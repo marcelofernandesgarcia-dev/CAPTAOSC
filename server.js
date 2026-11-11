@@ -851,6 +851,22 @@ app.post('/api/propostas/exportar-docx', async (req, res) => {
   }
 });
 
+// Endpoint de Download da Declaração de Não Impedimento do Art. 39 em DOCX
+app.post('/api/documentos/declaracao-art39/docx', async (req, res) => {
+  try {
+    const p = req.body;
+    const buffer = await gerarBufferDocxDeclaracaoArt39(p);
+    const sanitizado = (p.osc_sigla || p.osc_nome || 'OSC').replace(/[/\\?%*:|"<>]/g, '-').slice(0, 20);
+    const nomeArquivo = `Declaracao_Art39_MROSC_${sanitizado}_${Date.now()}.docx`;
+
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    res.setHeader('Content-Disposition', `attachment; filename="${nomeArquivo}"`);
+    res.send(buffer);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // Endpoint de Download Direto em DOCX por ID de proposta salva
 app.get('/api/propostas/:id/docx', async (req, res) => {
   try {
@@ -1233,6 +1249,199 @@ async function gerarBufferDocxOficio(p) {
           alignment: AlignmentType.CENTER,
           spacing: { after: 30 },
           children: [new TextRun({ text: 'Presidente / Representante Legal', size: 19, font: 'Calibri' })]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          children: [new TextRun({ text: `${p.osc_nome || 'Organização da Sociedade Civil'} – CNPJ ${p.cnpj || ''}`, size: 18, color: '555555', font: 'Calibri' })]
+        })
+      ]
+    }]
+  });
+
+  return await Packer.toBuffer(doc);
+}
+
+// =============================================================================
+// GERADOR DE DECLARAÇÃO DO ART. 39 (GOVERNANÇA & NÃO IMPEDIMENTO) EM DOCX
+// =============================================================================
+async function gerarBufferDocxDeclaracaoArt39(p) {
+  const dataExtenso = new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+  const dirigentes = Array.isArray(p.dirigentes) && p.dirigentes.length > 0 
+    ? p.dirigentes 
+    : [
+        { nome: p.representanteLegal || 'Presidente / Representante Legal', cargo: 'Presidente', cpf: p.cpfPresidente || '---' },
+        { nome: p.diretorFinanceiro || 'Diretor(a) Financeiro(a) / Tesoureiro(a)', cargo: 'Tesoureiro(a)', cpf: '---' }
+      ];
+
+  const dirigentesRows = [
+    new TableRow({
+      children: [
+        new TableCell({
+          width: { size: 35, type: WidthType.PERCENTAGE },
+          children: [new Paragraph({ children: [new TextRun({ text: 'Nome do Dirigente', bold: true, size: 20 })] })]
+        }),
+        new TableCell({
+          width: { size: 20, type: WidthType.PERCENTAGE },
+          children: [new Paragraph({ children: [new TextRun({ text: 'Cargo na OSC', bold: true, size: 20 })] })]
+        }),
+        new TableCell({
+          width: { size: 20, type: WidthType.PERCENTAGE },
+          children: [new Paragraph({ children: [new TextRun({ text: 'CPF', bold: true, size: 20 })] })]
+        }),
+        new TableCell({
+          width: { size: 25, type: WidthType.PERCENTAGE },
+          children: [new Paragraph({ children: [new TextRun({ text: 'Assinatura', bold: true, size: 20 })] })]
+        })
+      ]
+    }),
+    ...dirigentes.map(d => new TableRow({
+      children: [
+        new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: d.nome || '', size: 19 })] })] }),
+        new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: d.cargo || '', size: 19 })] })] }),
+        new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: d.cpf || '', size: 19 })] })] }),
+        new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: '____________________', size: 16, color: '888888' })] })] })
+      ]
+    }))
+  ];
+
+  const doc = new Document({
+    sections: [{
+      properties: {
+        page: {
+          margin: { top: 1100, bottom: 1100, left: 1200, right: 1200 }
+        }
+      },
+      children: [
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 60 },
+          children: [new TextRun({ text: (p.osc_nome || 'ORGANIZAÇÃO DA SOCIEDADE CIVIL').toUpperCase(), bold: true, size: 22, font: 'Calibri' })]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 180 },
+          children: [new TextRun({ text: `CNPJ Nº ${p.cnpj || '00.000.000/0000-00'} | SEDE: ${p.cidade || 'Município'}/${p.uf || 'UF'}`, size: 18, color: '555555', font: 'Calibri' })]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 200 },
+          children: [
+            new TextRun({ 
+              text: 'DECLARAÇÃO DE INEXISTÊNCIA DE IMPEDIMENTOS E CONFORMIDADE DE GOVERNANÇA', 
+              bold: true, 
+              size: 22, 
+              color: '1b3576', 
+              font: 'Calibri' 
+            })
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 240 },
+          children: [
+            new TextRun({ 
+              text: '(Em estrito cumprimento ao Art. 39 da Lei nº 13.019/2014, Decreto nº 8.726/2016 e Lei Complementar nº 210/2024)', 
+              italics: true, 
+              size: 18, 
+              color: '444444', 
+              font: 'Calibri' 
+            })
+          ]
+        }),
+
+        new Paragraph({
+          alignment: AlignmentType.JUSTIFY,
+          spacing: { after: 160 },
+          children: [
+            new TextRun({
+              text: `A ${p.osc_nome || 'instituição proponente'}, pessoa jurídica de direito privado sem fins lucrativos, inscrita no Cadastro Nacional da Pessoa Jurídica (CNPJ) sob o nº ${p.cnpj || '---'}, com sede e foro no município de ${p.cidade || '---'}/${p.uf || '---'}, por intermédio de seus dirigentes e representantes legais abaixo firmados, DECLARA, sob as penas da lei e para os devidos fins de formalização de parceria com a Administração Pública Federal por meio da Plataforma Transferegov.br:`,
+              size: 20,
+              font: 'Calibri'
+            })
+          ]
+        }),
+
+        new Paragraph({
+          alignment: AlignmentType.JUSTIFY,
+          spacing: { after: 120 },
+          children: [
+            new TextRun({ text: '1. ', bold: true, size: 20, font: 'Calibri' }),
+            new TextRun({ text: 'Que se encontra regularmente constituída e com cadastro ATIVO perante a Receita Federal do Brasil, não estando omissa no dever de prestar contas de parcerias anteriormente celebradas (Art. 39, I e II da Lei nº 13.019/2014).', size: 20, font: 'Calibri' })
+          ]
+        }),
+
+        new Paragraph({
+          alignment: AlignmentType.JUSTIFY,
+          spacing: { after: 120 },
+          children: [
+            new TextRun({ text: '2. ', bold: true, size: 20, font: 'Calibri' }),
+            new TextRun({ text: 'Que nenhum de seus dirigentes estatutários é membro de Poder (Legislativo, Executivo ou Judiciário) ou do Ministério Público, ou dirigente de órgão/entidade concedente na esfera governamental da parceria, estendendo-se expressamente esta vedação aos respectivos cônjuges, companheiros e parentes em linha reta, colateral ou por afinidade até o 2º grau (Art. 39, III da Lei nº 13.019/2014).', size: 20, font: 'Calibri' })
+          ]
+        }),
+
+        new Paragraph({
+          alignment: AlignmentType.JUSTIFY,
+          spacing: { after: 120 },
+          children: [
+            new TextRun({ text: '3. ', bold: true, size: 20, font: 'Calibri' }),
+            new TextRun({ text: 'Que nenhum dirigente da entidade exerce cargo ou função pública com poder de supervisão, fiscalização, instrução técnica ou aprovação das parcerias no órgão repassador.', size: 20, font: 'Calibri' })
+          ]
+        }),
+
+        new Paragraph({
+          alignment: AlignmentType.JUSTIFY,
+          spacing: { after: 120 },
+          children: [
+            new TextRun({ text: '4. ', bold: true, size: 20, font: 'Calibri' }),
+            new TextRun({ text: 'Que a entidade não teve contas de parcerias rejeitadas pela administração pública nos últimos 5 (cinco) anos, nem contas julgadas irregulares por Tribunal de Contas da União (TCU) ou dos Estados/Municípios nos últimos 8 (oito) anos (Art. 39, IV e VI da Lei nº 13.019/2014).', size: 20, font: 'Calibri' })
+          ]
+        }),
+
+        new Paragraph({
+          alignment: AlignmentType.JUSTIFY,
+          spacing: { after: 120 },
+          children: [
+            new TextRun({ text: '5. ', bold: true, size: 20, font: 'Calibri' }),
+            new TextRun({ text: 'Que a entidade não foi punida com suspensão de participação em licitação, impedimento de celebrar parcerias ou declaração de inidoneidade pela Administração Pública (Art. 39, V da Lei nº 13.019/2014).', size: 20, font: 'Calibri' })
+          ]
+        }),
+
+        new Paragraph({
+          alignment: AlignmentType.JUSTIFY,
+          spacing: { after: 200 },
+          children: [
+            new TextRun({ text: '6. ', bold: true, size: 20, font: 'Calibri' }),
+            new TextRun({ text: 'Que a instituição cumpre integralmente os princípios de transparência ativa, publicidade e rastreabilidade estatuídos na Lei Complementar nº 210/2024 e no Decreto nº 11.948/2024.', size: 20, font: 'Calibri' })
+          ]
+        }),
+
+        new Paragraph({
+          spacing: { after: 120 },
+          children: [new TextRun({ text: 'QUADRO NOMINATIVO DE DIRIGENTES DA OSC:', bold: true, size: 20, font: 'Calibri' })]
+        }),
+
+        new Table({
+          rows: dirigentesRows,
+          width: { size: 100, type: WidthType.PERCENTAGE }
+        }),
+
+        new Paragraph({
+          alignment: AlignmentType.RIGHT,
+          spacing: { before: 280, after: 300 },
+          children: [
+            new TextRun({ text: `${p.cidade || 'Município'}/${p.uf || 'UF'}, ${dataExtenso}.`, italics: true, size: 20, font: 'Calibri' })
+          ]
+        }),
+
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 40 },
+          children: [new TextRun({ text: '___________________________________________________', size: 20, font: 'Calibri' })]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 30 },
+          children: [new TextRun({ text: p.representanteLegal || 'Presidente / Representante Legal', bold: true, size: 22, font: 'Calibri' })]
         }),
         new Paragraph({
           alignment: AlignmentType.CENTER,

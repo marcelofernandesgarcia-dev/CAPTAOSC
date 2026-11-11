@@ -112,23 +112,26 @@
           <button onclick="navegarMobile('aba-guia')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
             <span class="text-base">💡</span> Guia &amp; Usabilidade
           </button>
+          <button onclick="navegarMobile('aba-elegibilidade')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
+            <span class="text-base">🛡️</span> 1. Diagnóstico de Elegibilidade OSC
+          </button>
           <button onclick="navegarMobile('aba-pesquisa-emendas')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
-            <span class="text-base">🔎</span> 1. Consulta &amp; Inteligência
+            <span class="text-base">🔎</span> 2. Consulta de Emendas &amp; OGU
           </button>
           <button onclick="navegarMobile('aba-elaborador')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
-            <span class="text-base">📝</span> 2. Elaborador do Pleito
+            <span class="text-base">📝</span> 3. Elaborador do Pleito &amp; Cotação
           </button>
           <button onclick="navegarMobile('aba-oficio')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
-            <span class="text-base">✉️</span> 3. Ofício ao Parlamentar
+            <span class="text-base">✉️</span> 4. Ofício &amp; Declaração Art. 39
           </button>
           <button onclick="navegarMobile('aba-ciclo')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
-            <span class="text-base">📅</span> 4. Ciclo &amp; Calendário
+            <span class="text-base">📅</span> 5. Ciclo Anual &amp; Prazos TCE
           </button>
           <button onclick="navegarMobile('aba-trilha')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
-            <span class="text-base">🚀</span> 5. Trilha Transferegov
+            <span class="text-base">🚀</span> 6. Trilha Transferegov (6 Passos)
           </button>
           <button onclick="navegarMobile('aba-marco')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
-            <span class="text-base">⚖️</span> 6. Marco Legal (LC 210)
+            <span class="text-base">⚖️</span> 7. Marco Legal (LC 210 / MROSC)
           </button>
         </nav>
       </div>
@@ -137,34 +140,37 @@
         <a href="https://github.com/marcelofernandesgarcia-dev/CAPTAOSC" target="_blank" class="w-full py-2.5 px-3 bg-slate-900 text-white rounded-xl flex items-center justify-center gap-1.5 font-bold shadow">
           <i data-lucide="github" class="w-4 h-4"></i> GitHub Repositório
         </a>
-        <p class="text-center text-[10px] text-slate-400">Versão 3.1.0 &bull; PWA Habilitado</p>
+        <p class="text-center text-[10px] text-slate-400">Versão 3.2.0 &bull; PWA Habilitado &bull; MROSC 4.0</p>
       </div>
     </div>
   </div>
 
   <!-- Navegação por Módulos Estratégicos (Desktop) -->
   <nav class="bg-white border-b border-slate-200 shadow-sm sticky top-[68px] z-30 no-print hidden md:block">
-    <div class="max-w-6xl mx-auto px-4 flex space-x-2 sm:space-x-6 overflow-x-auto text-xs font-bold uppercase tracking-wider">
-      <button onclick="trocarAba('aba-guia')" id="btn-aba-guia" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-2 whitespace-nowrap">
-        <i data-lucide="help-circle" class="w-4 h-4 text-govgold"></i> 💡 Guia &amp; Usabilidade
+    <div class="max-w-6xl mx-auto px-4 flex space-x-1 sm:space-x-4 overflow-x-auto text-xs font-bold uppercase tracking-wider">
+      <button onclick="trocarAba('aba-guia')" id="btn-aba-guia" class="tab-btn py-3 px-2 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-1.5 whitespace-nowrap">
+        <i data-lucide="help-circle" class="w-4 h-4 text-govgold"></i> 💡 Guia
       </button>
-      <button onclick="trocarAba('aba-pesquisa-emendas')" id="btn-aba-pesquisa-emendas" class="tab-btn py-3 px-3 border-b-2 border-govblue text-govblue flex items-center gap-2 whitespace-nowrap">
-        <i data-lucide="search-check" class="w-4 h-4 text-emerald-600"></i> 1. Consulta de Emendas &amp; Inteligência
+      <button onclick="trocarAba('aba-elegibilidade')" id="btn-aba-elegibilidade" class="tab-btn py-3 px-2 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-1.5 whitespace-nowrap">
+        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i> 1. Diagnóstico OSC
       </button>
-      <button onclick="trocarAba('aba-elaborador')" id="btn-aba-elaborador" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-2 whitespace-nowrap">
-        <i data-lucide="file-edit" class="w-4 h-4"></i> 2. Elaborador do Pleito &amp; Orçamento
+      <button onclick="trocarAba('aba-pesquisa-emendas')" id="btn-aba-pesquisa-emendas" class="tab-btn py-3 px-2 border-b-2 border-govblue text-govblue flex items-center gap-1.5 whitespace-nowrap">
+        <i data-lucide="search-check" class="w-4 h-4 text-blue-600"></i> 2. Consulta &amp; OGU
       </button>
-      <button onclick="trocarAba('aba-oficio')" id="btn-aba-oficio" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-2 whitespace-nowrap">
-        <i data-lucide="mail" class="w-4 h-4"></i> 3. Ofício ao Parlamentar
+      <button onclick="trocarAba('aba-elaborador')" id="btn-aba-elaborador" class="tab-btn py-3 px-2 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-1.5 whitespace-nowrap">
+        <i data-lucide="file-edit" class="w-4 h-4"></i> 3. Elaborador Pleito
       </button>
-      <button onclick="trocarAba('aba-ciclo')" id="btn-aba-ciclo" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-2 whitespace-nowrap">
-        <i data-lucide="calendar" class="w-4 h-4"></i> 4. Ciclo Anual &amp; Calendário
+      <button onclick="trocarAba('aba-oficio')" id="btn-aba-oficio" class="tab-btn py-3 px-2 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-1.5 whitespace-nowrap">
+        <i data-lucide="mail" class="w-4 h-4 text-purple-600"></i> 4. Ofício &amp; Art. 39
       </button>
-      <button onclick="trocarAba('aba-trilha')" id="btn-aba-trilha" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-2 whitespace-nowrap">
-        <i data-lucide="route" class="w-4 h-4"></i> 5. Trilha Transferegov (6 Passos)
+      <button onclick="trocarAba('aba-ciclo')" id="btn-aba-ciclo" class="tab-btn py-3 px-2 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-1.5 whitespace-nowrap">
+        <i data-lucide="calendar" class="w-4 h-4 text-amber-600"></i> 5. Ciclo &amp; TCE
       </button>
-      <button onclick="trocarAba('aba-marco')" id="btn-aba-marco" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-2 whitespace-nowrap">
-        <i data-lucide="scale" class="w-4 h-4"></i> 6. Marco Legal (LC 210 / MROSC)
+      <button onclick="trocarAba('aba-trilha')" id="btn-aba-trilha" class="tab-btn py-3 px-2 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-1.5 whitespace-nowrap">
+        <i data-lucide="route" class="w-4 h-4"></i> 6. Trilha Transferegov
+      </button>
+      <button onclick="trocarAba('aba-marco')" id="btn-aba-marco" class="tab-btn py-3 px-2 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-1.5 whitespace-nowrap">
+        <i data-lucide="scale" class="w-4 h-4"></i> 7. Marco Legal
       </button>
     </div>
   </nav>
@@ -193,11 +199,14 @@
             O <strong>CaptaOSC</strong> é o assistente técnico-estratégico de captação de recursos federais para <strong>Organizações da Sociedade Civil (OSCs)</strong>. Ele integra inteligência jurídica do <strong>MROSC (Lei nº 13.019/2014)</strong>, regras orçamentárias do <strong>Transferegov.br</strong> e os parâmetros de transparência da nova <strong>Lei Complementar nº 210/2024</strong>.
           </p>
           <div class="pt-2 flex flex-wrap gap-3">
-            <button onclick="trocarAba('aba-elaborador')" class="px-5 py-2.5 bg-govgold hover:bg-yellow-500 text-govdark font-black rounded-xl text-xs uppercase tracking-wider transition shadow flex items-center gap-2">
-              <i data-lucide="play" class="w-4 h-4 fill-current"></i> Iniciar Elaboração Agora
+            <button onclick="trocarAba('aba-elegibilidade')" class="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-black rounded-xl text-xs uppercase tracking-wider transition shadow flex items-center gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4"></i> Diagnóstico de Elegibilidade OSC
+            </button>
+            <button onclick="trocarAba('aba-pesquisa-emendas')" class="px-5 py-2.5 bg-govgold hover:bg-yellow-500 text-govdark font-black rounded-xl text-xs uppercase tracking-wider transition shadow flex items-center gap-2">
+              <i data-lucide="search" class="w-4 h-4"></i> Consultar Emendas &amp; LOA
             </button>
             <button onclick="trocarAba('aba-ciclo')" class="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold border border-white/20 flex items-center gap-1.5 transition">
-              <i data-lucide="calendar" class="w-4 h-4"></i> Consultar Prazos e Calendário
+              <i data-lucide="calendar" class="w-4 h-4"></i> Calendário &amp; Prazos TCE
             </button>
           </div>
         </div>
@@ -208,84 +217,104 @@
         <div class="border-b pb-3">
           <h3 class="text-base font-bold text-govblue flex items-center gap-2 uppercase tracking-wide">
             <i data-lucide="compass" class="w-5 h-5 text-govblue"></i>
-            Jornada do Usuário: Do CNPJ ao Gabinete Parlamentar em 4 Passos
+            Jornada Integrada da OSC: Da Habilitação à Prestação de Contas em 5 Etapas
           </h3>
-          <p class="text-xs text-slate-500">Siga o roteiro passo a passo para estruturar um pleito robusto e com conformidade técnica garantida.</p>
+          <p class="text-xs text-slate-500">Siga o roteiro passo a passo para estruturar um pleito robusto, com segurança jurídica e conformidade técnica garantida.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <!-- Passo 1 -->
-          <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-2 relative flex flex-col justify-between">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+          <!-- Passo 0 -->
+          <div class="p-3.5 rounded-xl border border-emerald-300 bg-emerald-50/50 space-y-2 relative flex flex-col justify-between">
             <div>
-              <span class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center mb-2">1</span>
-              <h4 class="font-bold text-slate-900 text-sm">Pesquisa de Emendas &amp; Bancada</h4>
-              <p class="text-xs text-slate-600 mt-1">
-                Acesse a aba <strong>1. Consulta de Emendas</strong> para pesquisar os deputados federais da sua bancada e áreas financiadas:
+              <span class="w-6 h-6 rounded-full bg-emerald-700 text-white font-bold text-xs flex items-center justify-center mb-1.5">1</span>
+              <h4 class="font-bold text-slate-900 text-xs">Diagnóstico &amp; Elegibilidade</h4>
+              <p class="text-[11px] text-slate-600 mt-1">
+                Na aba <strong>1. Diagnóstico</strong>, verifique a aptidão da sua entidade antes de buscar recursos:
               </p>
-              <ul class="text-[11px] text-slate-600 space-y-1 font-medium mt-2">
-                <li>✔ Histórico de emendas por parlamentar e UF.</li>
-                <li>✔ Áreas afins (Saúde 50%, Assistência, Educação).</li>
-                <li>✔ Botão "Usar como Referência" para carregar dados.</li>
+              <ul class="text-[10px] text-slate-600 space-y-0.5 font-medium mt-1.5">
+                <li>• Tempo por esfera (1, 2 ou 3 anos).</li>
+                <li>• 8 requisitos da Lei 13.019/2014.</li>
+                <li>• Diagnóstico e semáforo imediato.</li>
               </ul>
             </div>
-            <button onclick="irParaPasso(1)" class="w-full mt-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-xs flex items-center justify-center gap-1 transition">
-              Pesquisar Emendas &rarr;
+            <button onclick="irParaPasso(0)" class="w-full mt-2.5 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-lg text-xs flex items-center justify-center gap-1 transition">
+              Simular Elegibilidade &rarr;
+            </button>
+          </div>
+
+          <!-- Passo 1 -->
+          <div class="p-3.5 rounded-xl border border-blue-300 bg-blue-50/50 space-y-2 relative flex flex-col justify-between">
+            <div>
+              <span class="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center mb-1.5">2</span>
+              <h4 class="font-bold text-slate-900 text-xs">Pesquisa de Emendas &amp; OGU</h4>
+              <p class="text-[11px] text-slate-600 mt-1">
+                Na aba <strong>2. Consulta</strong>, busque recursos impositivos e discricionários:
+              </p>
+              <ul class="text-[10px] text-slate-600 space-y-0.5 font-medium mt-1.5">
+                <li>• Bancada do Estado (RP 6 / RP 7).</li>
+                <li>• Políticas Públicas dos Ministérios.</li>
+                <li>• Botão "Usar no Elaborador".</li>
+              </ul>
+            </div>
+            <button onclick="irParaPasso(1)" class="w-full mt-2.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-xs flex items-center justify-center gap-1 transition">
+              Pesquisar Orçamento &rarr;
             </button>
           </div>
 
           <!-- Passo 2 -->
-          <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/40 space-y-2 relative flex flex-col justify-between">
+          <div class="p-3.5 rounded-xl border border-amber-300 bg-amber-50/50 space-y-2 relative flex flex-col justify-between">
             <div>
-              <span class="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center mb-2">2</span>
-              <h4 class="font-bold text-slate-900 text-sm">Elaboração do Pleito &amp; MROSC</h4>
-              <p class="text-xs text-slate-600 mt-1">
-                Na aba <strong>2. Elaborador</strong>, valide os requisitos legais da entidade e estruture o orçamento:
+              <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-bold text-xs flex items-center justify-center mb-1.5">3</span>
+              <h4 class="font-bold text-slate-900 text-xs">Plano &amp; Cotação de Preços</h4>
+              <p class="text-[11px] text-slate-600 mt-1">
+                Na aba <strong>3. Elaborador</strong>, estruture a proposta com segurança de custos:
               </p>
-              <ul class="text-[11px] text-slate-600 space-y-1 font-medium mt-2">
-                <li>• <strong>MROSC:</strong> Art. 33 (3 anos União) e Art. 39 (ATIVA).</li>
-                <li>• <strong>GND 3 vs. GND 4:</strong> Custeio e Capital calculados.</li>
+              <ul class="text-[10px] text-slate-600 space-y-0.5 font-medium mt-1.5">
+                <li>• GND 3 (Custeio) vs. GND 4 (Capital).</li>
+                <li>• Cotação com os 11 Métodos do Art. 46.</li>
+                <li>• Rito Simplificado (&lt; R$ 120k).</li>
               </ul>
             </div>
-            <button onclick="irParaPasso(2)" class="w-full mt-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-xs flex items-center justify-center gap-1 transition">
-              Elaborar Pleito &rarr;
+            <button onclick="irParaPasso(2)" class="w-full mt-2.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg text-xs flex items-center justify-center gap-1 transition">
+              Elaborar Proposta &rarr;
             </button>
           </div>
 
           <!-- Passo 3 -->
-          <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 relative flex flex-col justify-between">
+          <div class="p-3.5 rounded-xl border border-purple-300 bg-purple-50/50 space-y-2 relative flex flex-col justify-between">
             <div>
-              <span class="w-7 h-7 rounded-full bg-amber-600 text-white font-bold text-xs flex items-center justify-center mb-2">3</span>
-              <h4 class="font-bold text-slate-900 text-sm">Geração do Ofício Formal</h4>
-              <p class="text-xs text-slate-600 mt-1">
-                Acesse o modelo oficial na aba <strong>3. Ofício ao Parlamentar</strong> com:
+              <span class="w-6 h-6 rounded-full bg-purple-600 text-white font-bold text-xs flex items-center justify-center mb-1.5">4</span>
+              <h4 class="font-bold text-slate-900 text-xs">Formalização em Word/DOCX</h4>
+              <p class="text-[11px] text-slate-600 mt-1">
+                Na aba <strong>4. Ofício &amp; Art. 39</strong>, gere as minutas oficiais da parceria:
               </p>
-              <ul class="text-[11px] text-slate-600 space-y-1 font-medium mt-2">
-                <li>• Endereçamento formal ao Gabinete em Brasília.</li>
-                <li>• Fundamentação no Art. 29 e na <strong>LC nº 210/2024</strong>.</li>
-                <li>• Impressão timbrada ou download em .txt.</li>
+              <ul class="text-[10px] text-slate-600 space-y-0.5 font-medium mt-1.5">
+                <li>• Ofício formal para protocolo em Brasília.</li>
+                <li>• Declaração de Não Impedimento (Art. 39).</li>
+                <li>• Download em .DOCX com formatação oficial.</li>
               </ul>
             </div>
-            <button onclick="irParaPasso(3)" class="w-full mt-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg text-xs flex items-center justify-center gap-1 transition">
-              Visualizar Ofício &rarr;
+            <button onclick="irParaPasso(3)" class="w-full mt-2.5 py-1.5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg text-xs flex items-center justify-center gap-1 transition">
+              Gerar Documentos &rarr;
             </button>
           </div>
 
           <!-- Passo 4 -->
-          <div class="p-4 rounded-xl border border-purple-200 bg-purple-50/40 space-y-2 relative flex flex-col justify-between">
+          <div class="p-3.5 rounded-xl border border-slate-300 bg-slate-100/60 space-y-2 relative flex flex-col justify-between">
             <div>
-              <span class="w-7 h-7 rounded-full bg-purple-600 text-white font-bold text-xs flex items-center justify-center mb-2">4</span>
-              <h4 class="font-bold text-slate-900 text-sm">Transferegov.br &amp; Execução</h4>
-              <p class="text-xs text-slate-600 mt-1">
-                Acompanhe as <strong>Etapas 4 e 5</strong> após a aprovação da LOA:
+              <span class="w-6 h-6 rounded-full bg-slate-800 text-white font-bold text-xs flex items-center justify-center mb-1.5">5</span>
+              <h4 class="font-bold text-slate-900 text-xs">Prazos Fatais &amp; Prevenção TCE</h4>
+              <p class="text-[11px] text-slate-600 mt-1">
+                Nas abas <strong>5. Ciclo</strong> e <strong>6. Trilha</strong>, controle os marcos pós-aprovação:
               </p>
-              <ul class="text-[11px] text-slate-600 space-y-1 font-medium mt-2">
-                <li>• Calendário de votação da LOA (Nov-Dez).</li>
-                <li>• Inserção do Plano de Trabalho no Transferegov.</li>
-                <li>• Execução via OBTV e prestação de contas.</li>
+              <ul class="text-[10px] text-slate-600 space-y-0.5 font-medium mt-1.5">
+                <li>• Inserção no Transferegov.br via OBTV.</li>
+                <li>• Alerta de 30 dias para devolução de saldo.</li>
+                <li>• Blindagem contra TCE perante o TCU.</li>
               </ul>
             </div>
-            <button onclick="irParaPasso(4)" class="w-full mt-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg text-xs flex items-center justify-center gap-1 transition">
-              Ver Trilha Transferegov &rarr;
+            <button onclick="irParaPasso(4)" class="w-full mt-2.5 py-1.5 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-lg text-xs flex items-center justify-center gap-1 transition">
+              Ver Prazos &amp; Trilha &rarr;
             </button>
           </div>
         </div>
@@ -663,13 +692,102 @@
               </p>
             </div>
           </div>
+
+          <!-- Selo Dinâmico de Porte da Parceria (Decreto nº 11.948/2024) -->
+          <div id="box-porte-parceria" class="p-3.5 rounded-xl border transition flex items-start gap-3 bg-amber-50/80 border-amber-300 text-amber-950 text-xs">
+            <span class="text-xl flex-shrink-0" id="icone-porte-parceria">⚡</span>
+            <div>
+              <strong class="font-bold block text-sm" id="titulo-porte-parceria">Classificação do Porte: Parceria de Médio Porte</strong>
+              <p class="text-[11px] text-slate-700 mt-0.5 leading-relaxed" id="desc-porte-parceria">
+                Para parcerias de até R$ 120.000,00, aplica-se o rito simplificado do Decreto Federal nº 11.948/2024 (dispensa de certidões intermediárias redundantes e foco no cumprimento do objeto).
+              </p>
+            </div>
+          </div>
         </div>
 
-        <!-- 1.5 Dados do Ofício & Assinatura -->
+        <!-- 1.5 Cotação Prévia & Compatibilidade de Preços com o Mercado (Art. 46) -->
+        <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-3 gap-2">
+            <div>
+              <h2 class="text-sm font-bold text-govblue flex items-center gap-2 uppercase tracking-wide">
+                <i data-lucide="tags" class="w-5 h-5 text-govblue"></i>
+                5. Cotação Prévia de Preços &amp; Métodos de Mercado (Art. 46 da Lei 13.019/2014)
+              </h2>
+              <p class="text-xs text-slate-500">Cadastre os itens da proposta e comprove a compatibilidade dos custos com os preços praticados no mercado público.</p>
+            </div>
+            <button type="button" onclick="alternarMetodosCotacao()" class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-900 border border-blue-200 rounded-lg text-xs font-bold transition flex items-center gap-1">
+              <i data-lucide="info" class="w-3.5 h-3.5 text-blue-600"></i> Os 11 Métodos Legais de Cotação
+            </button>
+          </div>
+
+          <!-- Box Colapsável dos 11 Métodos Legais -->
+          <div id="box-11-metodos-cotacao" class="hidden p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-2.5">
+            <div class="flex items-center justify-between font-bold text-slate-800">
+              <span class="flex items-center gap-1.5">⚖️ Desmistificando o "Mito dos 3 Orçamentos" (Art. 25 do Decreto nº 8.726/2016):</span>
+              <button type="button" onclick="alternarMetodosCotacao()" class="text-slate-400 hover:text-slate-600">&times; Fechar</button>
+            </div>
+            <p class="text-[11px] leading-relaxed">
+              O MROSC <strong>não impõe</strong> como única via a coleta de 3 orçamentos físicos. A compatibilidade de preços pode ser atestada por qualquer um dos 11 métodos admitidos pela jurisprudência do TCU e pelo MGI:
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+              <div class="p-2 bg-white rounded-lg border border-slate-200">1. Painel de Preços do Governo Federal (paineldeprecos.planejamento.gov.br)</div>
+              <div class="p-2 bg-white rounded-lg border border-slate-200">2. Compras.gov.br (contratações similares recentes)</div>
+              <div class="p-2 bg-white rounded-lg border border-slate-200">3. Tabelas de referência oficiais (SINAPI, SICRO, Tabela SUS)</div>
+              <div class="p-2 bg-white rounded-lg border border-slate-200">4. Mídia especializada ou catálogos consolidados de mercado</div>
+              <div class="p-2 bg-white rounded-lg border border-slate-200">5. Notas fiscais de outros contratantes para o mesmo objeto</div>
+              <div class="p-2 bg-white rounded-lg border border-slate-200">6. Pesquisa publicada em sítios eletrônicos de ampla consulta</div>
+              <div class="p-2 bg-white rounded-lg border border-slate-200">7. Base nacional de notas fiscais eletrônicas (SEFAZ)</div>
+              <div class="p-2 bg-white rounded-lg border border-slate-200">8. Valores fixados em atas de registro de preços vigentes</div>
+              <div class="p-2 bg-white rounded-lg border border-slate-200">9. Cotação direta com 3 fornecedores do ramo</div>
+              <div class="p-2 bg-white rounded-lg border border-slate-200">10. Histórico de compras da própria instituição nos últimos 12 meses</div>
+              <div class="p-2 bg-white rounded-lg border border-slate-200">11. Parecer técnico circunstanciado sobre singularidade do item</div>
+            </div>
+          </div>
+
+          <!-- Tabela de Itens Cotados -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="bg-slate-100 border-b border-slate-200 text-slate-700 font-bold">
+                  <th class="py-2.5 px-3">Item / Descrição do Custo</th>
+                  <th class="py-2.5 px-3">GND</th>
+                  <th class="py-2.5 px-3">Unid.</th>
+                  <th class="py-2.5 px-3 w-16">Qtd</th>
+                  <th class="py-2.5 px-3">Ref. Unit. (R$)</th>
+                  <th class="py-2.5 px-3">Cotado Unit. (R$)</th>
+                  <th class="py-2.5 px-3">Variação %</th>
+                  <th class="py-2.5 px-3">Total (R$)</th>
+                  <th class="py-2.5 px-2 text-center">Ação</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-itens-cotacao" class="divide-y divide-slate-200">
+                <!-- Linhas inseridas dinamicamente via JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Barra de Ações da Cotação -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="adicionarLinhaCotacao()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-lg text-xs border border-slate-300 flex items-center gap-1.5 transition">
+                <i data-lucide="plus-circle" class="w-4 h-4 text-emerald-600"></i> Adicionar Item de Despesa
+              </button>
+              <button type="button" onclick="sincronizarCotacaoComGnd()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-xs flex items-center gap-1.5 transition shadow">
+                <i data-lucide="refresh-cw" class="w-4 h-4"></i> Aplicar Totais da Cotação em GND 3 e GND 4
+              </button>
+            </div>
+            <div class="text-right text-xs">
+              <span class="text-slate-500">Total Cotado: </span>
+              <strong id="total-itens-cotados" class="text-slate-900 font-bold">R$ 0,00</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.6 Dados do Ofício & Assinatura -->
         <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
           <h2 class="text-sm font-bold text-govblue flex items-center gap-2 uppercase tracking-wide border-b border-slate-100 pb-3">
             <i data-lucide="signature" class="w-5 h-5 text-govblue"></i>
-            5. Identificação e Assinatura do Pleito
+            6. Identificação e Assinatura do Pleito
           </h2>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
@@ -721,68 +839,155 @@
     </div>
 
     <!-- ================================================================= -->
-    <!-- MÓDULO 3: GERADOR OFICIAL DE OFÍCIO AO PARLAMENTAR -->
+    <!-- MÓDULO 4: DOCUMENTOS OFICIAIS: OFÍCIO & DECLARAÇÃO ART. 39 -->
     <!-- ================================================================= -->
     <div id="aba-oficio" class="modulo-conteudo hidden space-y-6">
       
-      <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 gap-3 no-print">
-          <div>
-            <h2 class="text-base font-bold text-govblue flex items-center gap-2">
-              <i data-lucide="mail" class="w-5 h-5 text-govblue"></i>
-              3. Ofício Formal de Pleito de Emenda Parlamentar
-            </h2>
-            <p class="text-xs text-slate-500">Documento estruturado pronto para ser protocolado no gabinete parlamentar em Brasília ou no Estado.</p>
+      <!-- Sub-Navegação de Documentos Formais -->
+      <div class="flex border-b border-slate-200 gap-2 text-xs font-bold no-print">
+        <button type="button" onclick="trocarSubAbaDocumento('sub-oficio')" id="btn-sub-oficio" class="py-2.5 px-4 border-b-2 border-govblue text-govblue flex items-center gap-1.5 transition">
+          <i data-lucide="mail" class="w-4 h-4 text-govblue"></i> ✉️ Ofício ao Parlamentar (Gabinete)
+        </button>
+        <button type="button" onclick="trocarSubAbaDocumento('sub-declaracao-art39')" id="btn-sub-declaracao-art39" class="py-2.5 px-4 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-1.5 transition">
+          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i> 📜 Declaração de Não Impedimento dos Dirigentes (Art. 39)
+        </button>
+      </div>
+
+      <!-- ============================================================= -->
+      <!-- SUB-ABA A: OFÍCIO FORMAL AO PARLAMENTAR -->
+      <!-- ============================================================= -->
+      <div id="container-sub-oficio" class="space-y-4">
+        <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 gap-3 no-print">
+            <div>
+              <h2 class="text-base font-bold text-govblue flex items-center gap-2">
+                <i data-lucide="mail" class="w-5 h-5 text-govblue"></i>
+                Ofício Formal de Pleito de Emenda Parlamentar
+              </h2>
+              <p class="text-xs text-slate-500">Documento estruturado pronto para ser protocolado no gabinete parlamentar em Brasília ou no Estado.</p>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <button onclick="baixarOficioDocx()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow">
+                <i data-lucide="file-text" class="w-4 h-4"></i> Baixar .DOCX Oficial
+              </button>
+              <button onclick="imprimirOficio()" class="px-3.5 py-2 bg-govblue hover:bg-govdark text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow">
+                <i data-lucide="printer" class="w-4 h-4"></i> Visualizar & Salvar PDF
+              </button>
+              <button onclick="copiarTextoOficio()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold border border-slate-300 flex items-center gap-1.5 transition">
+                <i data-lucide="copy" class="w-4 h-4"></i> Copiar Texto
+              </button>
+              <button onclick="baixarOficioTxt()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold border border-slate-300 flex items-center gap-1.5 transition">
+                <i data-lucide="download" class="w-4 h-4"></i> Baixar .txt
+              </button>
+            </div>
           </div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <button onclick="baixarOficioDocx()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow">
-              <i data-lucide="file-text" class="w-4 h-4"></i> Baixar .DOCX Oficial
-            </button>
-            <button onclick="imprimirOficio()" class="px-3.5 py-2 bg-govblue hover:bg-govdark text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow">
-              <i data-lucide="printer" class="w-4 h-4"></i> Visualizar & Salvar PDF
-            </button>
-            <button onclick="copiarTextoOficio()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold border border-slate-300 flex items-center gap-1.5 transition">
-              <i data-lucide="copy" class="w-4 h-4"></i> Copiar Texto
-            </button>
-            <button onclick="baixarOficioTxt()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold border border-slate-300 flex items-center gap-1.5 transition">
-              <i data-lucide="download" class="w-4 h-4"></i> Baixar .txt
-            </button>
+
+          <!-- Área Timbrada de Visualização do Ofício -->
+          <div id="area-impressao" class="bg-white p-4 sm:p-8 md:p-12 border border-slate-300 rounded-xl shadow-inner font-serif text-slate-900 leading-relaxed text-sm max-w-3xl mx-auto space-y-4">
+            <div class="text-center pb-4 border-b border-slate-200">
+              <h3 id="of-cabecalho-osc" class="font-bold text-base uppercase tracking-wider text-slate-900">ORGANIZAÇÃO DA SOCIEDADE CIVIL</h3>
+              <p id="of-cabecalho-cnpj" class="text-xs text-slate-600">CNPJ nº 00.000.000/0001-00</p>
+            </div>
+
+            <div class="flex justify-between text-xs font-sans text-slate-600 pt-2">
+              <span id="of-numero-txt" class="font-bold text-slate-800">OFÍCIO Nº 001/2026-OSC</span>
+              <span id="of-data-txt">Brasília/DF, 11 de novembro de 2026</span>
+            </div>
+
+            <div class="pt-4 text-xs font-sans space-y-1">
+              <p><strong>A Sua Excelência o(a) Senhor(a)</strong></p>
+              <p id="of-dest-nome" class="text-sm font-bold text-slate-900">Deputado(a) Federal / Senador(a)</p>
+              <p>Congresso Nacional – Câmara dos Deputados / Senado Federal</p>
+              <p id="of-dest-gabinete">Gabinete Parlamentar – CEP: 70160-900 – Brasília/DF</p>
+            </div>
+
+            <div class="pt-2 font-sans font-bold text-xs text-govblue border-l-4 border-govgold pl-3 py-1 bg-amber-50/50">
+              <p id="of-assunto-txt">Assunto: Pleito de destinação de Emenda Parlamentar ao Projeto de Lei Orçamentária Anual (PLOA 2027) – Apoio ao projeto "Nome do Projeto".</p>
+            </div>
+
+            <div class="space-y-3 pt-2 text-justify text-xs leading-relaxed font-sans text-slate-800" id="of-corpo-texto">
+              <!-- Texto injetado dinamicamente -->
+            </div>
+
+            <div class="pt-8 text-center font-sans space-y-1">
+              <p>Respeitosamente,</p>
+              <div class="pt-10">
+                <p class="font-bold border-t border-slate-400 inline-block px-8 pt-1" id="of-assina-nome">[Nome do(a) Presidente/Representante]</p>
+                <p class="text-xs text-slate-600">Presidente / Diretor(a) Executivo(a)</p>
+                <p class="text-[11px] text-slate-500" id="of-assina-osc">[Nome da OSC]</p>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- Área Timbrada de Visualização do Ofício -->
-        <div id="area-impressao" class="bg-white p-4 sm:p-8 md:p-12 border border-slate-300 rounded-xl shadow-inner font-serif text-slate-900 leading-relaxed text-sm max-w-3xl mx-auto space-y-4">
-          <div class="text-center pb-4 border-b border-slate-200">
-            <h3 id="of-cabecalho-osc" class="font-bold text-base uppercase tracking-wider text-slate-900">ORGANIZAÇÃO DA SOCIEDADE CIVIL</h3>
-            <p id="of-cabecalho-cnpj" class="text-xs text-slate-600">CNPJ nº 00.000.000/0001-00</p>
+      <!-- ============================================================= -->
+      <!-- SUB-ABA B: DECLARAÇÃO DE NÃO IMPEDIMENTO (ART. 39) -->
+      <!-- ============================================================= -->
+      <div id="container-sub-declaracao-art39" class="hidden space-y-4">
+        <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 gap-3 no-print">
+            <div>
+              <h2 class="text-base font-bold text-govblue flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i>
+                Declaração de Inexistência de Impedimentos de Dirigentes (Art. 39 da Lei 13.019/2014 &amp; LC 210/2024)
+              </h2>
+              <p class="text-xs text-slate-500">Documento de governança obrigatório para celebração da parceria e prestação de contas no Transferegov.br.</p>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <button onclick="baixarDeclaracaoArt39Docx()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow">
+                <i data-lucide="file-text" class="w-4 h-4"></i> Baixar .DOCX Oficial
+              </button>
+              <button onclick="imprimirDeclaracaoArt39()" class="px-3.5 py-2 bg-govblue hover:bg-govdark text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow">
+                <i data-lucide="printer" class="w-4 h-4"></i> Imprimir / PDF
+              </button>
+              <button onclick="copiarTextoDeclaracaoArt39()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold border border-slate-300 flex items-center gap-1.5 transition">
+                <i data-lucide="copy" class="w-4 h-4"></i> Copiar Texto
+              </button>
+            </div>
           </div>
 
-          <div class="flex justify-between text-xs font-sans text-slate-600 pt-2">
-            <span id="of-numero-txt" class="font-bold text-slate-800">OFÍCIO Nº 001/2026-OSC</span>
-            <span id="of-data-txt">Brasília/DF, 11 de novembro de 2026</span>
+          <!-- Gerenciador de Nominata de Dirigentes -->
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3 no-print">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                👥 Nominata dos Dirigentes Estatutários da Entidade (Art. 34, VI):
+              </span>
+              <button type="button" onclick="adicionarDirigenteArt39()" class="px-3 py-1 bg-white hover:bg-emerald-50 text-emerald-900 border border-slate-300 rounded-lg text-xs font-bold transition flex items-center gap-1">
+                <i data-lucide="user-plus" class="w-3.5 h-3.5"></i> + Adicionar Dirigente
+              </button>
+            </div>
+            <div id="lista-dirigentes-art39" class="space-y-2">
+              <!-- Renderizado via JS -->
+            </div>
           </div>
 
-          <div class="pt-4 text-xs font-sans space-y-1">
-            <p><strong>A Sua Excelência o(a) Senhor(a)</strong></p>
-            <p id="of-dest-nome" class="text-sm font-bold text-slate-900">Deputado(a) Federal / Senador(a)</p>
-            <p>Congresso Nacional – Câmara dos Deputados / Senado Federal</p>
-            <p id="of-dest-gabinete">Gabinete Parlamentar – CEP: 70160-900 – Brasília/DF</p>
-          </div>
+          <!-- Área Timbrada de Visualização da Declaração Art. 39 -->
+          <div id="area-impressao-declaracao" class="bg-white p-4 sm:p-8 md:p-12 border border-slate-300 rounded-xl shadow-inner font-serif text-slate-900 leading-relaxed text-sm max-w-3xl mx-auto space-y-4">
+            <div class="text-center pb-4 border-b border-slate-200">
+              <h3 id="dec-cabecalho-osc" class="font-bold text-base uppercase tracking-wider text-slate-900">ORGANIZAÇÃO DA SOCIEDADE CIVIL</h3>
+              <p id="dec-cabecalho-cnpj" class="text-xs text-slate-600">CNPJ nº 00.000.000/0001-00</p>
+              <h4 class="font-bold text-xs uppercase tracking-wide text-govblue mt-3">DECLARAÇÃO DE INEXISTÊNCIA DE IMPEDIMENTOS E CONFORMIDADE DE GOVERNANÇA</h4>
+              <p class="text-[11px] text-slate-500 italic mt-0.5">(Art. 39 da Lei Federal nº 13.019/2014 &amp; Lei Complementar nº 210/2024)</p>
+            </div>
 
-          <div class="pt-2 font-sans font-bold text-xs text-govblue border-l-4 border-govgold pl-3 py-1 bg-amber-50/50">
-            <p id="of-assunto-txt">Assunto: Pleito de destinação de Emenda Parlamentar ao Projeto de Lei Orçamentária Anual (PLOA 2027) – Apoio ao projeto "Nome do Projeto".</p>
-          </div>
+            <div class="space-y-3 text-justify text-xs leading-relaxed font-sans text-slate-800" id="dec-corpo-texto">
+              <!-- Injetado dinamicamente -->
+            </div>
 
-          <div class="space-y-3 pt-2 text-justify text-xs leading-relaxed font-sans text-slate-800" id="of-corpo-texto">
-            <!-- Texto injetado dinamicamente -->
-          </div>
+            <div class="pt-6 font-sans text-xs space-y-2">
+              <span class="font-bold text-slate-800 block uppercase tracking-wide">Quadro de Dirigentes e Assinaturas:</span>
+              <div id="dec-tabela-dirigentes" class="border border-slate-300 rounded-lg overflow-hidden">
+                <!-- Tabela de assinaturas injetada via JS -->
+              </div>
+            </div>
 
-          <div class="pt-8 text-center font-sans space-y-1">
-            <p>Respeitosamente,</p>
-            <div class="pt-10">
-              <p class="font-bold border-t border-slate-400 inline-block px-8 pt-1" id="of-assina-nome">[Nome do(a) Presidente/Representante]</p>
-              <p class="text-xs text-slate-600">Presidente / Diretor(a) Executivo(a)</p>
-              <p class="text-[11px] text-slate-500" id="of-assina-osc">[Nome da OSC]</p>
+            <div class="pt-6 text-center font-sans space-y-1">
+              <p class="text-xs text-slate-600" id="dec-data-extenso"></p>
+              <div class="pt-8">
+                <p class="font-bold border-t border-slate-400 inline-block px-8 pt-1" id="dec-assina-presidente">[Nome do Presidente]</p>
+                <p class="text-xs text-slate-600">Presidente / Representante Legal da OSC</p>
+              </div>
             </div>
           </div>
         </div>
@@ -791,7 +996,7 @@
     </div>
 
     <!-- ================================================================= -->
-    <!-- MÓDULO 4: CICLO ANUAL & CALENDÁRIO DA CAPTAÇÃO -->
+    <!-- MÓDULO 5: CICLO ANUAL & CALENDÁRIO DA CAPTAÇÃO (COM ALERTA TCE) -->
     <!-- ================================================================= -->
     <div id="aba-ciclo" class="modulo-conteudo hidden space-y-6">
       
@@ -896,6 +1101,65 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+
+        <!-- Alerta Máximo: Prazos Fatais & Prevenção de Tomada de Contas Especial (TCE) -->
+        <div class="border-2 border-red-500/70 bg-gradient-to-br from-red-50 via-rose-50 to-white rounded-2xl p-5 sm:p-6 space-y-4 shadow-sm">
+          <div class="flex items-start gap-3">
+            <span class="text-3xl flex-shrink-0">🚨</span>
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-[10px] font-black uppercase tracking-wider bg-red-600 text-white px-2.5 py-0.5 rounded-full">Risco de TCE Imediata</span>
+                <span class="text-xs font-bold text-red-900 font-mono">Art. 52 da Lei nº 13.019/2014</span>
+              </div>
+              <h3 class="text-base font-bold text-red-950 mt-1">
+                Prazo Improrrogável de 30 Dias: Devolução de Saldo Remanescente
+              </h3>
+              <p class="text-xs text-red-900/90 mt-1 leading-relaxed">
+                Por ocasião do encerramento da vigência do Termo de Fomento/Colaboração, os <strong>saldos financeiros remanescentes</strong> da conta vinculada (inclusive rendimentos de aplicações financeiras) <strong>devem ser obrigatoriamente recolhidos à União em até 30 (trinta) dias</strong> via Guia de Recolhimento da União (GRU).
+              </p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
+            <div class="p-3 bg-white/80 rounded-xl border border-red-200 space-y-1">
+              <strong class="text-red-950 font-bold block flex items-center gap-1">
+                <span>⏱️</span> 30 Dias Improrrogáveis
+              </strong>
+              <p class="text-[11px] text-slate-600">
+                A lei não permite dilação de prazo para a devolução do saldo. Se houver valores remanescentes após o 30º dia, o processo segue compulsoriamente para instauração de TCE.
+              </p>
+            </div>
+
+            <div class="p-3 bg-white/80 rounded-xl border border-red-200 space-y-1">
+              <strong class="text-red-950 font-bold block flex items-center gap-1">
+                <span>⚖️</span> Instauração Compulsória TCU
+              </strong>
+              <p class="text-[11px] text-slate-600">
+                O gestor público ministerial é obrigado por dever de ofício a abrir a Tomada de Contas Especial, enviando os dados da OSC e CPF dos dirigentes ao Tribunal de Contas da União.
+              </p>
+            </div>
+
+            <div class="p-3 bg-white/80 rounded-xl border border-red-200 space-y-1">
+              <strong class="text-red-950 font-bold block flex items-center gap-1">
+                <span>🚫</span> Bloqueio CADIN &amp; CEPIM
+              </strong>
+              <p class="text-[11px] text-slate-600">
+                Inclusão do CNPJ e dirigentes no CADIN e CEPIM, impedindo a captação de novas emendas, convênios ou certidões em qualquer esfera governamental.
+              </p>
+            </div>
+          </div>
+
+          <!-- Régua de Prazos do Decreto nº 8.726/2016 -->
+          <div class="p-3.5 bg-white rounded-xl border border-slate-200 space-y-2 text-xs">
+            <span class="font-bold text-slate-800 block flex items-center gap-1.5">
+              <span>📅</span> Cronograma Legal de Prestação de Contas Federal (Decreto nº 8.726/2016 &amp; MROSC):
+            </span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px] text-slate-600">
+              <p>• <strong>Entrega do Relatório Final pela OSC (Art. 65, I):</strong> até <strong>30 dias</strong> após o término da vigência (prorrogável por mais 15 dias mediante justificativa formal no Transferegov).</p>
+              <p>• <strong>Análise e Parecer Conclusivo pelo Concedente (Art. 71):</strong> até <strong>150 dias</strong> contados do recebimento da prestação de contas final.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -1084,7 +1348,148 @@
     </div>
 
     <!-- ================================================================= -->
-    <!-- MÓDULO 1: CONSULTA DE EMENDAS & POLÍTICAS PÚBLICAS (OGU / LOA) -->
+    <!-- MÓDULO 1: DIAGNÓSTICO & SIMULADOR DE ELEGIBILIDADE MROSC -->
+    <!-- ================================================================= -->
+    <div id="aba-elegibilidade" class="modulo-conteudo hidden space-y-6">
+      
+      <!-- Hero Banner Informativo -->
+      <div class="bg-gradient-to-r from-emerald-900 via-teal-900 to-govdark text-white p-6 sm:p-7 rounded-3xl shadow-md border-2 border-emerald-500/40 space-y-3">
+        <div class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-emerald-500/30">
+          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> Diagnóstico de Prontidão Jurídica da OSC
+        </div>
+        <h2 class="text-xl sm:text-2xl font-black text-white">
+          1. Simulador de Elegibilidade MROSC (Lei nº 13.019/2014 &amp; Decreto nº 11.948/2024)
+        </h2>
+        <p class="text-xs sm:text-sm text-emerald-100 max-w-3xl leading-relaxed">
+          Antes de pleitear emendas parlamentares ou submeter propostas no <strong>Transferegov.br</strong>, verifique preventivamente se a sua instituição atende aos <strong>8 requisitos legais obrigatórios</strong> do Marco Regulatório e possui o <strong>tempo mínimo de registro ativo por esfera federativa</strong> (Art. 33, V, "a").
+        </p>
+      </div>
+
+      <!-- 1.1 Seletor de Esfera Federativa & Busca Integrada de CNPJ -->
+      <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 space-y-5">
+        <div>
+          <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-1 uppercase tracking-wide">
+            <i data-lucide="landmark" class="w-4 h-4 text-govblue"></i> Etapa A: Selecione a Esfera de Governo Pretendida
+          </h3>
+          <p class="text-xs text-slate-500">
+            O tempo mínimo de existência formal da entidade varia legalmente conforme o ente concedente dos recursos (Art. 33, V, "a" da Lei 13.019/2014):
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+          <!-- Esfera Federal -->
+          <div onclick="selecionarEsferaElegibilidade('uniao')" id="opt-esfera-uniao" class="cursor-pointer border-2 border-govblue bg-blue-50/50 p-4 rounded-xl flex items-start gap-3 transition">
+            <input type="radio" name="radioEsfera" id="radio-uniao" value="uniao" checked class="mt-1 text-govblue focus:ring-govblue">
+            <div>
+              <div class="flex items-center gap-1.5 font-bold text-xs text-govblue">
+                <span>🏛️</span> Esfera Federal (União)
+                <span class="bg-govblue text-white text-[9px] px-1.5 py-0.5 rounded font-bold">Padrão OGU</span>
+              </div>
+              <p class="text-[11px] text-slate-700 mt-1 font-semibold">Exigência: <strong>3 anos mínimos</strong> de existência ativa</p>
+              <p class="text-[10px] text-slate-500 mt-0.5">Ministérios, Emendas Parlamentares Federais e Editais Transferegov.br.</p>
+            </div>
+          </div>
+
+          <!-- Esfera Estadual -->
+          <div onclick="selecionarEsferaElegibilidade('estado')" id="opt-esfera-estado" class="cursor-pointer border-2 border-slate-200 bg-white p-4 rounded-xl flex items-start gap-3 transition hover:border-slate-300">
+            <input type="radio" name="radioEsfera" id="radio-estado" value="estado" class="mt-1 text-govblue focus:ring-govblue">
+            <div>
+              <div class="flex items-center gap-1.5 font-bold text-xs text-slate-800">
+                <span>🏢</span> Esfera Estadual / DF
+              </div>
+              <p class="text-[11px] text-slate-700 mt-1 font-semibold">Exigência: <strong>2 anos mínimos</strong> de existência ativa</p>
+              <p class="text-[10px] text-slate-500 mt-0.5">Secretarias Estaduais e Fundos Estaduais.</p>
+            </div>
+          </div>
+
+          <!-- Esfera Municipal -->
+          <div onclick="selecionarEsferaElegibilidade('municipio')" id="opt-esfera-municipio" class="cursor-pointer border-2 border-slate-200 bg-white p-4 rounded-xl flex items-start gap-3 transition hover:border-slate-300">
+            <input type="radio" name="radioEsfera" id="radio-municipio" value="municipio" class="mt-1 text-govblue focus:ring-govblue">
+            <div>
+              <div class="flex items-center gap-1.5 font-bold text-xs text-slate-800">
+                <span>🏙️</span> Esfera Municipal
+              </div>
+              <p class="text-[11px] text-slate-700 mt-1 font-semibold">Exigência: <strong>1 ano mínimo</strong> de existência ativa</p>
+              <p class="text-[10px] text-slate-500 mt-0.5">Prefeituras Municipais e Conselhos Municipais de Direitos.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Consulta Automatizada de CNPJ -->
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+          <label class="block text-xs font-bold text-slate-700">Verificação Automática de CNPJ na Base Oficial da Receita Federal:</label>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <div class="relative flex-1">
+              <input type="text" id="cnpj-eleg" onkeypress="if(event.key==='Enter') consultarCnpjElegibilidade()" placeholder="Digite o CNPJ da entidade (ex: 00.000.000/0001-00)" class="w-full text-xs p-2.5 pl-9 border border-slate-300 rounded-lg bg-white outline-none focus:ring-2 focus:ring-govblue font-mono font-bold">
+              <i data-lucide="building-2" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+            </div>
+            <button type="button" onclick="consultarCnpjElegibilidade()" id="btn-busca-cnpj-eleg" class="px-5 py-2.5 bg-govblue hover:bg-govdark text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition shadow">
+              <i data-lucide="search" class="w-4 h-4"></i> Consultar Receita
+            </button>
+          </div>
+
+          <div id="box-resultado-cnpj-eleg" class="hidden p-3.5 bg-white border border-slate-200 rounded-xl text-xs space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-2">
+              <div>
+                <strong id="res-nome-osc" class="text-sm font-bold text-slate-900 block"></strong>
+                <span id="res-dados-osc" class="text-[11px] text-slate-500"></span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span id="badge-tempo-osc" class="px-2.5 py-1 rounded-full text-[11px] font-bold"></span>
+                <span id="badge-status-cnpj" class="px-2.5 py-1 rounded-full text-[11px] font-bold"></span>
+              </div>
+            </div>
+            <p id="res-parecer-tempo" class="text-[11px] text-slate-700"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.2 Os 8 Requisitos Legais MROSC -->
+      <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+        <div class="border-b border-slate-100 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2 uppercase tracking-wide">
+              <i data-lucide="check-square" class="w-4 h-4 text-emerald-600"></i> Etapa B: Checklist dos 8 Requisitos de Habilitação (Lei 13.019/2014)
+            </h3>
+            <p class="text-xs text-slate-500">Marque a situação atual da sua organização para gerar o diagnóstico de prontidão:</p>
+          </div>
+          <span class="text-xs bg-slate-100 text-slate-700 font-bold px-2.5 py-1 rounded-full border border-slate-200" id="progresso-checklist-eleg">0/8 verificados</span>
+        </div>
+
+        <div id="grid-criterios-elegibilidade" class="space-y-3">
+          <!-- Injetado dinamicamente via JS -->
+        </div>
+
+        <!-- Semáforo de Prontidão Consolidado -->
+        <div id="painel-diagnostico-eleg" class="p-5 rounded-2xl border transition space-y-3 bg-slate-50 border-slate-200 mt-4">
+          <div class="flex items-start sm:items-center gap-3">
+            <div id="icone-diagnostico-eleg" class="text-3xl flex-shrink-0">⚪</div>
+            <div class="space-y-0.5">
+              <h4 id="titulo-diagnostico-eleg" class="font-bold text-sm text-slate-800">Status de Elegibilidade: Não avaliado</h4>
+              <p id="desc-diagnostico-eleg" class="text-xs text-slate-600">Responda aos requisitos acima para calcular a prontidão jurídica da sua entidade.</p>
+            </div>
+          </div>
+
+          <div id="box-pendencias-eleg" class="hidden space-y-1.5 pt-3 border-t border-slate-200 text-xs">
+            <span class="font-bold text-slate-700 block">Itens que Exigem Atenção ou Regularização:</span>
+            <ul id="lista-pendencias-eleg" class="list-disc pl-5 space-y-1 text-slate-600"></ul>
+          </div>
+
+          <div class="pt-2 flex flex-wrap gap-2.5">
+            <button type="button" onclick="transportarElegibilidadeParaElaborador()" class="px-4 py-2.5 bg-govblue hover:bg-govdark text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow">
+              <i data-lucide="arrow-right-circle" class="w-4 h-4"></i> Carregar Dados no Elaborador do Pleito
+            </button>
+            <button type="button" onclick="trocarAba('aba-pesquisa-emendas')" class="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow">
+              <i data-lucide="search" class="w-4 h-4"></i> Prosseguir para Consulta de Emendas &amp; LOA
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- MÓDULO 2: CONSULTA DE EMENDAS & POLÍTICAS PÚBLICAS (OGU / LOA) -->
     <!-- ================================================================= -->
     <div id="aba-pesquisa-emendas" class="modulo-conteudo space-y-6">
       
@@ -1373,6 +1778,12 @@
 
       if (abaId === 'aba-oficio') {
         atualizarVisualizacaoOficio();
+        atualizarVisualizacaoDeclaracaoArt39();
+      } else if (abaId === 'aba-elaborador') {
+        calcularTotais();
+        renderizarItensCotacao();
+      } else if (abaId === 'aba-elegibilidade') {
+        renderizarCriteriosElegibilidade();
       }
       lucide.createIcons();
     }
@@ -1382,7 +1793,9 @@
     }
 
     function irParaPasso(num) {
-      if (num === 1) {
+      if (num === 0) {
+        trocarAba('aba-elegibilidade');
+      } else if (num === 1) {
         trocarAba('aba-pesquisa-emendas');
         setTimeout(() => {
           const el = document.getElementById('filtro-pesq-q');
@@ -1492,6 +1905,25 @@
 
       document.getElementById('prog-gnd3').style.width = `${p3}%`;
       document.getElementById('prog-gnd4').style.width = `${p4}%`;
+
+      // Atualização do Porte da Parceria (Decreto nº 11.948/2024)
+      const boxPorte = document.getElementById('box-porte-parceria');
+      const iconePorte = document.getElementById('icone-porte-parceria');
+      const tituloPorte = document.getElementById('titulo-porte-parceria');
+      const descPorte = document.getElementById('desc-porte-parceria');
+      if (boxPorte) {
+        if (total <= 120000 && total > 0) {
+          boxPorte.className = 'p-3.5 rounded-xl border transition flex items-start gap-3 bg-emerald-50 border-emerald-300 text-emerald-950 text-xs';
+          if (iconePorte) iconePorte.innerText = '🟢';
+          if (tituloPorte) tituloPorte.innerText = 'Classificação: Parceria de Pequeno Porte (até R$ 120.000,00)';
+          if (descPorte) descPorte.innerHTML = '<strong>Benefício Legal (Decreto Federal nº 11.948/2024):</strong> Esta proposta enquadra-se no <em>Procedimento Simplificado</em>, com dispensa de certidões intermediárias redundantes e prestação de contas focada na demonstração dos resultados e do cumprimento do objeto.';
+        } else {
+          boxPorte.className = 'p-3.5 rounded-xl border transition flex items-start gap-3 bg-blue-50 border-blue-200 text-blue-950 text-xs';
+          if (iconePorte) iconePorte.innerText = '🔵';
+          if (tituloPorte) tituloPorte.innerText = 'Classificação: Parceria de Médio/Grande Porte';
+          if (descPorte) descPorte.innerHTML = '<strong>Regime Ordinário MROSC (Lei 13.019/2014 &amp; Decreto 8.726/2016):</strong> Exigência de comprovação documental plena, cotação prévia detalhada com itens de mercado e prestação de contas física e financeira.';
+        }
+      }
 
       // Avaliação Anti-Impedimento Técnico
       const alertaBox = document.getElementById('alerta-consistencia-orcamento');
@@ -2210,8 +2642,581 @@ ${p.justificativa}
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // =========================================================================
+    // MÓDULO 1: DIAGNÓSTICO & SIMULADOR DE ELEGIBILIDADE MROSC
+    // =========================================================================
+    let esferaElegibilidade = 'uniao';
+    const anosMinimosEsfera = { uniao: 3, estado: 2, municipio: 1 };
+    let dadosCnpjElegibilidade = null;
+
+    const criteriosElegibilidade = [
+      { id: 'crit_tempo', titulo: 'Tempo Mínimo de Existência Formal com CNPJ Ativo', desc: 'Comprovado por meio de documentação emitida pela Receita Federal do Brasil (Art. 33, V, "a").', fundamento: 'Art. 33, V, "a" da Lei 13.019/2014' },
+      { id: 'crit_cnpj_ativo', titulo: 'Situação Cadastral Ativa na Receita Federal', desc: 'CNPJ deve constar com status "Ativo". Entidades baixadas, inaptas ou suspensas são legalmente impedidas.', fundamento: 'Art. 34, VII da Lei 13.019/2014' },
+      { id: 'crit_estatuto', titulo: 'Compatibilidade Estatutária Expressa com o Objeto', desc: 'O estatuto social registrado em cartório deve prever expressamente finalidades compatíveis com a área do projeto pleiteado.', fundamento: 'Art. 33, I da Lei 13.019/2014' },
+      { id: 'crit_cndt', titulo: 'Certidão Negativa de Débitos Trabalhistas (CNDT)', desc: 'Certidão emitida gratuitamente pelo Tribunal Superior do Trabalho (TST) com validade de 180 dias.', fundamento: 'Art. 34, II da Lei 13.019/2014' },
+      { id: 'crit_cnd_federal', titulo: 'Certidão Conjunta Federal e Dívida Ativa da União (Receita/PGFN)', desc: 'Regularidade quanto a tributos federais, previdência social e contribuições.', fundamento: 'Art. 34, II da Lei 13.019/2014' },
+      { id: 'crit_parentesco', titulo: 'Inexistência de Nepotismo / Vínculo com Autoridade Concedente', desc: 'Nenhum dirigente pode ser cônjuge, companheiro ou parente até o 2º grau (pais, filhos, irmãos) de autoridade pública do órgão repassador.', fundamento: 'Art. 39, III da Lei 13.019/2014' },
+      { id: 'crit_agente_publico', titulo: 'Ausência de Dirigente com Poder de Supervisão ou Fiscalização', desc: 'É vedado que dirigentes da OSC sejam agentes públicos com poder de aprovação ou fiscalização das parcerias no órgão.', fundamento: 'Art. 39, III da Lei 13.019/2014' },
+      { id: 'crit_capacidade', titulo: 'Capacidade Técnica e Operacional Comprovável', desc: 'Disponibilidade de equipe qualificada, histórico de projetos similares e infraestrutura para execução das metas.', fundamento: 'Art. 33, V, "c" da Lei 13.019/2014' }
+    ];
+
+    let respostasElegibilidade = {
+      crit_tempo: null,
+      crit_cnpj_ativo: null,
+      crit_estatuto: null,
+      crit_cndt: null,
+      crit_cnd_federal: null,
+      crit_parentesco: null,
+      crit_agente_publico: null,
+      crit_capacidade: null
+    };
+
+    function renderizarCriteriosElegibilidade() {
+      const container = document.getElementById('grid-criterios-elegibilidade');
+      if (!container) return;
+
+      container.innerHTML = criteriosElegibilidade.map((c, index) => {
+        const resp = respostasElegibilidade[c.id];
+        const btnSimClass = resp === 'sim' ? 'bg-emerald-600 text-white font-bold border-emerald-600' : 'bg-white text-slate-700 hover:bg-emerald-50 border-slate-300';
+        const btnNaoClass = resp === 'nao' ? 'bg-red-600 text-white font-bold border-red-600' : 'bg-white text-slate-700 hover:bg-red-50 border-slate-300';
+        const btnAnaliseClass = resp === 'analise' ? 'bg-amber-500 text-white font-bold border-amber-500' : 'bg-white text-slate-700 hover:bg-amber-50 border-slate-300';
+
+        return `
+          <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5 transition">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="space-y-0.5">
+                <span class="text-[11px] font-bold text-govblue">${index + 1}. ${c.titulo}</span>
+                <p class="text-[11px] text-slate-600">${c.desc}</p>
+                <span class="text-[10px] text-slate-400 font-mono">Fundamento: ${c.fundamento}</span>
+              </div>
+              <div class="flex items-center gap-1.5 flex-shrink-0">
+                <button type="button" onclick="responderCriterioElegibilidade('${c.id}', 'sim')" class="px-2.5 py-1 text-xs rounded-lg border transition ${btnSimClass}">
+                  ✓ Sim
+                </button>
+                <button type="button" onclick="responderCriterioElegibilidade('${c.id}', 'analise')" class="px-2.5 py-1 text-xs rounded-lg border transition ${btnAnaliseClass}">
+                  ? Em Análise
+                </button>
+                <button type="button" onclick="responderCriterioElegibilidade('${c.id}', 'nao')" class="px-2.5 py-1 text-xs rounded-lg border transition ${btnNaoClass}">
+                  ✕ Não
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      atualizarProgressoElegibilidade();
+      calcularDiagnosticoElegibilidade();
+    }
+
+    function responderCriterioElegibilidade(id, resposta) {
+      respostasElegibilidade[id] = resposta;
+      renderizarCriteriosElegibilidade();
+    }
+
+    function selecionarEsferaElegibilidade(esfera) {
+      esferaElegibilidade = esfera;
+      ['uniao', 'estado', 'municipio'].forEach(e => {
+        const el = document.getElementById(`opt-esfera-${e}`);
+        const rad = document.getElementById(`radio-${e}`);
+        if (el) {
+          if (e === esfera) {
+            el.className = 'cursor-pointer border-2 border-govblue bg-blue-50/50 p-4 rounded-xl flex items-start gap-3 transition';
+            if (rad) rad.checked = true;
+          } else {
+            el.className = 'cursor-pointer border-2 border-slate-200 bg-white p-4 rounded-xl flex items-start gap-3 transition hover:border-slate-300';
+            if (rad) rad.checked = false;
+          }
+        }
+      });
+
+      if (dadosCnpjElegibilidade && dadosCnpjElegibilidade.anos !== undefined) {
+        const minAnos = anosMinimosEsfera[esferaElegibilidade];
+        const atende = dadosCnpjElegibilidade.anos >= minAnos;
+        respostasElegibilidade.crit_tempo = atende ? 'sim' : 'nao';
+        atualizarCardResultadoCnpj(dadosCnpjElegibilidade);
+      }
+      renderizarCriteriosElegibilidade();
+    }
+
+    async function consultarCnpjElegibilidade() {
+      const input = document.getElementById('cnpj-eleg');
+      const val = (input?.value || '').replace(/\D/g, '');
+      if (val.length !== 14) {
+        showToast('Informe um CNPJ válido com 14 dígitos.', 'warning');
+        return;
+      }
+
+      const btn = document.getElementById('btn-busca-cnpj-eleg');
+      if (btn) btn.innerHTML = '<span class="animate-spin">⏳</span> Consultando...';
+
+      try {
+        const res = await fetch(`/api/cnpj/${val}`);
+        const data = await res.json();
+        if (data.success && data.dados) {
+          const d = data.dados;
+          dadosCnpjElegibilidade = d;
+
+          const minAnos = anosMinimosEsfera[esferaElegibilidade];
+          const atendeTempo = (d.anos || 0) >= minAnos;
+          const statusAtivo = (d.situacaoCadastral || '').toUpperCase().includes('ATIVA');
+
+          respostasElegibilidade.crit_tempo = atendeTempo ? 'sim' : 'nao';
+          respostasElegibilidade.crit_cnpj_ativo = statusAtivo ? 'sim' : 'nao';
+
+          atualizarCardResultadoCnpj(d);
+          renderizarCriteriosElegibilidade();
+          showToast(`Dados de ${d.razaoSocial} obtidos com sucesso!`, 'success');
+        } else {
+          showToast(data.erro || 'CNPJ não encontrado na base pública.', 'warning');
+        }
+      } catch (err) {
+        showToast('Erro ao consultar dados do CNPJ.', 'warning');
+      } finally {
+        if (btn) btn.innerHTML = '<i data-lucide="search" class="w-4 h-4"></i> Consultar Receita';
+        lucide.createIcons();
+      }
+    }
+
+    function atualizarCardResultadoCnpj(d) {
+      const box = document.getElementById('box-resultado-cnpj-eleg');
+      if (!box) return;
+      box.classList.remove('hidden');
+
+      document.getElementById('res-nome-osc').innerText = d.razaoSocial || 'Razão Social';
+      document.getElementById('res-dados-osc').innerText = `CNPJ: ${d.cnpj} • Fundação: ${d.dataAbertura || d.anoAbertura} (${d.anos || 0} anos de existência) • ${d.municipio}/${d.uf}`;
+
+      const minAnos = anosMinimosEsfera[esferaElegibilidade];
+      const atendeTempo = (d.anos || 0) >= minAnos;
+      const statusAtivo = (d.situacaoCadastral || '').toUpperCase().includes('ATIVA');
+
+      const badgeTempo = document.getElementById('badge-tempo-osc');
+      if (badgeTempo) {
+        badgeTempo.className = atendeTempo 
+          ? 'px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800' 
+          : 'px-2.5 py-1 rounded-full text-[11px] font-bold bg-red-100 text-red-800';
+        badgeTempo.innerText = atendeTempo ? `Tempo OK (${d.anos} anos ≥ ${minAnos} anos)` : `Tempo Insuficiente (${d.anos} anos < ${minAnos} anos)`;
+      }
+
+      const badgeStatus = document.getElementById('badge-status-cnpj');
+      if (badgeStatus) {
+        badgeStatus.className = statusAtivo
+          ? 'px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800'
+          : 'px-2.5 py-1 rounded-full text-[11px] font-bold bg-red-100 text-red-800';
+        badgeStatus.innerText = statusAtivo ? 'Cadastro ATIVO' : 'Cadastro IRREGULAR';
+      }
+
+      const parecer = document.getElementById('res-parecer-tempo');
+      if (parecer) {
+        parecer.innerHTML = atendeTempo
+          ? `✓ Entidade atende ao requisito temporal para a esfera <strong>${esferaElegibilidade.toUpperCase()}</strong> (mínimo de ${minAnos} anos pela Lei 13.019/2014).`
+          : `⚠️ A instituição tem ${d.anos || 0} anos de existência, abaixo do mínimo legal de <strong>${minAnos} anos</strong> exigidos para celebração na esfera ${esferaElegibilidade.toUpperCase()}.`;
+      }
+    }
+
+    function atualizarProgressoElegibilidade() {
+      const total = criteriosElegibilidade.length;
+      const respondidos = Object.values(respostasElegibilidade).filter(v => v !== null).length;
+      const el = document.getElementById('progresso-checklist-eleg');
+      if (el) el.innerText = `${respondidos}/${total} verificados`;
+    }
+
+    function calcularDiagnosticoElegibilidade() {
+      const respostas = Object.values(respostasElegibilidade);
+      const temNao = respostas.includes('nao');
+      const temAnaliseOuNulo = respostas.includes('analise') || respostas.some(v => v === null);
+
+      const painel = document.getElementById('painel-diagnostico-eleg');
+      const icone = document.getElementById('icone-diagnostico-eleg');
+      const titulo = document.getElementById('titulo-diagnostico-eleg');
+      const desc = document.getElementById('desc-diagnostico-eleg');
+      const boxPendencias = document.getElementById('box-pendencias-eleg');
+      const listaPendencias = document.getElementById('lista-pendencias-eleg');
+
+      if (!painel) return;
+
+      const pendencias = [];
+      criteriosElegibilidade.forEach(c => {
+        const r = respostasElegibilidade[c.id];
+        if (r === 'nao') {
+          pendencias.push(`<strong>IMPEDIMENTO:</strong> ${c.titulo} não atendido (${c.fundamento}).`);
+        } else if (r === 'analise' || r === null) {
+          pendencias.push(`<strong>PENDÊNCIA:</strong> ${c.titulo} requer confirmação documental.`);
+        }
+      });
+
+      if (temNao) {
+        painel.className = 'p-5 rounded-2xl border transition space-y-3 bg-red-50 border-red-300 mt-4';
+        icone.innerText = '🔴';
+        titulo.className = 'font-bold text-sm text-red-950';
+        titulo.innerText = 'Diagnóstico: Inelegível para Celebração Imediata (Risco de Diligência / Bloqueio)';
+        desc.className = 'text-xs text-red-900';
+        desc.innerText = 'Foram detectados critérios legais obrigatórios não atendidos. A entidade não pode celebrar Termo de Fomento antes de sanar as irregularidades.';
+      } else if (temAnaliseOuNulo) {
+        painel.className = 'p-5 rounded-2xl border transition space-y-3 bg-amber-50 border-amber-300 mt-4';
+        icone.innerText = '🟡';
+        titulo.className = 'font-bold text-sm text-amber-950';
+        titulo.innerText = 'Diagnóstico: Elegível com Ressalvas / Itens em Verificação';
+        desc.className = 'text-xs text-amber-900';
+        desc.innerText = 'A entidade atende aos critérios já preenchidos, porém restam requisitos a confirmar antes de protocolar a proposta no Transferegov.br.';
+      } else {
+        painel.className = 'p-5 rounded-2xl border transition space-y-3 bg-emerald-50 border-emerald-400 mt-4';
+        icone.innerText = '🟢';
+        titulo.className = 'font-bold text-sm text-emerald-950';
+        titulo.innerText = 'Diagnóstico: 100% Elegível e Habilitada (Prontidão Jurídica Plena MROSC)';
+        desc.className = 'text-xs text-emerald-900';
+        desc.innerText = 'Parabéns! Sua OSC atende a todos os 8 requisitos obrigatórios da Lei nº 13.019/2014 para a esfera federativa selecionada. Prossiga com segurança técnica.';
+      }
+
+      if (boxPendencias && listaPendencias) {
+        if (pendencias.length > 0) {
+          boxPendencias.classList.remove('hidden');
+          listaPendencias.innerHTML = pendencias.map(p => `<li>${p}</li>`).join('');
+        } else {
+          boxPendencias.classList.add('hidden');
+        }
+      }
+    }
+
+    function transportarElegibilidadeParaElaborador() {
+      if (dadosCnpjElegibilidade) {
+        const d = dadosCnpjElegibilidade;
+        if (document.getElementById('cnpj')) document.getElementById('cnpj').value = d.cnpj || '';
+        if (document.getElementById('osc_nome')) document.getElementById('osc_nome').value = d.razaoSocial || '';
+        if (document.getElementById('ano_fundacao')) document.getElementById('ano_fundacao').value = d.anoAbertura || '';
+        if (document.getElementById('cidade')) document.getElementById('cidade').value = d.municipio || '';
+        if (document.getElementById('uf')) document.getElementById('uf').value = d.uf || '';
+        if (document.getElementById('representanteLegal') && d.qsa && d.qsa[0]) {
+          document.getElementById('representanteLegal').value = d.qsa[0].nome || '';
+        }
+      }
+      trocarAba('aba-elaborador');
+      showToast('Dados institucionais da OSC transportados com sucesso para o Elaborador!', 'success');
+    }
+
+    // =========================================================================
+    // MÓDULO 2: COTAÇÃO PRÉVIA & PESQUISA DE PREÇOS (ART. 46)
+    // =========================================================================
+    let itensCotacao = [
+      { descricao: 'Instrutores Especializados e Coordenação Pedagógica', gnd: '3', unidade: 'mês', qtd: 6, refUnit: 6000, cotUnit: 6000 },
+      { descricao: 'Kits Didáticos e Material Pedagógico de Apoio', gnd: '3', unidade: 'kit', qtd: 150, refUnit: 560, cotUnit: 560 },
+      { descricao: 'Notebooks i5 para Laboratório de Informática Comunitário', gnd: '4', unidade: 'un', qtd: 16, refUnit: 4500, cotUnit: 4700 },
+      { descricao: 'Projetor Multimídia Interativo de Alta Resolução', gnd: '4', unidade: 'un', qtd: 2, refUnit: 2400, cotUnit: 2400 }
+    ];
+
+    function renderizarItensCotacao() {
+      const tbody = document.getElementById('tbody-itens-cotacao');
+      if (!tbody) return;
+
+      const fmt = v => Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      let totalGeral = 0;
+
+      tbody.innerHTML = itensCotacao.map((it, idx) => {
+        const subtotal = (Number(it.qtd || 0)) * (Number(it.cotUnit || 0));
+        totalGeral += subtotal;
+
+        const ref = Number(it.refUnit || 0);
+        const cot = Number(it.cotUnit || 0);
+        const diffPerc = ref > 0 ? (((cot - ref) / ref) * 100) : 0;
+        
+        let badgeVariacao = '';
+        if (diffPerc <= 10) {
+          badgeVariacao = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">🟢 ${diffPerc > 0 ? '+' : ''}${diffPerc.toFixed(1)}% Conforme</span>`;
+        } else if (diffPerc <= 25) {
+          badgeVariacao = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">🟡 +${diffPerc.toFixed(1)}% Ressalva</span>`;
+        } else {
+          badgeVariacao = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-800">🔴 +${diffPerc.toFixed(1)}% Sobrepreço</span>`;
+        }
+
+        return `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-2 px-3">
+              <input type="text" value="${it.descricao || ''}" onchange="atualizarItemCotacao(${idx}, 'descricao', this.value)" placeholder="Nome do item ou serviço" class="w-full text-xs p-1.5 border border-slate-300 rounded bg-white">
+            </td>
+            <td class="py-2 px-3 w-28">
+              <select onchange="atualizarItemCotacao(${idx}, 'gnd', this.value)" class="text-xs p-1.5 border border-slate-300 rounded bg-white w-full">
+                <option value="3" ${it.gnd === '3' ? 'selected' : ''}>GND 3 (Custeio)</option>
+                <option value="4" ${it.gnd === '4' ? 'selected' : ''}>GND 4 (Capital)</option>
+              </select>
+            </td>
+            <td class="py-2 px-3 w-20">
+              <input type="text" value="${it.unidade || 'un'}" onchange="atualizarItemCotacao(${idx}, 'unidade', this.value)" class="w-full text-xs p-1.5 border border-slate-300 rounded bg-white text-center">
+            </td>
+            <td class="py-2 px-3 w-16">
+              <input type="number" value="${it.qtd || 1}" min="1" onchange="atualizarItemCotacao(${idx}, 'qtd', this.value)" class="w-full text-xs p-1.5 border border-slate-300 rounded bg-white text-center font-bold">
+            </td>
+            <td class="py-2 px-3 w-28">
+              <input type="number" step="0.01" value="${it.refUnit || 0}" onchange="atualizarItemCotacao(${idx}, 'refUnit', this.value)" placeholder="0.00" class="w-full text-xs p-1.5 border border-slate-300 rounded bg-white text-right font-mono">
+            </td>
+            <td class="py-2 px-3 w-28">
+              <input type="number" step="0.01" value="${it.cotUnit || 0}" onchange="atualizarItemCotacao(${idx}, 'cotUnit', this.value)" placeholder="0.00" class="w-full text-xs p-1.5 border border-slate-300 rounded bg-white text-right font-mono font-bold">
+            </td>
+            <td class="py-2 px-3 whitespace-nowrap">
+              ${badgeVariacao}
+            </td>
+            <td class="py-2 px-3 font-bold text-slate-800 text-right whitespace-nowrap">
+              ${fmt(subtotal)}
+            </td>
+            <td class="py-2 px-2 text-center">
+              <button type="button" onclick="removerLinhaCotacao(${idx})" class="p-1 text-slate-400 hover:text-red-600 rounded">
+                &times;
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      const totalEl = document.getElementById('total-itens-cotados');
+      if (totalEl) totalEl.innerText = fmt(totalGeral);
+    }
+
+    function adicionarLinhaCotacao() {
+      itensCotacao.push({
+        descricao: 'Novo Item / Despesa',
+        gnd: '3',
+        unidade: 'un',
+        qtd: 1,
+        refUnit: 1000,
+        cotUnit: 1000
+      });
+      renderizarItensCotacao();
+    }
+
+    function removerLinhaCotacao(idx) {
+      itensCotacao.splice(idx, 1);
+      renderizarItensCotacao();
+    }
+
+    function atualizarItemCotacao(idx, campo, valor) {
+      if (itensCotacao[idx]) {
+        itensCotacao[idx][campo] = campo === 'qtd' || campo === 'refUnit' || campo === 'cotUnit' ? Number(valor) : valor;
+        renderizarItensCotacao();
+      }
+    }
+
+    function sincronizarCotacaoComGnd() {
+      let gnd3Total = 0;
+      let gnd4Total = 0;
+
+      itensCotacao.forEach(it => {
+        const sub = (Number(it.qtd || 0)) * (Number(it.cotUnit || 0));
+        if (it.gnd === '4') {
+          gnd4Total += sub;
+        } else {
+          gnd3Total += sub;
+        }
+      });
+
+      document.getElementById('gnd3').value = gnd3Total;
+      document.getElementById('gnd4').value = gnd4Total;
+      calcularTotais();
+      showToast(`Totais aplicados: GND 3 R$ ${gnd3Total.toLocaleString('pt-BR')} | GND 4 R$ ${gnd4Total.toLocaleString('pt-BR')}`, 'success');
+    }
+
+    function alternarMetodosCotacao() {
+      const box = document.getElementById('box-11-metodos-cotacao');
+      if (box) box.classList.toggle('hidden');
+    }
+
+    // =========================================================================
+    // MÓDULO 4: DECLARAÇÃO DO ART. 39 (GOVERNANÇA & NÃO IMPEDIMENTO)
+    // =========================================================================
+    let dirigentesArt39 = [
+      { nome: '', cargo: 'Presidente / Representante Legal', cpf: '' },
+      { nome: '', cargo: 'Diretor(a) Financeiro(a) / Tesoureiro(a)', cpf: '' }
+    ];
+
+    function trocarSubAbaDocumento(sub) {
+      const cOficio = document.getElementById('container-sub-oficio');
+      const cDec = document.getElementById('container-sub-declaracao-art39');
+      const bOficio = document.getElementById('btn-sub-oficio');
+      const bDec = document.getElementById('btn-sub-declaracao-art39');
+
+      if (sub === 'sub-oficio') {
+        cOficio?.classList.remove('hidden');
+        cDec?.classList.add('hidden');
+        bOficio?.classList.add('border-govblue', 'text-govblue');
+        bOficio?.classList.remove('border-transparent', 'text-slate-500');
+        bDec?.classList.remove('border-govblue', 'text-govblue');
+        bDec?.classList.add('border-transparent', 'text-slate-500');
+        atualizarVisualizacaoOficio();
+      } else {
+        cOficio?.classList.add('hidden');
+        cDec?.classList.remove('hidden');
+        bDec?.classList.add('border-govblue', 'text-govblue');
+        bDec?.classList.remove('border-transparent', 'text-slate-500');
+        bOficio?.classList.remove('border-govblue', 'text-govblue');
+        bOficio?.classList.add('border-transparent', 'text-slate-500');
+        atualizarVisualizacaoDeclaracaoArt39();
+      }
+      lucide.createIcons();
+    }
+
+    function renderizarDirigentesArt39() {
+      const c = document.getElementById('lista-dirigentes-art39');
+      if (!c) return;
+
+      c.innerHTML = dirigentesArt39.map((d, idx) => `
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 items-center bg-white p-2.5 rounded-lg border border-slate-200">
+          <input type="text" value="${d.nome || ''}" onchange="atualizarDirigenteArt39(${idx}, 'nome', this.value)" placeholder="Nome Completo do Dirigente" class="sm:col-span-2 text-xs p-2 border border-slate-300 rounded">
+          <input type="text" value="${d.cargo || ''}" onchange="atualizarDirigenteArt39(${idx}, 'cargo', this.value)" placeholder="Cargo na Diretoria" class="text-xs p-2 border border-slate-300 rounded">
+          <div class="flex items-center gap-1.5">
+            <input type="text" value="${d.cpf || ''}" onchange="atualizarDirigenteArt39(${idx}, 'cpf', this.value)" placeholder="CPF (000.000.000-00)" class="text-xs p-2 border border-slate-300 rounded w-full font-mono">
+            ${dirigentesArt39.length > 1 ? `<button type="button" onclick="removerDirigenteArt39(${idx})" class="p-1.5 text-slate-400 hover:text-red-600 rounded">&times;</button>` : ''}
+          </div>
+        </div>
+      `).join('');
+
+      atualizarVisualizacaoDeclaracaoArt39();
+    }
+
+    function adicionarDirigenteArt39() {
+      dirigentesArt39.push({ nome: '', cargo: 'Membro da Diretoria / Conselho', cpf: '' });
+      renderizarDirigentesArt39();
+    }
+
+    function removerDirigenteArt39(idx) {
+      dirigentesArt39.splice(idx, 1);
+      renderizarDirigentesArt39();
+    }
+
+    function atualizarDirigenteArt39(idx, campo, val) {
+      if (dirigentesArt39[idx]) {
+        dirigentesArt39[idx][campo] = val;
+        atualizarVisualizacaoDeclaracaoArt39();
+      }
+    }
+
+    function atualizarVisualizacaoDeclaracaoArt39() {
+      const osc = document.getElementById('osc_nome')?.value || 'ORGANIZAÇÃO DA SOCIEDADE CIVIL';
+      const cnpj = document.getElementById('cnpj')?.value || '00.000.000/0001-00';
+      const cidade = document.getElementById('cidade')?.value || 'Brasília';
+      const uf = document.getElementById('uf')?.value || 'DF';
+      const pres = document.getElementById('representanteLegal')?.value || (dirigentesArt39[0]?.nome || '[Nome do Presidente]');
+
+      if (dirigentesArt39[0] && !dirigentesArt39[0].nome && pres) {
+        dirigentesArt39[0].nome = pres;
+      }
+
+      const cabOsc = document.getElementById('dec-cabecalho-osc');
+      if (cabOsc) cabOsc.innerText = osc.toUpperCase();
+      const cabCnpj = document.getElementById('dec-cabecalho-cnpj');
+      if (cabCnpj) cabCnpj.innerText = `CNPJ nº ${cnpj} • Sede: ${cidade}/${uf}`;
+
+      const dataExtenso = new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+      const dataEl = document.getElementById('dec-data-extenso');
+      if (dataEl) dataEl.innerText = `${cidade}/${uf}, ${dataExtenso}.`;
+
+      const assinaPres = document.getElementById('dec-assina-presidente');
+      if (assinaPres) assinaPres.innerText = pres;
+
+      const corpo = document.getElementById('dec-corpo-texto');
+      if (corpo) {
+        corpo.innerHTML = `
+          <p>
+            A <strong>${osc}</strong>, entidade sem fins lucrativos, inscrita no CNPJ sob o nº <strong>${cnpj}</strong>, com sede em ${cidade}/${uf}, por intermédio de seus dirigentes estatutários abaixo qualificados, <strong>DECLARA</strong> expressamente sob as penas da lei, para fins de celebração de parceria perante a Administração Pública Federal via Plataforma <strong>Transferegov.br</strong>:
+          </p>
+          <ol class="list-decimal pl-5 space-y-1.5 mt-2">
+            <li>Que se encontra regularmente constituída e com cadastro ativo perante a Receita Federal do Brasil, não estando omissa na prestação de contas de parcerias anteriores (Art. 39, I e II da Lei 13.019/2014);</li>
+            <li>Que <strong>nenhum dirigente estatutário é membro de Poder (Legislativo, Executivo ou Judiciário) ou do Ministério Público</strong>, nem dirigente de órgão repassador, estendendo-se a vedação a cônjuges, companheiros e parentes até o 2º grau (Art. 39, III);</li>
+            <li>Que nenhum membro da diretoria exerce função com poder de supervisão, fiscalização, instrução técnica ou aprovação da parceria (Art. 39, III);</li>
+            <li>Que a instituição e seus membros não tiveram contas rejeitadas nos últimos 5 anos pela administração pública, nem julgadas irregulares pelo TCU nos últimos 8 anos (Art. 39, IV e VI);</li>
+            <li>Que atende aos estritos parâmetros de transparência ativa e publicidade da <strong>Lei Complementar nº 210/2024</strong> e do <strong>Decreto Federal nº 11.948/2024</strong>.</li>
+          </ol>
+        `;
+      }
+
+      const tabDirigentes = document.getElementById('dec-tabela-dirigentes');
+      if (tabDirigentes) {
+        tabDirigentes.innerHTML = `
+          <table class="w-full text-left text-xs border-collapse">
+            <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-300">
+              <tr>
+                <th class="py-2 px-3">Nome do Dirigente</th>
+                <th class="py-2 px-3">Cargo na OSC</th>
+                <th class="py-2 px-3">CPF</th>
+                <th class="py-2 px-3">Assinatura Formal</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              ${dirigentesArt39.map(d => `
+                <tr>
+                  <td class="py-2 px-3 font-semibold text-slate-900">${d.nome || '[Nome do Dirigente]'}</td>
+                  <td class="py-2 px-3 text-slate-600">${d.cargo || 'Diretor'}</td>
+                  <td class="py-2 px-3 font-mono text-slate-600">${d.cpf || '---'}</td>
+                  <td class="py-2 px-3 text-slate-400 font-mono">____________________</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+      }
+    }
+
+    async function baixarDeclaracaoArt39Docx() {
+      const p = obterPayloadForm();
+      p.dirigentes = dirigentesArt39;
+
+      try {
+        showToast('Gerando documento oficial Word (.docx)...', 'info');
+        const res = await fetch('/api/documentos/declaracao-art39/docx', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(p)
+        });
+
+        if (!res.ok) throw new Error('Falha ao gerar arquivo Word.');
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        const sanitizado = (p.osc_sigla || p.osc_nome || 'OSC').replace(/[^a-zA-Z0-9]/g, '_');
+        a.download = `Declaracao_Art39_MROSC_${sanitizado}.docx`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+        showToast('Declaração Art. 39 baixada com sucesso em .DOCX!', 'success');
+      } catch (err) {
+        showToast('Erro ao baixar documento DOCX.', 'warning');
+      }
+    }
+
+    function imprimirDeclaracaoArt39() {
+      window.print();
+    }
+
+    function copiarTextoDeclaracaoArt39() {
+      const osc = document.getElementById('osc_nome')?.value || 'ORGANIZAÇÃO DA SOCIEDADE CIVIL';
+      const cnpj = document.getElementById('cnpj')?.value || '00.000.000/0001-00';
+      const cidade = document.getElementById('cidade')?.value || 'Brasília';
+      const uf = document.getElementById('uf')?.value || 'DF';
+      const pres = document.getElementById('representanteLegal')?.value || '[Nome do Presidente]';
+
+      let txt = `DECLARAÇÃO DE INEXISTÊNCIA DE IMPEDIMENTOS E CONFORMIDADE DE GOVERNANÇA\n`;
+      txt += `(Art. 39 da Lei Federal nº 13.019/2014 & Lei Complementar nº 210/2024)\n\n`;
+      txt += `A ${osc}, CNPJ nº ${cnpj}, com sede em ${cidade}/${uf}, DECLARA sob as penas da lei, para fins de celebração de parceria via Transferegov.br:\n`;
+      txt += `1. Que se encontra regularmente constituída com cadastro ativo na Receita Federal;\n`;
+      txt += `2. Que nenhum de seus dirigentes estatutários é membro de Poder ou Ministério Público, nem autoridade com poder de aprovação ou supervisão (Art. 39, III);\n`;
+      txt += `3. Que a vedação estende-se a cônjuges, companheiros e parentes até o 2º grau;\n`;
+      txt += `4. Que não teve contas rejeitadas nos últimos 5 anos pela administração pública nem nos últimos 8 anos por Tribunais de Contas.\n\n`;
+      txt += `Quadro de Dirigentes:\n`;
+      dirigentesArt39.forEach(d => {
+        txt += `- ${d.nome} (${d.cargo}) - CPF: ${d.cpf}\n`;
+      });
+      txt += `\n${cidade}/${uf}, ${new Date().toLocaleDateString('pt-BR')}\n\n`;
+      txt += `_________________________________________\n${pres}\nPresidente / Representante Legal`;
+
+      navigator.clipboard.writeText(txt).then(() => {
+        showToast('Texto da Declaração Art. 39 copiado!', 'success');
+      });
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      renderizarCriteriosElegibilidade();
+      renderizarItensCotacao();
+      renderizarDirigentesArt39();
       calcularTotais();
       calcularProntidaoChecklist();
       carregarHistorico();
@@ -2222,23 +3227,23 @@ ${p.justificativa}
 
   <!-- Barra de Navegação Inferior Fixa (Mobile Bottom Navigation) -->
   <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-2 py-1.5 flex justify-around items-center shadow-[0_-4px_20px_rgba(0,0,0,0.08)] no-print">
-    <button onclick="trocarAba('aba-guia')" class="flex flex-col items-center gap-0.5 py-1 px-2 text-slate-500 hover:text-govblue active:scale-95 transition">
-      <i data-lucide="help-circle" class="w-5 h-5 text-govgold"></i>
-      <span class="text-[9px] font-bold">Guia</span>
+    <button onclick="trocarAba('aba-elegibilidade')" class="flex flex-col items-center gap-0.5 py-1 px-1.5 text-slate-500 hover:text-govblue active:scale-95 transition">
+      <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i>
+      <span class="text-[9px] font-bold">Diagnóstico</span>
     </button>
-    <button onclick="trocarAba('aba-pesquisa-emendas')" class="flex flex-col items-center gap-0.5 py-1 px-2 text-slate-500 hover:text-govblue active:scale-95 transition">
-      <i data-lucide="search-check" class="w-5 h-5 text-emerald-600"></i>
+    <button onclick="trocarAba('aba-pesquisa-emendas')" class="flex flex-col items-center gap-0.5 py-1 px-1.5 text-slate-500 hover:text-govblue active:scale-95 transition">
+      <i data-lucide="search-check" class="w-5 h-5 text-blue-600"></i>
       <span class="text-[9px] font-bold">Consulta</span>
     </button>
-    <button onclick="trocarAba('aba-elaborador')" class="flex flex-col items-center gap-0.5 py-1 px-2 text-slate-500 hover:text-govblue active:scale-95 transition">
+    <button onclick="trocarAba('aba-elaborador')" class="flex flex-col items-center gap-0.5 py-1 px-1.5 text-slate-500 hover:text-govblue active:scale-95 transition">
       <i data-lucide="file-edit" class="w-5 h-5 text-govblue"></i>
       <span class="text-[9px] font-bold">Pleito</span>
     </button>
-    <button onclick="trocarAba('aba-oficio')" class="flex flex-col items-center gap-0.5 py-1 px-2 text-slate-500 hover:text-govblue active:scale-95 transition">
+    <button onclick="trocarAba('aba-oficio')" class="flex flex-col items-center gap-0.5 py-1 px-1.5 text-slate-500 hover:text-govblue active:scale-95 transition">
       <i data-lucide="mail" class="w-5 h-5 text-purple-600"></i>
       <span class="text-[9px] font-bold">Ofício</span>
     </button>
-    <button onclick="abrirDrawerMobile()" class="flex flex-col items-center gap-0.5 py-1 px-2 text-slate-500 hover:text-govblue active:scale-95 transition">
+    <button onclick="abrirDrawerMobile()" class="flex flex-col items-center gap-0.5 py-1 px-1.5 text-slate-500 hover:text-govblue active:scale-95 transition">
       <i data-lucide="menu" class="w-5 h-5"></i>
       <span class="text-[9px] font-bold">Mais</span>
     </button>
