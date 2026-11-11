@@ -1,0 +1,15 @@
+{
+  "name": "captaosc",
+  "version": "3.0.0",
+  "description": "Guia de Bolso e Automação de Captação para OSCs (MROSC & Transferegov)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "log:evolucao": "node scripts/registrar-evolucao.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "docx": "^9.15.3",
+    "express": "^4.19.2"
+  }
+}

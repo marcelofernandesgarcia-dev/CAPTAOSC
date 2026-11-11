@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CaptaOSC - Gestão Estratégica de Emendas Parlamentares (MROSC & Transferegov)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            govblue: '#0C326F',
+            govdark: '#08214d',
+            govgold: '#DDB338',
+            govgreen: '#138835'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @media print {
+      body {
+        background-color: white !important;
+        color: #111827 !important;
+        font-family: 'Times New Roman', Times, serif !important;
+      }
+      body * { visibility: hidden; }
+      #area-impressao, #area-impressao * { visibility: visible; }
+      #area-impressao {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .no-print, header, nav, footer, button, #toast-container { display: none !important; }
+      @page {
+        size: A4 portrait;
+        margin: 25mm 20mm 20mm 25mm;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col font-sans">
+
+  <!-- Topbar Oficial Gov -->
+  <header class="bg-govblue text-white shadow-md border-b-4 border-govgold sticky top-0 z-40 no-print">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-2xl shadow-inner">
+          🏛️
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] text-govgold font-black uppercase tracking-widest">LEI COMPLEMENTAR Nº 210/2024 &bull; MROSC</span>
+          </div>
+          <h1 class="text-xl font-black tracking-tight">CaptaOSC</h1>
+          <p class="text-xs text-blue-100 hidden sm:block">Plataforma Técnica e Estratégica para Captação de Emendas Parlamentares Federais</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-xs bg-govdark text-emerald-300 px-3 py-1.5 rounded-full border border-blue-400/30 flex items-center gap-1.5 font-medium">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sistema Ativo (:3000)
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navegação por Módulos Estratégicos Reorganizada -->
+  <nav class="bg-white border-b border-slate-200 shadow-sm sticky top-[68px] z-30 no-print">
+    <div class="max-w-6xl mx-auto px-4 flex space-x-2 sm:space-x-6 overflow-x-auto text-xs font-bold uppercase tracking-wider">
+      <button onclick="trocarAba('aba-guia')" id="btn-aba-guia" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-2 whitespace-nowrap">
+        <i data-lucide="help-circle" class="w-4 h-4 text-govgold"></i> 💡 Guia &amp; Usabilidade
+      </button>
+      <button onclick="trocarAba('aba-pesquisa-emendas')" id="btn-aba-pesquisa-emendas" class="tab-btn py-3 px-3 border-b-2 border-govblue text-govblue flex items-center gap-2 whitespace-nowrap">
+        <i data-lucide="search-check" class="w-4 h-4 text-emerald-600"></i> 1. Consulta de Emendas &amp; Inteligência
+      </button>
+      <button onclick="trocarAba('aba-elaborador')" id="btn-aba-elaborador" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-2 whitespace-nowrap">
+        <i data-lucide="file-edit" class="w-4 h-4"></i> 2. Elaborador do Pleito &amp; Orçamento
+      </button>
+      <button onclick="trocarAba('aba-oficio')" id="btn-aba-oficio" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-2 whitespace-nowrap">
+        <i data-lucide="mail" class="w-4 h-4"></i> 3. Ofício ao Parlamentar
+      </button>
+      <button onclick="trocarAba('aba-ciclo')" id="btn-aba-ciclo" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-2 whitespace-nowrap">
+        <i data-lucide="calendar" class="w-4 h-4"></i> 4. Ciclo Anual &amp; Calendário
+      </button>
+      <button onclick="trocarAba('aba-trilha')" id="btn-aba-trilha" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-2 whitespace-nowrap">
+        <i data-lucide="route" class="w-4 h-4"></i> 5. Trilha Transferegov (6 Passos)
+      </button>
+      <button onclick="trocarAba('aba-marco')" id="btn-aba-marco" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-2 whitespace-nowrap">
+        <i data-lucide="scale" class="w-4 h-4"></i> 6. Marco Legal (LC 210 / MROSC)
+      </button>
+    </div>
+  </nav>
+
+  <!-- Notificações Toast -->
+  <div id="toast-container" class="fixed top-20 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Container Principal -->
+  <main class="max-w-6xl mx-auto px-4 py-6 flex-1 w-full space-y-6">
+
+    <!-- ================================================================= -->
+    <!-- MÓDULO 0: GUIA DE EXPLICAÇÃO & USABILIDADE DO APLICATIVO -->
+    <!-- ================================================================= -->
+    <div id="aba-guia" class="modulo-conteudo hidden space-y-6">
+      
+      <!-- Hero Banner Explicativo -->
+      <div class="bg-gradient-to-r from-govblue via-slate-900 to-govdark text-white p-6 sm:p-8 rounded-3xl shadow-lg border-2 border-govgold/40 relative overflow-hidden">
+        <div class="relative z-10 space-y-3">
+          <div class="inline-flex items-center gap-2 bg-govgold/20 text-govgold px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-govgold/30">
+            <span>💡</span> Guia de Funcionamento e Usabilidade
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-white">
+            Como Operar o CaptaOSC com Eficiência
+          </h2>
+          <p class="text-sm text-blue-100 max-w-3xl leading-relaxed">
+            O <strong>CaptaOSC</strong> é o assistente técnico-estratégico de captação de recursos federais para <strong>Organizações da Sociedade Civil (OSCs)</strong>. Ele integra inteligência jurídica do <strong>MROSC (Lei nº 13.019/2014)</strong>, regras orçamentárias do <strong>Transferegov.br</strong> e os parâmetros de transparência da nova <strong>Lei Complementar nº 210/2024</strong>.
+          </p>
+          <div class="pt-2 flex flex-wrap gap-3">
+            <button onclick="trocarAba('aba-elaborador')" class="px-5 py-2.5 bg-govgold hover:bg-yellow-500 text-govdark font-black rounded-xl text-xs uppercase tracking-wider transition shadow flex items-center gap-2">
+              <i data-lucide="play" class="w-4 h-4 fill-current"></i> Iniciar Elaboração Agora
+            </button>
+            <button onclick="trocarAba('aba-ciclo')" class="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold border border-white/20 flex items-center gap-1.5 transition">
+              <i data-lucide="calendar" class="w-4 h-4"></i> Consultar Prazos e Calendário
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fluxo Operacional de Usabilidade (4 Passos) -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+        <div class="border-b pb-3">
+          <h3 class="text-base font-bold text-govblue flex items-center gap-2 uppercase tracking-wide">
+            <i data-lucide="compass" class="w-5 h-5 text-govblue"></i>
+            Jornada do Usuário: Do CNPJ ao Gabinete Parlamentar em 4 Passos
+          </h3>
+          <p class="text-xs text-slate-500">Siga o roteiro passo a passo para estruturar um pleito robusto e com conformidade técnica garantida.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <!-- Passo 1 -->
+          <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-2 relative flex flex-col justify-between">
+            <div>
+              <span class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center mb-2">1</span>
+              <h4 class="font-bold text-slate-900 text-sm">Pesquisa de Emendas &amp; Bancada</h4>
+              <p class="text-xs text-slate-600 mt-1">
+                Acesse a aba <strong>1. Consulta de Emendas</strong> para pesquisar os deputados federais da sua bancada e áreas financiadas:
+              </p>
+              <ul class="text-[11px] text-slate-600 space-y-1 font-medium mt-2">
+                <li>✔ Histórico de emendas por parlamentar e UF.</li>
+                <li>✔ Áreas afins (Saúde 50%, Assistência, Educação).</li>
+                <li>✔ Botão "Usar como Referência" para carregar dados.</li>
+              </ul>
+            </div>
+            <button onclick="irParaPasso(1)" class="w-full mt-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-xs flex items-center justify-center gap-1 transition">
+              Pesquisar Emendas &rarr;
+            </button>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/40 space-y-2 relative flex flex-col justify-between">
+            <div>
+              <span class="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center mb-2">2</span>
+              <h4 class="font-bold text-slate-900 text-sm">Elaboração do Pleito &amp; MROSC</h4>
+              <p class="text-xs text-slate-600 mt-1">
+                Na aba <strong>2. Elaborador</strong>, valide os requisitos legais da entidade e estruture o orçamento:
+              </p>
+              <ul class="text-[11px] text-slate-600 space-y-1 font-medium mt-2">
+                <li>• <strong>MROSC:</strong> Art. 33 (3 anos União) e Art. 39 (ATIVA).</li>
+                <li>• <strong>GND 3 vs. GND 4:</strong> Custeio e Capital calculados.</li>
+              </ul>
+            </div>
+            <button onclick="irParaPasso(2)" class="w-full mt-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-xs flex items-center justify-center gap-1 transition">
+              Elaborar Pleito &rarr;
+            </button>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 relative flex flex-col justify-between">
+            <div>
+              <span class="w-7 h-7 rounded-full bg-amber-600 text-white font-bold text-xs flex items-center justify-center mb-2">3</span>
+              <h4 class="font-bold text-slate-900 text-sm">Geração do Ofício Formal</h4>
+              <p class="text-xs text-slate-600 mt-1">
+                Acesse o modelo oficial na aba <strong>3. Ofício ao Parlamentar</strong> com:
+              </p>
+              <ul class="text-[11px] text-slate-600 space-y-1 font-medium mt-2">
+                <li>• Endereçamento formal ao Gabinete em Brasília.</li>
+                <li>• Fundamentação no Art. 29 e na <strong>LC nº 210/2024</strong>.</li>
+                <li>• Impressão timbrada ou download em .txt.</li>
+              </ul>
+            </div>
+            <button onclick="irParaPasso(3)" class="w-full mt-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg text-xs flex items-center justify-center gap-1 transition">
+              Visualizar Ofício &rarr;
+            </button>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="p-4 rounded-xl border border-purple-200 bg-purple-50/40 space-y-2 relative flex flex-col justify-between">
+            <div>
+              <span class="w-7 h-7 rounded-full bg-purple-600 text-white font-bold text-xs flex items-center justify-center mb-2">4</span>
+              <h4 class="font-bold text-slate-900 text-sm">Transferegov.br &amp; Execução</h4>
+              <p class="text-xs text-slate-600 mt-1">
+                Acompanhe as <strong>Etapas 4 e 5</strong> após a aprovação da LOA:
+              </p>
+              <ul class="text-[11px] text-slate-600 space-y-1 font-medium mt-2">
+                <li>• Calendário de votação da LOA (Nov-Dez).</li>
+                <li>• Inserção do Plano de Trabalho no Transferegov.</li>
+                <li>• Execução via OBTV e prestação de contas.</li>
+              </ul>
+            </div>
+            <button onclick="irParaPasso(4)" class="w-full mt-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg text-xs flex items-center justify-center gap-1 transition">
+              Ver Trilha Transferegov &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dicionário Prático de Conceitos do Transferegov & Emendas -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+        <div class="border-b pb-3">
+          <h3 class="text-base font-bold text-govblue flex items-center gap-2 uppercase tracking-wide">
+            <i data-lucide="book-open-check" class="w-5 h-5 text-govblue"></i>
+            Dicionário Técnico Rápido para a Equipe da OSC
+          </h3>
+          <p class="text-xs text-slate-500">Terminologias essenciais que você encontrará no aplicativo e no Transferegov.br.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+            <strong class="text-blue-900 font-bold block text-sm">GND (Grupo de Natureza de Despesa)</strong>
+            <p class="text-slate-600">
+              Código orçamentário federal que classifica os recursos. <strong>GND 3</strong> financia despesas correntes de operação. <strong>GND 4</strong> financia investimentos em bens permanentes ou infraestrutura física.
+            </p>
+          </div>
+          <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+            <strong class="text-emerald-900 font-bold block text-sm">RP 6, RP 7 e RP 8</strong>
+            <p class="text-slate-600">
+              Indicadores de Resultado Primário: <strong>RP 6</strong> são emendas individuais de deputados/senadores (impositivas); <strong>RP 7</strong> são emendas de bancada estadual; <strong>RP 8</strong> são emendas de comissões temáticas.
+            </p>
+          </div>
+          <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+            <strong class="text-purple-900 font-bold block text-sm">Art. 29 da Lei 13.019/2014</strong>
+            <p class="text-slate-600">
+              Autoriza a <em>dispensa de chamamento público</em> para parcerias decorrentes de emendas. Atenção: a dispensa não elimina a exigência de Plano de Trabalho formal e análise técnica do Ministério.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEÇÃO EXPLICATIVA: ORÇAMENTO IMPOSITIVO vs. ORÇAMENTO DISCRICIONÁRIO -->
+      <div class="bg-gradient-to-br from-slate-900 to-govdark text-white p-6 sm:p-8 rounded-3xl shadow-md border-2 border-govgold/30 space-y-5">
+        <div class="border-b border-slate-700 pb-3">
+          <span class="text-[10px] text-govgold font-black uppercase tracking-wider">Fundamento Orçamentário e Constitucional</span>
+          <h3 class="text-lg font-bold text-white flex items-center gap-2 mt-1">
+            ⚖️ Orçamento Impositivo vs. Orçamento Discricionário: Qual a Diferença para a OSC?
+          </h3>
+          <p class="text-xs text-slate-300">Entenda as duas grandes vias de acesso aos recursos federais e como cada uma afeta a sua entidade.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <!-- Card Impositivo -->
+          <div class="p-4 rounded-2xl bg-emerald-950/60 border border-emerald-500/40 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-emerald-300 tracking-wider">🟢 Orçamento Impositivo (RP 6 e RP 7)</span>
+              <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-mono font-bold">CF/88 Art. 166</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Execução Obrigatória por Mandamento Constitucional</h4>
+            <p class="text-slate-300 leading-relaxed">
+              O Poder Executivo <strong>tem o dever constitucional de executar e pagar</strong>. O Ministério não pode cancelar a emenda por conveniência política, apenas se houver <em>impedimento técnico formal</em>.
+            </p>
+            <div class="p-3 bg-black/40 rounded-xl space-y-1 text-[11px] text-emerald-200">
+              <p>• <strong>Via de Acesso:</strong> Indicação direta do Deputado ou Senador no OGU.</p>
+              <p>• <strong>Regime MROSC:</strong> <strong>Dispensa de Chamamento Público (Art. 29 da Lei 13.019/2014)</strong>.</p>
+              <p>• <strong>Cota da Saúde:</strong> 50% das emendas individuais devem ir obrigatoriamente para Saúde (ASPS).</p>
+            </div>
+          </div>
+
+          <!-- Card Discricionário -->
+          <div class="p-4 rounded-2xl bg-amber-950/60 border border-amber-500/40 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-amber-300 tracking-wider">🟡 Orçamento Discricionário (RP 2 e RP 8)</span>
+              <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-mono font-bold">Transferegov / Editais</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Programas Próprios e Editais dos Ministérios</h4>
+            <p class="text-slate-300 leading-relaxed">
+              Recursos de livre gestão dos Ministros de Estado para executar políticas públicas. <strong>Não é obrigatório</strong> e pode sofrer contingenciamento fiscal dependendo do caixa da União.
+            </p>
+            <div class="p-3 bg-black/40 rounded-xl space-y-1 text-[11px] text-amber-200">
+              <p>• <strong>Via de Acesso:</strong> Inscrição da OSC em Chamamento Público aberto no Transferegov.br.</p>
+              <p>• <strong>Regime MROSC:</strong> <strong>Chamamento Concorrencial Obrigatório (Art. 16 da Lei 13.019/2014)</strong>.</p>
+              <p>• <strong>Critério:</strong> A OSC concorre contra outras entidades com base em pontuação técnica do edital.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-3 bg-slate-800/80 rounded-xl text-[11px] text-blue-200 border border-slate-700 flex items-center gap-2">
+          <span class="text-lg">💡</span>
+          <span><strong>Dica Prática CaptaOSC:</strong> Na aba <em>1. Consulta de Emendas &amp; Inteligência</em>, utilize a busca de <strong>Políticas Públicas</strong> para descobrir o código exato da Ação Orçamentária antes de redigir seu ofício ao parlamentar!</span>
+        </div>
+      </div>
+
+      <!-- FAQ: Perguntas Frequentes de Usabilidade -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+        <div class="border-b pb-3">
+          <h3 class="text-base font-bold text-govblue flex items-center gap-2 uppercase tracking-wide">
+            <i data-lucide="help-circle" class="w-5 h-5 text-govblue"></i>
+            Perguntas Frequentes (FAQ) de Usabilidade
+          </h3>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <details class="p-3 bg-slate-50 rounded-xl border border-slate-200 cursor-pointer group">
+            <summary class="font-bold text-slate-800 flex items-center justify-between">
+              <span>❓ Minha OSC tem menos de 3 anos de registro. Posso receber emenda federal?</span>
+              <span class="text-slate-400 group-open:rotate-180 transition">&darr;</span>
+            </summary>
+            <p class="mt-2 text-slate-600 pl-4 border-l-2 border-amber-400">
+              O Art. 33, III da Lei nº 13.019/2014 exige no mínimo 3 (três) anos de eficácia do registro para celebração de parcerias com a União. Se sua entidade tiver menos de 3 anos, o sistema emitirá um alerta de impedimento técnico. Parcerias com Estados exigem 2 anos e com Municípios 1 ano.
+            </p>
+          </details>
+
+          <details class="p-3 bg-slate-50 rounded-xl border border-slate-200 cursor-pointer group">
+            <summary class="font-bold text-slate-800 flex items-center justify-between">
+              <span>❓ Onde e quando devo entregar o Ofício gerado pelo aplicativo?</span>
+              <span class="text-slate-400 group-open:rotate-180 transition">&darr;</span>
+            </summary>
+            <p class="mt-2 text-slate-600 pl-4 border-l-2 border-blue-400">
+              O momento ideal para protocolar o Ofício no gabinete parlamentar é entre <strong>Agosto e Outubro</strong> (Etapa 2 do Ciclo), período em que o Projeto de Lei Orçamentária Anual (PLOA) está em tramitação e os parlamentares definem a destinação de suas cotas de emendas.
+            </p>
+          </details>
+
+          <details class="p-3 bg-slate-50 rounded-xl border border-slate-200 cursor-pointer group">
+            <summary class="font-bold text-slate-800 flex items-center justify-between">
+              <span>❓ Como utilizo o Espelho do Transferegov gerado pelo CaptaOSC?</span>
+              <span class="text-slate-400 group-open:rotate-180 transition">&darr;</span>
+            </summary>
+            <p class="mt-2 text-slate-600 pl-4 border-l-2 border-emerald-400">
+              Quando o Ministério setorial abrir o programa no Transferegov.br correspondente ao número da emenda, acesse o portal com seu certificado digital, crie a proposta e use o botão <em>"Copiar Espelho Transferegov"</em> do CaptaOSC para preencher fielmente os campos de Objeto, Justificativa e Valores por GND.
+            </p>
+          </details>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- MÓDULO 2: ELABORADOR DO PLEITO & ORÇAMENTO -->
+    <!-- ================================================================= -->
+    <div id="aba-elaborador" class="modulo-conteudo hidden space-y-6">
+      
+      <!-- Banner Informativo com Atalho para o Guia -->
+      <div class="bg-blue-50 border border-blue-200 p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm no-print">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">💡</span>
+          <div>
+            <h4 class="text-xs font-bold text-blue-900">Novo no CaptaOSC ou tem dúvidas sobre o preenchimento?</h4>
+            <p class="text-[11px] text-blue-700">Consulte a jornada em 4 passos, o significado de GND 3 vs GND 4 e a fundamentação da Lei Complementar nº 210/2024.</p>
+          </div>
+        </div>
+        <button onclick="trocarAba('aba-guia')" class="px-3.5 py-1.5 bg-govblue hover:bg-govdark text-white rounded-lg text-xs font-bold whitespace-nowrap transition flex items-center gap-1.5 shadow">
+          <i data-lucide="help-circle" class="w-3.5 h-3.5 text-govgold"></i> Abrir Guia de Usabilidade
+        </button>
+      </div>
+
+      <form id="form-proposta" onsubmit="event.preventDefault(); salvarPropostaCompleta();" class="space-y-6">
+
+        <!-- 1.1 Habilitação MROSC & Consulta CNPJ -->
+        <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h2 class="text-sm font-bold text-govblue flex items-center gap-2 uppercase tracking-wide">
+              <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i>
+              1. Habilitação MROSC da OSC Proponente (Lei nº 13.019/2014)
+            </h2>
+            <span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-bold">Art. 33, III &bull; 3 Anos União</span>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">CNPJ da Entidade *</label>
+            <div class="flex gap-2">
+              <input type="text" id="cnpj" maxlength="18" placeholder="Digite apenas números (14 dígitos)" class="flex-1 text-sm px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-govblue outline-none" required>
+              <button type="button" onclick="consultarCNPJ()" id="btn-cnpj" class="bg-govblue hover:bg-govdark text-white text-xs px-4 py-2 rounded-lg font-bold transition flex items-center gap-1.5 shadow">
+                <i data-lucide="search" class="w-4 h-4"></i> Consultar Receita &amp; MROSC
+              </button>
+            </div>
+            <div id="mrosc-alerta-box" class="hidden mt-3 p-3.5 rounded-xl text-xs space-y-1"></div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-bold text-slate-700 mb-1">Razão Social da OSC *</label>
+              <input type="text" id="osc_nome" placeholder="Associação ou Fundação sem fins lucrativos" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 font-medium" required>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Ano de Fundação</label>
+              <input type="number" id="ano_fundacao" placeholder="Ex: 2012" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 text-center font-bold">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Situação Cadastral</label>
+              <input type="text" id="osc_situacao" placeholder="Ex: ATIVA" readonly class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 text-center font-bold text-slate-600">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Município Sede *</label>
+              <input type="text" id="cidade" placeholder="Cidade de atuação" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg bg-slate-50" required>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">UF *</label>
+              <input type="text" id="uf" maxlength="2" placeholder="UF" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 uppercase text-center font-bold" required>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Área Principal de Atuação</label>
+              <select id="areaAtuacao" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg bg-white">
+                <option value="Assistência Social">Assistência Social</option>
+                <option value="Saúde">Saúde</option>
+                <option value="Educação e Formação Profissional">Educação e Formação Profissional</option>
+                <option value="Cultura e Patrimônio Histórico">Cultura e Patrimônio Histórico</option>
+                <option value="Esporte e Lazer Comunitário">Esporte e Lazer Comunitário</option>
+                <option value="Meio Ambiente e Desenvolvimento Sustentável">Meio Ambiente e Sustentabilidade</option>
+                <option value="Direitos Humanos e Cidadania">Direitos Humanos e Cidadania</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.2 Coordenadas Parlamentares & Tipo de Emenda -->
+        <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h2 class="text-sm font-bold text-govblue flex items-center gap-2 uppercase tracking-wide">
+              <i data-lucide="landmark" class="w-5 h-5 text-govblue"></i>
+              2. Coordenadas da Destinação Parlamentar
+            </h2>
+            <span class="text-[11px] text-slate-500">LC 210/2024 &bull; Rastreabilidade</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Tipo de Emenda *</label>
+              <select id="tipoEmenda" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg bg-white font-medium focus:ring-2 focus:ring-govblue outline-none">
+                <option value="Individual (RP 6 - Impositiva)">Individual (RP 6 - Impositiva)</option>
+                <option value="Bancada Estadual (RP 7 - Impositiva)">Bancada Estadual (RP 7 - Impositiva / Estruturante)</option>
+                <option value="Comissão Temática (RP 8 - Não Impositiva)">Comissão Temática (RP 8 - Não Impositiva)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Casa Legislativa *</label>
+              <select id="casaLegislativa" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg bg-white font-medium focus:ring-2 focus:ring-govblue outline-none">
+                <option value="Câmara dos Deputados">Câmara dos Deputados</option>
+                <option value="Senado Federal">Senado Federal</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Parlamentar Destinador(a) *</label>
+              <input type="text" id="parlamentar" placeholder="Ex: Senador Carlos Viana (PSD/MG)" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-govblue outline-none" required>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Exercício (PLOA)</label>
+              <input type="number" id="exercicio" value="2026" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg text-center font-bold">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Ministério Setorial Sugerido *</label>
+              <select id="ministerio" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg bg-white">
+                <option value="Ministério do Desenvolvimento e Assistência Social, Família e Combate à Fome (MDS)">MDS - Desenvolvimento Social e Família</option>
+                <option value="Ministério da Saúde (MS)">Ministério da Saúde (Fundo Nacional de Saúde)</option>
+                <option value="Ministério dos Direitos Humanos e da Cidadania (MDHC)">MDHC - Direitos Humanos e Cidadania</option>
+                <option value="Ministério da Cultura (MinC)">MinC - Cultura / Fundo Nacional de Cultura</option>
+                <option value="Ministério da Educação (MEC)">MEC - Educação</option>
+                <option value="Ministério do Esporte (MEsp)">Ministério do Esporte</option>
+                <option value="Ministério da Gestão e da Inovação em Serviços Públicos (MGI)">MGI - Gestão e Inovação</option>
+                <option value="Ministério da Justiça e Segurança Pública (MJSP)">MJSP - Justiça e Segurança Pública</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Ação Orçamentária Sugerida (Código / Descrição)</label>
+              <input type="text" id="acaoOrcamentaria" placeholder="Ex: Ação 21C0 / 20V0 / Apoio a Projetos Sociais" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Nº do Gabinete e Anexo</label>
+              <input type="text" id="gabinete" placeholder="Ex: Gabinete 412 – Anexo IV" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.3 Caracterização do Projeto (Plano de Trabalho) -->
+        <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h2 class="text-sm font-bold text-govblue flex items-center gap-2 uppercase tracking-wide">
+              <i data-lucide="file-text" class="w-5 h-5 text-govblue"></i>
+              3. Caracterização Técnica da Proposta (Plano de Trabalho)
+            </h2>
+            <span class="text-[11px] text-slate-500">MROSC Art. 29 &bull; Mérito e Viabilidade</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-bold text-slate-700 mb-1">Título do Projeto *</label>
+              <input type="text" id="projeto" placeholder="Ex: Projeto Mulheres Empreendedoras: Capacitação Socioprofissional e Geração de Renda" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-govblue outline-none" required>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Meta Física (Nº de Beneficiários Diretos)</label>
+              <input type="number" id="metaBeneficiarios" placeholder="Ex: 200" value="150" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg text-center font-bold">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Objeto da Parceria (Claro, preciso e sucinto) *</label>
+            <textarea id="objeto" rows="2" placeholder="Ex: Propiciar formação socioprofissional e oficinas de tecnologia para 150 mulheres chefes de família em situação de vulnerabilidade no município..." class="w-full text-sm p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-govblue outline-none" required></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Justificativa e Diagnóstico da Realidade Local *</label>
+            <textarea id="justificativa" rows="3" placeholder="Ex: A região atendida apresenta elevados índices de vulnerabilidade e carência de equipamentos de qualificação. A presente parceria alinha-se estritamente aos programas do Ministério e atende aos requisitos do MROSC..." class="w-full text-sm p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-govblue outline-none" required></textarea>
+          </div>
+        </div>
+
+        <!-- 1.4 Planilha Orçamentária Transferegov.br (GND 3 vs GND 4) -->
+        <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h2 class="text-sm font-bold text-govblue flex items-center gap-2 uppercase tracking-wide">
+              <i data-lucide="calculator" class="w-5 h-5 text-emerald-600"></i>
+              4. Estrutura Orçamentária Transferegov.br (GND 3 vs. GND 4)
+            </h2>
+            <span class="text-[11px] text-slate-500">Natureza de Despesa</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- GND 3 -->
+            <div class="p-4 rounded-xl border-2 border-blue-200 bg-blue-50/40 space-y-2">
+              <div class="flex items-center justify-between">
+                <label class="text-xs font-bold text-blue-900 flex items-center gap-1.5 uppercase">
+                  <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span> GND 3 - Custeio (Despesas Correntes)
+                </label>
+                <span id="badge-gnd3" class="text-xs bg-blue-200 text-blue-900 font-bold px-2 py-0.5 rounded">0%</span>
+              </div>
+              <p class="text-[11px] text-slate-500">Pessoal próprio, instrutores, materiais de consumo, lanches, eventos, serviços de terceiros e diárias.</p>
+              <div class="relative">
+                <span class="absolute left-3 top-2.5 text-xs font-bold text-slate-400">R$</span>
+                <input type="number" step="0.01" id="gnd3" oninput="calcularTotais()" placeholder="0,00" value="120000" class="w-full text-base font-bold pl-9 pr-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-800">
+              </div>
+            </div>
+
+            <!-- GND 4 -->
+            <div class="p-4 rounded-xl border-2 border-purple-200 bg-purple-50/40 space-y-2">
+              <div class="flex items-center justify-between">
+                <label class="text-xs font-bold text-purple-900 flex items-center gap-1.5 uppercase">
+                  <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span> GND 4 - Capital (Investimento)
+                </label>
+                <span id="badge-gnd4" class="text-xs bg-purple-200 text-purple-900 font-bold px-2 py-0.5 rounded">0%</span>
+              </div>
+              <p class="text-[11px] text-slate-500">Equipamentos permanentes, computadores, maquinários, veículos e obras de reforma/infraestrutura.</p>
+              <div class="relative">
+                <span class="absolute left-3 top-2.5 text-xs font-bold text-slate-400">R$</span>
+                <input type="number" step="0.01" id="gnd4" oninput="calcularTotais()" placeholder="0,00" value="80000" class="w-full text-base font-bold pl-9 pr-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-800">
+              </div>
+            </div>
+          </div>
+
+          <!-- Total Consolidado -->
+          <div class="p-4 bg-slate-900 text-white rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-inner">
+            <div>
+              <span class="text-xs text-slate-400 uppercase font-semibold">Valor Total Pleiteado (Emenda Parlamentar):</span>
+              <div class="text-2xl font-black text-govgold" id="total-global-formatado">R$ 200.000,00</div>
+            </div>
+            <div class="w-full sm:w-72 space-y-1">
+              <div class="flex justify-between text-[11px] text-slate-300">
+                <span id="label-gnd3-resumo">GND 3: 60.0%</span>
+                <span id="label-gnd4-resumo">GND 4: 40.0%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden flex border border-slate-700">
+                <div id="prog-gnd3" class="bg-blue-500 h-full transition-all" style="width: 60%"></div>
+                <div id="prog-gnd4" class="bg-purple-500 h-full transition-all" style="width: 40%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Assistente Anti-Impedimento Técnico (GND 3 Custeio vs. GND 4 Capital) -->
+          <div id="alerta-consistencia-orcamento" class="p-3.5 rounded-xl border border-blue-200 bg-blue-50/70 text-xs text-blue-900 transition flex items-start gap-2.5">
+            <span class="text-base flex-shrink-0" id="icone-consistencia-orcamento">🛡️</span>
+            <div class="space-y-0.5">
+              <strong class="block font-bold" id="titulo-consistencia-orcamento">Assistente Anti-Impedimento Técnico (OGU & MROSC):</strong>
+              <p id="txt-consistencia-orcamento" class="text-[11px] text-slate-700 leading-relaxed">
+                Composição em análise: verifique a compatibilidade entre a destinação de despesas correntes (GND 3) e capital/equipamentos (GND 4) com a Ação Orçamentária escolhida.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.5 Dados do Ofício & Assinatura -->
+        <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+          <h2 class="text-sm font-bold text-govblue flex items-center gap-2 uppercase tracking-wide border-b border-slate-100 pb-3">
+            <i data-lucide="signature" class="w-5 h-5 text-govblue"></i>
+            5. Identificação e Assinatura do Pleito
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Nº do Ofício (Ex: 015/2026)</label>
+              <input type="text" id="numeroOficio" value="001/2026" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Nome do(a) Presidente / Representante Legal *</label>
+              <input type="text" id="representanteLegal" placeholder="Nome completo do signatário" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg" required>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Telefone / E-mail de Contato</label>
+              <input type="text" id="telefoneContato" placeholder="(XX) 99999-9999 / contato@osc.org.br" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
+            </div>
+          </div>
+        </div>
+
+        <!-- Botões de Ação do Módulo 1 -->
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-govgreen hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+            <i data-lucide="save" class="w-4 h-4"></i> Salvar Proposta &amp; Gerar Ofício
+          </button>
+          <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
+            <button type="button" onclick="irParaAbaOficio()" class="px-4 py-2.5 bg-govblue hover:bg-govdark text-white font-bold rounded-lg text-xs flex items-center gap-1.5 transition">
+              <i data-lucide="mail-check" class="w-4 h-4"></i> Ver Ofício Formal
+            </button>
+            <button type="button" onclick="copiarEspelhoTransferegov()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-xs border border-slate-300 flex items-center gap-1.5 transition">
+              <i data-lucide="copy" class="w-4 h-4"></i> Espelho Transferegov
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- Lista de Propostas Salvas -->
+      <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2 uppercase tracking-wide">
+            <i data-lucide="folder-archive" class="w-4 h-4 text-govblue"></i>
+            Propostas de Emendas Elaboradas
+          </h3>
+          <span class="text-xs text-slate-400" id="contador-propostas">0 registradas</span>
+        </div>
+        <div id="lista-propostas" class="divide-y divide-slate-100 text-xs">
+          <p class="py-4 text-center text-slate-400">Nenhuma proposta cadastrada ainda.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- MÓDULO 3: GERADOR OFICIAL DE OFÍCIO AO PARLAMENTAR -->
+    <!-- ================================================================= -->
+    <div id="aba-oficio" class="modulo-conteudo hidden space-y-6">
+      
+      <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 gap-3 no-print">
+          <div>
+            <h2 class="text-base font-bold text-govblue flex items-center gap-2">
+              <i data-lucide="mail" class="w-5 h-5 text-govblue"></i>
+              3. Ofício Formal de Pleito de Emenda Parlamentar
+            </h2>
+            <p class="text-xs text-slate-500">Documento estruturado pronto para ser protocolado no gabinete parlamentar em Brasília ou no Estado.</p>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <button onclick="baixarOficioDocx()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow">
+              <i data-lucide="file-text" class="w-4 h-4"></i> Baixar .DOCX Oficial
+            </button>
+            <button onclick="imprimirOficio()" class="px-3.5 py-2 bg-govblue hover:bg-govdark text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow">
+              <i data-lucide="printer" class="w-4 h-4"></i> Visualizar & Salvar PDF
+            </button>
+            <button onclick="copiarTextoOficio()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold border border-slate-300 flex items-center gap-1.5 transition">
+              <i data-lucide="copy" class="w-4 h-4"></i> Copiar Texto
+            </button>
+            <button onclick="baixarOficioTxt()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold border border-slate-300 flex items-center gap-1.5 transition">
+              <i data-lucide="download" class="w-4 h-4"></i> Baixar .txt
+            </button>
+          </div>
+        </div>
+
+        <!-- Área Timbrada de Visualização do Ofício -->
+        <div id="area-impressao" class="bg-white p-8 sm:p-12 border border-slate-300 rounded-xl shadow-inner font-serif text-slate-900 leading-relaxed text-sm max-w-3xl mx-auto space-y-4">
+          <div class="text-center pb-4 border-b border-slate-200">
+            <h3 id="of-cabecalho-osc" class="font-bold text-base uppercase tracking-wider text-slate-900">ORGANIZAÇÃO DA SOCIEDADE CIVIL</h3>
+            <p id="of-cabecalho-cnpj" class="text-xs text-slate-600">CNPJ nº 00.000.000/0001-00</p>
+          </div>
+
+          <div class="flex justify-between text-xs font-sans text-slate-600 pt-2">
+            <span id="of-numero-txt" class="font-bold text-slate-800">OFÍCIO Nº 001/2026-OSC</span>
+            <span id="of-data-txt">Brasília/DF, 11 de novembro de 2026</span>
+          </div>
+
+          <div class="pt-4 text-xs font-sans space-y-1">
+            <p><strong>A Sua Excelência o(a) Senhor(a)</strong></p>
+            <p id="of-dest-nome" class="text-sm font-bold text-slate-900">Deputado(a) Federal / Senador(a)</p>
+            <p>Congresso Nacional – Câmara dos Deputados / Senado Federal</p>
+            <p id="of-dest-gabinete">Gabinete Parlamentar – CEP: 70160-900 – Brasília/DF</p>
+          </div>
+
+          <div class="pt-2 font-sans font-bold text-xs text-govblue border-l-4 border-govgold pl-3 py-1 bg-amber-50/50">
+            <p id="of-assunto-txt">Assunto: Pleito de destinação de Emenda Parlamentar ao Projeto de Lei Orçamentária Anual (PLOA 2027) – Apoio ao projeto "Nome do Projeto".</p>
+          </div>
+
+          <div class="space-y-3 pt-2 text-justify text-xs leading-relaxed font-sans text-slate-800" id="of-corpo-texto">
+            <!-- Texto injetado dinamicamente -->
+          </div>
+
+          <div class="pt-8 text-center font-sans space-y-1">
+            <p>Respeitosamente,</p>
+            <div class="pt-10">
+              <p class="font-bold border-t border-slate-400 inline-block px-8 pt-1" id="of-assina-nome">[Nome do(a) Presidente/Representante]</p>
+              <p class="text-xs text-slate-600">Presidente / Diretor(a) Executivo(a)</p>
+              <p class="text-[11px] text-slate-500" id="of-assina-osc">[Nome da OSC]</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- MÓDULO 4: CICLO ANUAL & CALENDÁRIO DA CAPTAÇÃO -->
+    <!-- ================================================================= -->
+    <div id="aba-ciclo" class="modulo-conteudo hidden space-y-6">
+      
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+        <div>
+          <h2 class="text-base font-bold text-govblue flex items-center gap-2">
+            <i data-lucide="calendar" class="w-5 h-5 text-govblue"></i>
+            4. Ciclo Orçamentário Anual das Emendas Parlamentares
+          </h2>
+          <p class="text-xs text-slate-500">O cronograma estratégico em 4 etapas para a OSC não perder os prazos regimentais no Congresso e no Poder Executivo.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <!-- Etapa 1 -->
+          <div class="p-4 rounded-xl border-t-4 border-blue-500 bg-blue-50/50 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black uppercase text-blue-700 tracking-wider">Etapa 1 &bull; Fev a Julho</span>
+              <span class="text-lg">🤝</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm">Relacionamento e Diagnóstico Local</h3>
+            <ul class="text-[11px] text-slate-600 space-y-1">
+              <li>• Mapeamento de deputados e senadores da bancada.</li>
+              <li>• Elaboração do portfólio de ações pregressas da OSC.</li>
+              <li>• Audiências institucionais nos gabinetes estaduais e em Brasília.</li>
+            </ul>
+          </div>
+
+          <!-- Etapa 2 -->
+          <div class="p-4 rounded-xl border-t-4 border-amber-500 bg-amber-50/50 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black uppercase text-amber-700 tracking-wider">Etapa 2 &bull; Ago a Outubro</span>
+              <span class="text-lg">📩</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm">Protocolo do Pleito (Ofício)</h3>
+            <ul class="text-[11px] text-slate-600 space-y-1">
+              <li>• Protocolo formal do Ofício com Memorial Descritivo.</li>
+              <li>• Enquadramento com o Ministério afim e Ação Orçamentária.</li>
+              <li>• Alinhamento prévio com a assessoria de orçamento do parlamentar.</li>
+            </ul>
+          </div>
+
+          <!-- Etapa 3 -->
+          <div class="p-4 rounded-xl border-t-4 border-purple-500 bg-purple-50/50 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black uppercase text-purple-700 tracking-wider">Etapa 3 &bull; Nov a Dezembro</span>
+              <span class="text-lg">🏛️</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm">Votação da LOA no Congresso</h3>
+            <ul class="text-[11px] text-slate-600 space-y-1">
+              <li>• Apresentação das emendas na Comissão Mista de Orçamento (CMO).</li>
+              <li>• Aprovação da LOA e publicação no Diário Oficial.</li>
+              <li>• Obtenção do Número da Emenda e indicação formal da entidade.</li>
+            </ul>
+          </div>
+
+          <!-- Etapa 4 -->
+          <div class="p-4 rounded-xl border-t-4 border-emerald-500 bg-emerald-50/50 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black uppercase text-emerald-700 tracking-wider">Etapa 4 &bull; Jan a Junho (Seguinte)</span>
+              <span class="text-lg">💻</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm">Operacionalização Transferegov.br</h3>
+            <ul class="text-[11px] text-slate-600 space-y-1">
+              <li>• Abertura do programa ministerial no sistema.</li>
+              <li>• Inserção da Proposta e Plano de Trabalho formal.</li>
+              <li>• Atendimento de eventuais diligências e celebração do Termo de Fomento.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tabela dos Tipos de Emendas -->
+        <div class="border rounded-xl p-4 bg-slate-50 space-y-3">
+          <h3 class="text-xs font-bold uppercase tracking-wide text-slate-700">Classificação das Emendas Parlamentares Federais</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b text-slate-500 font-bold">
+                  <th class="py-2 px-3">Modalidade</th>
+                  <th class="py-2 px-3">Identificador</th>
+                  <th class="py-2 px-3">Caráter</th>
+                  <th class="py-2 px-3">Regra Constitucional / Foco</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200">
+                <tr>
+                  <td class="py-2 px-3 font-bold text-blue-900">Emendas Individuais</td>
+                  <td class="py-2 px-3 font-mono">RP 6</td>
+                  <td class="py-2 px-3 text-emerald-700 font-bold">Impositiva</td>
+                  <td class="py-2 px-3">Obrigação de destinar 50% para Ações e Serviços Públicos de Saúde (ASPS). Foco regional e pontual.</td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-3 font-bold text-purple-900">Bancada Estadual</td>
+                  <td class="py-2 px-3 font-mono">RP 7</td>
+                  <td class="py-2 px-3 text-emerald-700 font-bold">Impositiva</td>
+                  <td class="py-2 px-3">Projetos estruturantes de grande vulto com consenso de deputados e senadores da bancada do Estado.</td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-3 font-bold text-amber-900">Comissões Temáticas</td>
+                  <td class="py-2 px-3 font-mono">RP 8</td>
+                  <td class="py-2 px-3 text-amber-700 font-bold">Não Impositiva</td>
+                  <td class="py-2 px-3">Vinculadas às temáticas específicas de cada comissão temática do Congresso Nacional.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- MÓDULO 5: TRILHA OPERACIONAL TRANSFEREGOV.BR (6 PASSOS) -->
+    <!-- ================================================================= -->
+    <div id="aba-trilha" class="modulo-conteudo hidden space-y-6">
+      
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+        <div>
+          <h2 class="text-base font-bold text-govblue flex items-center gap-2">
+            <i data-lucide="route" class="w-5 h-5 text-govblue"></i>
+            5. Trilha Operacional Transferegov.br em 6 Etapas
+          </h2>
+          <p class="text-xs text-slate-500">Do credenciamento prévio à execução via OBTV e prestação de contas digital.</p>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Passo 1 com Checklist Interativo MROSC -->
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-govblue text-white font-bold flex items-center justify-center text-sm flex-shrink-0">1</div>
+              <div class="flex-1">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <h4 class="font-bold text-slate-900 text-sm">Credenciamento e Habilitação da OSC</h4>
+                  <span id="badge-prontidao-osc" class="text-xs px-2.5 py-1 rounded-full font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 w-fit">
+                    Prontidão: 100% (8/8)
+                  </span>
+                </div>
+                <p class="text-xs text-slate-600 mt-1">Cadastro prévio e atualizado da entidade e dos representantes legais no Transferegov.br com certificado digital (ICP-Brasil ou gov.br prata/ouro). Comprovação do Art. 33 (3 anos União) e certidões negativas (CND Federal, FGTS, CNDT).</p>
+              </div>
+            </div>
+
+            <!-- Termômetro de Prontidão da OSC -->
+            <div class="space-y-1.5 pt-1 border-t border-slate-200">
+              <div class="flex justify-between text-[11px] font-bold text-slate-700">
+                <span>🛡️ Termômetro de Aptidão Documental MROSC &amp; LC 210/2024</span>
+                <span id="txt-status-prontidao" class="text-emerald-700 font-extrabold">Apta para Celebrar Parceria e Receber Recursos</span>
+              </div>
+              <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                <div id="prog-checklist-mrosc" class="bg-emerald-600 h-full transition-all duration-300" style="width: 100%"></div>
+              </div>
+            </div>
+
+            <!-- Grade com os 8 Critérios Obrigatórios -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs pt-1">
+              <!-- Item 1 -->
+              <label class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 flex items-start gap-2.5 cursor-pointer transition">
+                <input type="checkbox" id="chk-mrosc-1" checked onchange="calcularProntidaoChecklist()" class="mt-0.5 rounded text-govblue focus:ring-govblue w-4 h-4">
+                <div>
+                  <strong class="text-slate-800 block text-xs">1. Tempo de Registro Jurídico (3+ anos)</strong>
+                  <span class="text-[11px] text-slate-500">Art. 33, III da Lei 13.019/2014: eficácia de registro há no mínimo 3 anos para a União.</span>
+                </div>
+              </label>
+
+              <!-- Item 2 -->
+              <label class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 flex items-start gap-2.5 cursor-pointer transition">
+                <input type="checkbox" id="chk-mrosc-2" checked onchange="calcularProntidaoChecklist()" class="mt-0.5 rounded text-govblue focus:ring-govblue w-4 h-4">
+                <div>
+                  <strong class="text-slate-800 block text-xs">2. Situação Cadastral ATIVA na Receita Federal</strong>
+                  <span class="text-[11px] text-slate-500">Art. 39 da Lei 13.019/2014: CNPJ ativo sem suspensões.</span>
+                </div>
+              </label>
+
+              <!-- Item 3 -->
+              <label class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 flex items-start gap-2.5 cursor-pointer transition">
+                <input type="checkbox" id="chk-mrosc-3" checked onchange="calcularProntidaoChecklist()" class="mt-0.5 rounded text-govblue focus:ring-govblue w-4 h-4">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <strong class="text-slate-800 text-xs">3. CND Federal &amp; Previdenciária</strong>
+                    <a href="https://solucoes.receita.fazenda.gov.br/servicos/certidaointernet/pj/emitir" target="_blank" class="text-[10px] text-blue-600 hover:underline">🔗 RFB</a>
+                  </div>
+                  <span class="text-[11px] text-slate-500 block">Créditos Tributários Federais e Dívida Ativa da União.</span>
+                </div>
+              </label>
+
+              <!-- Item 4 -->
+              <label class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 flex items-start gap-2.5 cursor-pointer transition">
+                <input type="checkbox" id="chk-mrosc-4" checked onchange="calcularProntidaoChecklist()" class="mt-0.5 rounded text-govblue focus:ring-govblue w-4 h-4">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <strong class="text-slate-800 text-xs">4. CRF - Regularidade do FGTS</strong>
+                    <a href="https://consulta-crf.caixa.gov.br/consultacrf/pages/consultaEmpregador.jsf" target="_blank" class="text-[10px] text-blue-600 hover:underline">🔗 Caixa</a>
+                  </div>
+                  <span class="text-[11px] text-slate-500 block">Certificado de Regularidade do FGTS emitido pela Caixa.</span>
+                </div>
+              </label>
+
+              <!-- Item 5 -->
+              <label class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 flex items-start gap-2.5 cursor-pointer transition">
+                <input type="checkbox" id="chk-mrosc-5" checked onchange="calcularProntidaoChecklist()" class="mt-0.5 rounded text-govblue focus:ring-govblue w-4 h-4">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <strong class="text-slate-800 text-xs">5. CNDT - Negativa Trabalhista</strong>
+                    <a href="https://cndt-certidao.tst.jus.br/inicio.faces" target="_blank" class="text-[10px] text-blue-600 hover:underline">🔗 TST</a>
+                  </div>
+                  <span class="text-[11px] text-slate-500 block">Comprovação perante o Tribunal Superior do Trabalho.</span>
+                </div>
+              </label>
+
+              <!-- Item 6 -->
+              <label class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 flex items-start gap-2.5 cursor-pointer transition">
+                <input type="checkbox" id="chk-mrosc-6" checked onchange="calcularProntidaoChecklist()" class="mt-0.5 rounded text-govblue focus:ring-govblue w-4 h-4">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <strong class="text-slate-800 text-xs">6. Ausência de Débitos no CADIN</strong>
+                    <a href="https://www.bcb.gov.br/estabilidadefinanceira/cadin" target="_blank" class="text-[10px] text-blue-600 hover:underline">🔗 CADIN</a>
+                  </div>
+                  <span class="text-[11px] text-slate-500 block">Inexistência de registros pendentes no Cadastro Informativo.</span>
+                </div>
+              </label>
+
+              <!-- Item 7 -->
+              <label class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 flex items-start gap-2.5 cursor-pointer transition">
+                <input type="checkbox" id="chk-mrosc-7" checked onchange="calcularProntidaoChecklist()" class="mt-0.5 rounded text-govblue focus:ring-govblue w-4 h-4">
+                <div>
+                  <strong class="text-slate-800 block text-xs">7. Estatuto Social MROSC (Art. 33, I)</strong>
+                  <span class="text-[11px] text-slate-500">Sem distribuição de lucros e destinação do patrimônio residual.</span>
+                </div>
+              </label>
+
+              <!-- Item 8 -->
+              <label class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 flex items-start gap-2.5 cursor-pointer transition">
+                <input type="checkbox" id="chk-mrosc-8" checked onchange="calcularProntidaoChecklist()" class="mt-0.5 rounded text-govblue focus:ring-govblue w-4 h-4">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <strong class="text-slate-800 text-xs">8. Credenciamento Transferegov.br</strong>
+                    <a href="https://www.gov.br/transferegov" target="_blank" class="text-[10px] text-blue-600 hover:underline">🔗 Acessar</a>
+                  </div>
+                  <span class="text-[11px] text-slate-500 block">Certificado digital Gov.br Prata/Ouro ou ICP-Brasil habilitado.</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-start gap-4">
+            <div class="w-8 h-8 rounded-full bg-govblue text-white font-bold flex items-center justify-center text-sm flex-shrink-0">2</div>
+            <div>
+              <h4 class="font-bold text-slate-900 text-sm">Vinculação ao Programa Ministerial</h4>
+              <p class="text-xs text-slate-600 mt-1">Localização do Programa de Trabalho aberto pelo Ministério setorial correspondente ao número da emenda parlamentar indicada na LOA.</p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-start gap-4">
+            <div class="w-8 h-8 rounded-full bg-govblue text-white font-bold flex items-center justify-center text-sm flex-shrink-0">3</div>
+            <div>
+              <h4 class="font-bold text-slate-900 text-sm">Elaboração do Plano de Trabalho</h4>
+              <p class="text-xs text-slate-600 mt-1">Inserção de Justificativa, Objeto, Metas, Etapas/Fases, Cronograma Físico-Financeiro, Planilha discriminada por GND 3 (Custeio) vs GND 4 (Capital) e Cronograma de Desembolso.</p>
+            </div>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-start gap-4">
+            <div class="w-8 h-8 rounded-full bg-govblue text-white font-bold flex items-center justify-center text-sm flex-shrink-0">4</div>
+            <div>
+              <h4 class="font-bold text-slate-900 text-sm">Análise Técnica e Saneamento de Diligências</h4>
+              <p class="text-xs text-slate-600 mt-1">O órgão ministerial concede parecer sobre o mérito técnico e a compatibilidade dos custos (pesquisa de preços / Painel de Preços). Emissão de diligências pelo concedente para ajustes com prazo de resposta.</p>
+            </div>
+          </div>
+
+          <!-- Passo 5 -->
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-start gap-4">
+            <div class="w-8 h-8 rounded-full bg-govblue text-white font-bold flex items-center justify-center text-sm flex-shrink-0">5</div>
+            <div>
+              <h4 class="font-bold text-slate-900 text-sm">Empenho e Assinatura do Termo de Fomento</h4>
+              <p class="text-xs text-slate-600 mt-1">Emissão da Nota de Empenho pelo órgão concedente, publicação do extrato da parceria no Diário Oficial da União (DOU) e abertura automática da conta corrente vinculada e bloqueada (Banco do Brasil ou Caixa Econômica).</p>
+            </div>
+          </div>
+
+          <!-- Passo 6 -->
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-start gap-4">
+            <div class="w-8 h-8 rounded-full bg-govblue text-white font-bold flex items-center justify-center text-sm flex-shrink-0">6</div>
+            <div>
+              <h4 class="font-bold text-slate-900 text-sm">Execução Financeira (OBTV) e Prestação de Contas</h4>
+              <p class="text-xs text-slate-600 mt-1">Realização de pagamentos exclusivamente via Ordem Bancária de Transferência Voluntária (OBTV), cotação com 3 fornecedores (Art. 42 da Lei 13.019), emissão de relatórios de cumprimento do objeto e prestação de contas digital.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- MÓDULO 1: CONSULTA DE EMENDAS & POLÍTICAS PÚBLICAS (OGU / LOA) -->
+    <!-- ================================================================= -->
+    <div id="aba-pesquisa-emendas" class="modulo-conteudo space-y-6">
+      
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+        <div>
+          <h2 class="text-base font-bold text-govblue flex items-center gap-2">
+            <i data-lucide="search-check" class="w-5 h-5 text-emerald-600"></i>
+            1. Inteligência Orçamentária Federal: Emendas &amp; Políticas Públicas dos Ministérios
+          </h2>
+          <p class="text-xs text-slate-500">
+            Pesquise o orçamento disponível no Orçamento Geral da União (OGU), identifique a Ação Orçamentária correta e verifique se a via de acesso é por <strong>Orçamento Impositivo (Emendas)</strong> ou <strong>Orçamento Discricionário (Editais Transferegov)</strong>.
+          </p>
+        </div>
+
+        <!-- Sub-Navegação Interna do Módulo 1 -->
+        <div class="flex border-b border-slate-200 gap-2 text-xs font-bold">
+          <button type="button" onclick="trocarSubAbaPesquisa('sub-politicas')" id="btn-sub-politicas" class="py-2.5 px-4 border-b-2 border-govblue text-govblue flex items-center gap-1.5 transition">
+            <i data-lucide="landmark" class="w-4 h-4 text-govgold"></i> 🏛️ Políticas Públicas dos Ministérios (OGU / LOA)
+          </button>
+          <button type="button" onclick="trocarSubAbaPesquisa('sub-emendas')" id="btn-sub-emendas" class="py-2.5 px-4 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-1.5 transition">
+            <i data-lucide="users" class="w-4 h-4 text-emerald-600"></i> 🔎 Emendas Parlamentares da Bancada
+          </button>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- SUB-ABA A: POLÍTICAS PÚBLICAS & ORÇAMENTOS DOS MINISTÉRIOS -->
+        <!-- ============================================================= -->
+        <div id="sub-politicas-container" class="space-y-4">
+          <!-- Filtros de Políticas Públicas -->
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+              <div class="sm:col-span-2">
+                <label class="block font-bold text-slate-700 mb-1">Palavra-Chave / Ação / Área Temática</label>
+                <input type="text" id="filtro-pol-q" onkeypress="if(event.key==='Enter') executarPesquisaPoliticas()" placeholder="Ex: inclusao socioprodutiva, saude, 20V0, 21C0, capacitacao..." class="w-full text-xs p-2.5 border border-slate-300 rounded-lg bg-white outline-none focus:ring-2 focus:ring-govblue">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Ministério Concedente</label>
+                <select id="filtro-pol-min" onchange="executarPesquisaPoliticas()" class="w-full text-xs p-2.5 border border-slate-300 rounded-lg bg-white">
+                  <option value="">Todos os Ministérios</option>
+                  <option value="MDS">MDS - Assistência Social e Família</option>
+                  <option value="MS">MS - Ministério da Saúde</option>
+                  <option value="MEC">MEC - Educação e Tecnologia</option>
+                  <option value="MinC">MinC - Cultura / FNC</option>
+                  <option value="MDHC">MDHC - Direitos Humanos</option>
+                  <option value="MEsp">MEsp - Ministério do Esporte</option>
+                  <option value="MGI">MGI - Gestão e Inovação</option>
+                </select>
+              </div>
+              <div class="flex items-end">
+                <button onclick="executarPesquisaPoliticas()" id="btn-exec-politicas" class="w-full py-2.5 bg-govblue hover:bg-govdark text-white font-bold rounded-lg transition flex items-center justify-center gap-1.5 shadow">
+                  <i data-lucide="search" class="w-4 h-4"></i> Filtrar Orçamento
+                </button>
+              </div>
+            </div>
+
+            <!-- Filtros de Natureza Orçamentária: Impositivo vs. Discricionário -->
+            <div class="flex items-center gap-2 flex-wrap pt-2 border-t border-slate-200">
+              <span class="text-[11px] font-bold text-slate-600 mr-1">Natureza do Recurso:</span>
+              <button type="button" onclick="filtrarNaturezaPolitica('todos')" id="btn-nat-todos" class="btn-nat px-3 py-1 bg-govblue text-white rounded-full text-[11px] font-bold transition">
+                Todos os Recursos
+              </button>
+              <button type="button" onclick="filtrarNaturezaPolitica('impositivo')" id="btn-nat-impositivo" class="btn-nat px-3 py-1 bg-white hover:bg-emerald-50 text-emerald-900 border border-slate-300 rounded-full text-[11px] font-bold transition flex items-center gap-1">
+                <span>🟢</span> Orçamento Impositivo (RP 6/RP 7 - Emendas Obrigatórias)
+              </button>
+              <button type="button" onclick="filtrarNaturezaPolitica('discricionario')" id="btn-nat-discricionario" class="btn-nat px-3 py-1 bg-white hover:bg-amber-50 text-amber-900 border border-slate-300 rounded-full text-[11px] font-bold transition flex items-center gap-1">
+                <span>🟡</span> Orçamento Discricionário (RP 2 - Editais Transferegov)
+              </button>
+            </div>
+          </div>
+
+          <!-- Resultados das Políticas Públicas -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-xs font-semibold text-slate-600">
+              <span id="label-status-politicas">Políticas Públicas Encontradas:</span>
+              <span class="text-[11px] bg-blue-100 text-blue-900 px-2 py-0.5 rounded font-bold">Catálogo OGU / LOA</span>
+            </div>
+            <div id="grid-resultados-politicas" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Injetado via JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- SUB-ABA B: EMENDAS PARLAMENTARES DA BANCADA -->
+        <!-- ============================================================= -->
+        <div id="sub-emendas-container" class="hidden space-y-4">
+          <!-- Filtros de Busca de Emendas -->
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+              <div class="sm:col-span-2">
+                <label class="block font-bold text-slate-700 mb-1">Palavra-Chave / Nome do Parlamentar / Área</label>
+                <input type="text" id="filtro-pesq-q" onkeypress="if(event.key==='Enter') executarPesquisaEmendas()" placeholder="Ex: saude, assistencia, Reginaldo, Tabata, inclusao..." class="w-full text-xs p-2.5 border border-slate-300 rounded-lg bg-white outline-none focus:ring-2 focus:ring-govblue">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">UF da Bancada</label>
+                <select id="filtro-pesq-uf" onchange="executarPesquisaEmendas()" class="w-full text-xs p-2.5 border border-slate-300 rounded-lg bg-white">
+                  <option value="">Todas as UFs</option>
+                  <option value="AC">Acre (AC)</option><option value="AL">Alagoas (AL)</option><option value="AP">Amapá (AP)</option><option value="AM">Amazonas (AM)</option><option value="BA">Bahia (BA)</option><option value="CE">Ceará (CE)</option><option value="DF">Distrito Federal (DF)</option><option value="ES">Espírito Santo (ES)</option><option value="GO">Goiás (GO)</option><option value="MA">Maranhão (MA)</option><option value="MT">Mato Grosso (MT)</option><option value="MS">Mato Grosso do Sul (MS)</option><option value="MG">Minas Gerais (MG)</option><option value="PA">Pará (PA)</option><option value="PB">Paraíba (PB)</option><option value="PR">Paraná (PR)</option><option value="PE">Pernambuco (PE)</option><option value="PI">Piauí (PI)</option><option value="RJ">Rio de Janeiro (RJ)</option><option value="RN">Rio Grande do Norte (RN)</option><option value="RS">Rio Grande do Sul (RS)</option><option value="RO">Rondônia (RO)</option><option value="RR">Roraima (RR)</option><option value="SC">Santa Catarina (SC)</option><option value="SP">São Paulo (SP)</option><option value="SE">Sergipe (SE)</option><option value="TO">Tocantins (TO)</option>
+                </select>
+              </div>
+              <div class="flex items-end">
+                <button onclick="executarPesquisaEmendas()" id="btn-exec-pesquisa" class="w-full py-2.5 bg-govblue hover:bg-govdark text-white font-bold rounded-lg transition flex items-center justify-center gap-1.5 shadow">
+                  <i data-lucide="search" class="w-4 h-4"></i> Pesquisar Emendas
+                </button>
+              </div>
+            </div>
+
+            <!-- Sugestões Rápidas de Temas com 1 Clique -->
+            <div class="flex items-center gap-1.5 flex-wrap pt-1 border-t border-slate-200">
+              <span class="text-[11px] font-bold text-slate-500 mr-1">Filtros Rápidos:</span>
+              <button type="button" onclick="aplicarFiltroRapido('saude')" class="px-2.5 py-1 bg-white hover:bg-blue-50 text-blue-900 border border-slate-300 rounded-full text-[11px] font-semibold transition">
+                🩺 Saúde (ASPS 50%)
+              </button>
+              <button type="button" onclick="aplicarFiltroRapido('assistencia social')" class="px-2.5 py-1 bg-white hover:bg-emerald-50 text-emerald-900 border border-slate-300 rounded-full text-[11px] font-semibold transition">
+                🤝 Assistência Social
+              </button>
+              <button type="button" onclick="aplicarFiltroRapido('educacao')" class="px-2.5 py-1 bg-white hover:bg-purple-50 text-purple-900 border border-slate-300 rounded-full text-[11px] font-semibold transition">
+                🎓 Educação &amp; Tecnologia
+              </button>
+              <button type="button" onclick="aplicarFiltroRapido('cultura')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-amber-900 border border-slate-300 rounded-full text-[11px] font-semibold transition">
+                🎨 Cultura
+              </button>
+              <button type="button" onclick="limparFiltrosPesquisa()" class="px-2.5 py-1 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-full text-[11px] font-semibold transition">
+                ✖ Limpar Filtros
+              </button>
+            </div>
+          </div>
+
+          <!-- Resultados da Busca de Emendas -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-xs font-semibold text-slate-600">
+              <span id="label-status-pesquisa">Resultados Encontrados:</span>
+              <span id="badge-origem-api" class="text-[11px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">Base de Dados Abertos Conectada</span>
+            </div>
+
+            <div id="grid-resultados-emendas" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Resultados renderizados via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Portais Oficiais de Dados Abertos Federais -->
+        <div class="border-t pt-4">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Portais Oficiais Federais Conectáveis</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+            <a href="https://portaldatransparencia.gov.br/emendas" target="_blank" class="p-3 bg-slate-50 border rounded-xl hover:bg-blue-50 hover:border-blue-300 transition flex items-center gap-2">
+              <span class="text-lg">🏛️</span>
+              <div>
+                <strong class="text-slate-800 block text-[11px]">Portal da Transparência</strong>
+                <span class="text-[10px] text-slate-500">CGU / Emendas OGU</span>
+              </div>
+            </a>
+            <a href="https://www12.senado.leg.br/orcamento/sigabrasil" target="_blank" class="p-3 bg-slate-50 border rounded-xl hover:bg-purple-50 hover:border-purple-300 transition flex items-center gap-2">
+              <span class="text-lg">📊</span>
+              <div>
+                <strong class="text-slate-800 block text-[11px]">Siga Brasil</strong>
+                <span class="text-[10px] text-slate-500">Senado Federal</span>
+              </div>
+            </a>
+            <a href="https://www.gov.br/transferegov" target="_blank" class="p-3 bg-slate-50 border rounded-xl hover:bg-emerald-50 hover:border-emerald-300 transition flex items-center gap-2">
+              <span class="text-lg">💻</span>
+              <div>
+                <strong class="text-slate-800 block text-[11px]">Transferegov.br</strong>
+                <span class="text-[10px] text-slate-500">Programas Abertos MGI</span>
+              </div>
+            </a>
+            <a href="https://paineldeprecos.planejamento.gov.br" target="_blank" class="p-3 bg-slate-50 border rounded-xl hover:bg-amber-50 hover:border-amber-300 transition flex items-center gap-2">
+              <span class="text-lg">🏷️</span>
+              <div>
+                <strong class="text-slate-800 block text-[11px]">Painel de Preços</strong>
+                <span class="text-[10px] text-slate-500">Pesquisa de Custos</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+        <!-- Portais Oficiais de Dados Abertos Federais -->
+        <div class="border-t pt-4">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Portais Oficiais Federais Conectáveis</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+            <a href="https://portaldatransparencia.gov.br/emendas" target="_blank" class="p-3 bg-slate-50 border rounded-xl hover:bg-blue-50 hover:border-blue-300 transition flex items-center gap-2">
+              <span class="text-lg">🏛️</span>
+              <div>
+                <strong class="text-slate-800 block text-[11px]">Portal da Transparência</strong>
+                <span class="text-[10px] text-slate-500">CGU / Emendas OGU</span>
+              </div>
+            </a>
+            <a href="https://www12.senado.leg.br/orcamento/sigabrasil" target="_blank" class="p-3 bg-slate-50 border rounded-xl hover:bg-purple-50 hover:border-purple-300 transition flex items-center gap-2">
+              <span class="text-lg">📊</span>
+              <div>
+                <strong class="text-slate-800 block text-[11px]">Siga Brasil</strong>
+                <span class="text-[10px] text-slate-500">Senado Federal</span>
+              </div>
+            </a>
+            <a href="https://www.gov.br/transferegov" target="_blank" class="p-3 bg-slate-50 border rounded-xl hover:bg-emerald-50 hover:border-emerald-300 transition flex items-center gap-2">
+              <span class="text-lg">💻</span>
+              <div>
+                <strong class="text-slate-800 block text-[11px]">Transferegov.br</strong>
+                <span class="text-[10px] text-slate-500">Programas Abertos MGI</span>
+              </div>
+            </a>
+            <a href="https://paineldeprecos.planejamento.gov.br" target="_blank" class="p-3 bg-slate-50 border rounded-xl hover:bg-amber-50 hover:border-amber-300 transition flex items-center gap-2">
+              <span class="text-lg">🏷️</span>
+              <div>
+                <strong class="text-slate-800 block text-[11px]">Painel de Preços</strong>
+                <span class="text-[10px] text-slate-500">Pesquisa de Custos</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- MÓDULO 6: MARCO LEGAL (LC 210/2024 & MROSC) -->
+    <!-- ================================================================= -->
+    <div id="aba-marco" class="modulo-conteudo hidden space-y-6">
+      
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+        <div>
+          <h2 class="text-base font-bold text-govblue flex items-center gap-2">
+            <i data-lucide="scale" class="w-5 h-5 text-govblue"></i>
+            6. Fundamentação Jurídica &amp; Marco Regulatório (LC 210 &amp; MROSC)
+          </h2>
+          <p class="text-xs text-slate-500">As normas fundamentais que regulam as transferências voluntárias para Organizações da Sociedade Civil.</p>
+        </div>
+
+        <div class="space-y-4 text-xs">
+          <div class="p-4 bg-blue-50 border-l-4 border-blue-600 rounded-r-xl">
+            <h4 class="font-bold text-blue-900 text-sm">Constituição Federal de 1988 (Arts. 165 e 166)</h4>
+            <p class="text-slate-700 mt-1">Define o ciclo orçamentário (PPA, LDO e LOA) e as regras das emendas impositivas (individuais e de bancada estadual), garantindo a reserva parlamentar de recursos públicos.</p>
+          </div>
+
+          <div class="p-4 bg-emerald-50 border-l-4 border-emerald-600 rounded-r-xl">
+            <h4 class="font-bold text-emerald-900 text-sm">Lei Complementar nº 210/2024 (Novo Marco das Emendas)</h4>
+            <p class="text-slate-700 mt-1">Regulamenta a proposição, aprovação e execução de emendas parlamentares federais, estabelecendo rigorosos mecanismos de <strong>rastreabilidade</strong>, <strong>publicidade</strong>, <strong>transparência ativa</strong> e critérios de impedimentos técnicos.</p>
+          </div>
+
+          <div class="p-4 bg-purple-50 border-l-4 border-purple-600 rounded-r-xl">
+            <h4 class="font-bold text-purple-900 text-sm">Lei Federal nº 13.019/2014 (MROSC) &bull; Artigo 29</h4>
+            <p class="text-slate-700 mt-1">
+              <strong>Art. 29:</strong> Prevê expressamente a <em>dispensa de chamamento público</em> para parcerias decorrentes de emendas parlamentares às leis orçamentárias anuais.<br>
+              <span class="font-semibold text-purple-900">Atenção Técnica:</span> A dispensa de chamamento não desobriga a OSC de demonstrar capacidade técnica e operacional e de apresentar Plano de Trabalho formal, homologado pelo Ministério competente.
+            </p>
+          </div>
+
+          <div class="p-4 bg-amber-50 border-l-4 border-amber-600 rounded-r-xl">
+            <h4 class="font-bold text-amber-900 text-sm">Portaria Conjunta MGI/MF/CGU nº 32/2024 &amp; Decreto 8.726/2016</h4>
+            <p class="text-slate-700 mt-1">Estabelece diretrizes operacionais para transferências de recursos da União, padronizando a análise de custos, celebração de Termos de Fomento e procedimentos supletivos.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Modal: Espelho Transferegov -->
+  <div id="modal-espelho" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-6 space-y-4 max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="font-bold text-govblue text-base flex items-center gap-2">
+          📋 Espelho Formatado para o Transferegov.br
+        </h3>
+        <button onclick="fecharModal()" class="text-slate-400 hover:text-slate-700 font-bold text-lg">&times;</button>
+      </div>
+      <p class="text-xs text-slate-500">
+        Copie o texto estruturado abaixo e utilize como base para o preenchimento da Proposta e Plano de Trabalho no portal do Governo Federal.
+      </p>
+      <textarea id="texto-espelho" readonly class="w-full flex-1 p-3 bg-slate-50 border rounded-xl text-xs font-mono leading-relaxed resize-none focus:outline-none"></textarea>
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="copiarTextoEspelho()" class="px-4 py-2 bg-govblue text-white rounded-lg text-xs font-bold hover:bg-govdark flex items-center gap-1.5">
+          <i data-lucide="check" class="w-4 h-4"></i> Copiar Texto
+        </button>
+        <button onclick="fecharModal()" class="px-4 py-2 bg-slate-200 text-slate-700 rounded-lg text-xs font-bold hover:bg-slate-300">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-slate-200 border-t border-slate-300 py-4 text-center text-xs text-slate-600 no-print">
+    <p>CaptaOSC &bull; Marco Regulatório das OSCs (Lei 13.019/2014) &bull; Lei Complementar nº 210/2024 &bull; Transferegov.br</p>
+  </footer>
+
+  <!-- Lógica da Aplicação -->
+  <script>
+    let estadoAtual = {
+      id: null,
+      propostaAtual: null
+    };
+
+    function showToast(msg, tipo = 'info') {
+      const c = document.getElementById('toast-container');
+      const t = document.createElement('div');
+      const bg = tipo === 'success' ? 'bg-emerald-600' : (tipo === 'warning' ? 'bg-amber-600' : 'bg-slate-900');
+      t.className = `${bg} text-white px-4 py-2.5 rounded-xl shadow-lg text-xs font-semibold flex items-center gap-2 pointer-events-auto transition`;
+      t.innerHTML = `<span>${msg}</span>`;
+      c.appendChild(t);
+      setTimeout(() => { t.classList.add('opacity-0'); setTimeout(() => t.remove(), 300); }, 3500);
+    }
+
+    // Navegação de Abas
+    function trocarAba(abaId) {
+      document.querySelectorAll('.modulo-conteudo').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('border-govblue', 'text-govblue');
+        el.classList.add('border-transparent', 'text-slate-500');
+      });
+
+      const aba = document.getElementById(abaId);
+      const btn = document.getElementById(`btn-${abaId}`);
+      if (aba) aba.classList.remove('hidden');
+      if (btn) {
+        btn.classList.remove('border-transparent', 'text-slate-500');
+        btn.classList.add('border-govblue', 'text-govblue');
+      }
+
+      if (abaId === 'aba-oficio') {
+        atualizarVisualizacaoOficio();
+      }
+      lucide.createIcons();
+    }
+
+    function irParaAbaOficio() {
+      trocarAba('aba-oficio');
+    }
+
+    function irParaPasso(num) {
+      if (num === 1) {
+        trocarAba('aba-pesquisa-emendas');
+        setTimeout(() => {
+          const el = document.getElementById('filtro-pesq-q');
+          if (el) { el.focus(); el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        }, 150);
+      } else if (num === 2) {
+        trocarAba('aba-elaborador');
+        setTimeout(() => {
+          const el = document.getElementById('cnpj');
+          if (el) { el.focus(); el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        }, 150);
+      } else if (num === 3) {
+        trocarAba('aba-oficio');
+      } else if (num === 4) {
+        trocarAba('aba-trilha');
+      }
+    }
+
+    // Consulta CNPJ na BrasilAPI & Validação MROSC
+    async function consultarCNPJ() {
+      const raw = document.getElementById('cnpj').value;
+      const cnpj = raw.replace(/\D/g, '');
+      const alerta = document.getElementById('mrosc-alerta-box');
+
+      if (cnpj.length !== 14) {
+        showToast('Digite um CNPJ válido com 14 dígitos.', 'warning');
+        return;
+      }
+
+      alerta.classList.remove('hidden');
+      alerta.className = 'mt-3 p-3.5 rounded-xl text-xs bg-slate-100 text-slate-700 border border-slate-200';
+      alerta.innerHTML = 'Consultando Receita Federal e validando Art. 33 e Art. 39 do MROSC...';
+
+      try {
+        const resp = await fetch(`/api/cnpj/${cnpj}`);
+        const data = await resp.json();
+
+        if (!resp.ok || !data.success) {
+          throw new Error(data.error || 'Não foi possível localizar o CNPJ informado.');
+        }
+
+        document.getElementById('osc_nome').value = data.razao_social || '';
+        document.getElementById('ano_fundacao').value = data.ano_fundacao || '';
+        document.getElementById('osc_situacao').value = data.situacao_cadastral || 'N/A';
+        document.getElementById('cidade').value = data.endereco?.municipio || '';
+        document.getElementById('uf').value = data.endereco?.uf || '';
+
+        if (data.mrosc?.apto_emenda_federal) {
+          alerta.className = 'mt-3 p-3.5 rounded-xl text-xs bg-emerald-50 border border-emerald-300 text-emerald-900 font-medium';
+          alerta.innerHTML = `
+            <div class="font-bold flex items-center gap-1.5 text-emerald-800 text-sm">
+              <span>✅</span> OSC Habilitada para Emendas Federais (Lei 13.019/2014)
+            </div>
+            <p class="text-[11px] mt-1 text-emerald-700">
+              • <strong>Art. 33, III:</strong> Fundada em <strong>${data.ano_fundacao}</strong> (${data.mrosc.anos_existencia} anos de existência; cumpre mínimo de 3 anos).<br>
+              • <strong>Art. 39:</strong> Situação Cadastral <strong>${data.situacao_cadastral}</strong> perante a Receita Federal.
+            </p>
+          `;
+          showToast('OSC habilitada perante o MROSC!', 'success');
+
+          // Auto-validação no Checklist MROSC
+          const chk1 = document.getElementById('chk-mrosc-1');
+          if (chk1) chk1.checked = data.mrosc.atende_art33_uniao;
+          const chk2 = document.getElementById('chk-mrosc-2');
+          if (chk2) chk2.checked = data.mrosc.atende_art39_situacao;
+          calcularProntidaoChecklist();
+        } else {
+          alerta.className = 'mt-3 p-3.5 rounded-xl text-xs bg-amber-50 border border-amber-300 text-amber-900 font-medium';
+          alerta.innerHTML = `
+            <div class="font-bold flex items-center gap-1.5 text-amber-800 text-sm">
+              <span>⚠️</span> Alerta de Habilitação MROSC
+            </div>
+            <p class="text-[11px] mt-1 text-amber-700">${data.mrosc?.mensagem || 'Verifique os requisitos.'}</p>
+          `;
+          showToast('Atenção aos requisitos do MROSC.', 'warning');
+
+          const chk1 = document.getElementById('chk-mrosc-1');
+          if (chk1) chk1.checked = !!data.mrosc?.atende_art33_uniao;
+          const chk2 = document.getElementById('chk-mrosc-2');
+          if (chk2) chk2.checked = !!data.mrosc?.atende_art39_situacao;
+          calcularProntidaoChecklist();
+        }
+      } catch (err) {
+        alerta.className = 'mt-3 p-3.5 rounded-xl text-xs bg-red-50 border border-red-300 text-red-900';
+        alerta.innerHTML = `❌ Erro: ${err.message}`;
+        showToast(err.message, 'warning');
+      }
+    }
+
+    // Cálculo Orçamentário GND 3 vs GND 4 & Assistente Anti-Impedimento Técnico
+    function calcularTotais() {
+      const gnd3 = parseFloat(document.getElementById('gnd3').value || 0);
+      const gnd4 = parseFloat(document.getElementById('gnd4').value || 0);
+      const total = gnd3 + gnd4;
+
+      const p3 = total > 0 ? ((gnd3 / total) * 100).toFixed(1) : '0';
+      const p4 = total > 0 ? ((gnd4 / total) * 100).toFixed(1) : '0';
+
+      const fmt = v => Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+      document.getElementById('badge-gnd3').innerText = `${p3}%`;
+      document.getElementById('badge-gnd4').innerText = `${p4}%`;
+      document.getElementById('total-global-formatado').innerText = fmt(total);
+
+      document.getElementById('label-gnd3-resumo').innerText = `GND 3 (Custeio): ${p3}%`;
+      document.getElementById('label-gnd4-resumo').innerText = `GND 4 (Capital): ${p4}%`;
+
+      document.getElementById('prog-gnd3').style.width = `${p3}%`;
+      document.getElementById('prog-gnd4').style.width = `${p4}%`;
+
+      // Avaliação Anti-Impedimento Técnico
+      const alertaBox = document.getElementById('alerta-consistencia-orcamento');
+      const iconeBox = document.getElementById('icone-consistencia-orcamento');
+      const tituloBox = document.getElementById('titulo-consistencia-orcamento');
+      const txtBox = document.getElementById('txt-consistencia-orcamento');
+      const acao = (document.getElementById('acaoOrcamentaria')?.value || '').toUpperCase();
+
+      if (alertaBox && txtBox) {
+        if (total <= 0) {
+          alertaBox.className = 'p-3.5 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-700 transition flex items-start gap-2.5';
+          if (iconeBox) iconeBox.innerText = 'ℹ️';
+          if (tituloBox) tituloBox.innerText = 'Estrutura Orçamentária Pendente:';
+          txtBox.innerText = 'Preencha os valores de GND 3 (Custeio) e GND 4 (Capital) para verificar a consistência técnica.';
+        } else if (acao.includes('21C0') && Number(p4) > 35) {
+          alertaBox.className = 'p-3.5 rounded-xl border border-amber-300 bg-amber-50 text-xs text-amber-900 transition flex items-start gap-2.5';
+          if (iconeBox) iconeBox.innerText = '⚠️';
+          if (tituloBox) tituloBox.innerText = 'Alerta Técnico Ministério da Saúde (Ação 21C0):';
+          txtBox.innerHTML = `A ação <strong>21C0</strong> (Atenção Primária à Saúde) destina-se preponderantemente a Custeio/Atenção Básica (GND 3). Alocar <strong>${p4}%</strong> em Capital (GND 4) gera risco elevado de diligência técnica. Se o projeto contempla compra expressiva de equipamentos ou reformas, vincule à ação <strong>8535 (Estruturação)</strong>.`;
+        } else if (acao.includes('8535') && Number(p3) > 65) {
+          alertaBox.className = 'p-3.5 rounded-xl border border-blue-300 bg-blue-50 text-xs text-blue-900 transition flex items-start gap-2.5';
+          if (iconeBox) iconeBox.innerText = '💡';
+          if (tituloBox) tituloBox.innerText = 'Orientação Técnica (Ação 8535):';
+          txtBox.innerHTML = `A ação <strong>8535</strong> é focada em Estruturação e Equipamentos Permanentes (GND 4). Sua proposta aloca <strong>${p3}%</strong> em Custeio. Certifique-se de que os itens de custeio estejam restritos à manutenção e insumos de reabilitação.`;
+        } else if (acao.includes('2180')) {
+          alertaBox.className = 'p-3.5 rounded-xl border border-red-300 bg-red-50 text-xs text-red-900 transition flex items-start gap-2.5';
+          if (iconeBox) iconeBox.innerText = '🚫';
+          if (tituloBox) tituloBox.innerText = 'Impedimento Legal - Ação 2180 (MGI):';
+          txtBox.innerHTML = `A ação <strong>2180</strong> opera exclusivamente via chamamentos públicos concorrenciais abertos no Transferegov.br e não aceita indicação direta de emendas impositivas individuais (RP 6).`;
+        } else {
+          alertaBox.className = 'p-3.5 rounded-xl border border-emerald-300 bg-emerald-50 text-xs text-emerald-900 transition flex items-start gap-2.5';
+          if (iconeBox) iconeBox.innerText = '✅';
+          if (tituloBox) tituloBox.innerText = 'Composição Orçamentária Equilibrada:';
+          txtBox.innerHTML = `Proporção de <strong>${p3}% em Custeio (GND 3)</strong> e <strong>${p4}% em Capital (GND 4)</strong> plenamente admissível para as diretrizes do Termo de Fomento no Transferegov.br.`;
+        }
+      }
+    }
+
+    function obterPayloadForm() {
+      const casa = document.getElementById('casaLegislativa')?.value || 'Câmara dos Deputados';
+      return {
+        id: estadoAtual.id,
+        cnpj: document.getElementById('cnpj').value,
+        osc_nome: document.getElementById('osc_nome').value,
+        ano_fundacao: document.getElementById('ano_fundacao').value,
+        cidade: document.getElementById('cidade').value,
+        uf: document.getElementById('uf').value,
+        areaAtuacao: document.getElementById('areaAtuacao').value,
+        tipoEmenda: document.getElementById('tipoEmenda').value,
+        casaLegislativa: casa,
+        cargoParlamentar: casa === 'Senado Federal' ? 'Senador(a) da República' : 'Deputado(a) Federal',
+        parlamentar: document.getElementById('parlamentar').value,
+        exercicio: document.getElementById('exercicio').value,
+        ministerio: document.getElementById('ministerio').value,
+        acaoOrcamentaria: document.getElementById('acaoOrcamentaria').value,
+        gabinete: document.getElementById('gabinete').value,
+        projeto: document.getElementById('projeto').value,
+        metaBeneficiarios: document.getElementById('metaBeneficiarios').value,
+        objeto: document.getElementById('objeto').value,
+        justificativa: document.getElementById('justificativa').value,
+        gnd3: parseFloat(document.getElementById('gnd3').value || 0),
+        gnd4: parseFloat(document.getElementById('gnd4').value || 0),
+        numeroOficio: document.getElementById('numeroOficio').value,
+        representanteLegal: document.getElementById('representanteLegal').value,
+        telefoneContato: document.getElementById('telefoneContato').value
+      };
+    }
+
+    // Salvar Proposta Completa
+    async function salvarPropostaCompleta() {
+      const payload = obterPayloadForm();
+      try {
+        const resp = await fetch('/api/propostas', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await resp.json();
+        if (data.success) {
+          estadoAtual.id = data.proposta.id;
+          estadoAtual.propostaAtual = data;
+          showToast('Proposta de emenda e ofício salvos com sucesso!', 'success');
+          carregarHistorico();
+          atualizarVisualizacaoOficio();
+        } else {
+          showToast('Erro ao salvar: ' + data.error, 'warning');
+        }
+      } catch (err) {
+        showToast('Falha: ' + err.message, 'warning');
+      }
+    }
+
+    // Renderizar Ofício no Módulo 2
+    function atualizarVisualizacaoOficio() {
+      const p = obterPayloadForm();
+      const total = (p.gnd3 || 0) + (p.gnd4 || 0);
+      const fmt = v => Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      const p3 = total > 0 ? (((p.gnd3 || 0) / total) * 100).toFixed(1) : '0';
+      const p4 = total > 0 ? (((p.gnd4 || 0) / total) * 100).toFixed(1) : '0';
+
+      const dataHoje = new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      document.getElementById('of-cabecalho-osc').innerText = p.osc_nome || 'ORGANIZAÇÃO DA SOCIEDADE CIVIL';
+      document.getElementById('of-cabecalho-cnpj').innerText = `CNPJ nº ${p.cnpj || '00.000.000/0001-00'}`;
+      document.getElementById('of-numero-txt').innerText = `OFÍCIO Nº ${p.numeroOficio || '001/2026'}`;
+      document.getElementById('of-data-txt').innerText = `${p.cidade || 'Brasília'}/${p.uf || 'DF'}, ${dataHoje}`;
+      document.getElementById('of-dest-nome').innerText = p.parlamentar || 'Deputado(a) Federal / Senador(a)';
+      document.getElementById('of-dest-gabinete').innerText = p.gabinete || 'Gabinete Parlamentar – Congresso Nacional – Brasília/DF';
+      document.getElementById('of-assunto-txt').innerText = `Assunto: Pleito de destinação de Emenda Parlamentar (${p.tipoEmenda || 'Individual'}) ao PLOA ${parseInt(p.exercicio || 2026) + 1} – Apoio ao projeto "${p.projeto || 'Nome do Projeto'}".`;
+
+      const corpoHtml = `
+        <p>Senhor(a) Parlamentar,</p>
+        <p>1. Cumprimentando-o(a) cordialmente, dirigimo-nos a Vossa Excelência para apresentar nossos cumprimentos pelo profícuo mandato exercido e, na oportunidade, submeter pleito de inclusão de <strong>Emenda Parlamentar (${p.tipoEmenda || 'Individual'})</strong> na Lei Orçamentária Anual para o exercício financeiro de <strong>${parseInt(p.exercicio || 2026) + 1}</strong>.</p>
+        <p>2. A <strong>${p.osc_nome || '[Nome da OSC]'}</strong>, constituída formalmente desde <strong>${p.ano_fundacao || '[Ano]'}</strong>, qualificada como organização da sociedade civil sem fins lucrativos, inscrita no CNPJ sob o nº <strong>${p.cnpj || '[CNPJ]'}</strong>, desenvolve ações ininterruptas na área de <strong>${p.areaAtuacao || 'desenvolvimento social'}</strong>, impactando a população do município de <strong>${p.cidade || '[Cidade]'}/${p.uf || '[UF]'}</strong>.</p>
+        <p>3. Para dar continuidade e ampliação a esse impacto, estruturamos o projeto <strong>"${p.projeto || '[Projeto]'}"</strong>, cujo objetivo central é: <em>${p.objeto || '[Objeto da Proposta]'}</em>. A iniciativa guarda estreita convergência com as diretrizes do <strong>${p.ministerio || '[Ministério Concedente]'}</strong>.</p>
+        <p>4. Segue síntese das coordenadas orçamentárias e operacionais da proposta:<br>
+        &nbsp;&nbsp;<strong>a) Unidade Orçamentária Sugerida:</strong> ${p.ministerio || 'Ministério Competente'};<br>
+        &nbsp;&nbsp;<strong>b) Ação Orçamentária:</strong> ${p.acaoOrcamentaria || 'Conforme programa temático'};<br>
+        &nbsp;&nbsp;<strong>c) Valor Total Pleiteado:</strong> <strong>${fmt(total)}</strong><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&bull; GND 3 (Custeio / Equipes e Insumos): ${fmt(p.gnd3)} (${p3}%)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&bull; GND 4 (Capital / Equipamentos e Obras): ${fmt(p.gnd4)} (${p4}%)<br>
+        &nbsp;&nbsp;<strong>d) Meta Física Estimada:</strong> Atendimento direto de <strong>${p.metaBeneficiarios || 150} beneficiários</strong>.</p>
+        <p>5. Informamos que a entidade atende plenamente aos requisitos previstos na Lei Federal nº 13.019/2014 (MROSC) — inclusive a comprovação de eficácia do registro há mais de 3 anos (Art. 33, III) e a dispensa de chamamento público (Art. 29) —, bem como às exigências de rastreabilidade e transparência da <strong>Lei Complementar nº 210/2024</strong>, encontrando-se apta técnica e juridicamente a operar no âmbito da Plataforma <strong>Transferegov.br</strong>.</p>
+        <p>6. Anexamos a este ofício o Memorial Técnico Descritivo do Projeto contendo a justificativa detalhada e o portfólio de ações pregressas da instituição. Colocamo-nos à disposição de Vossa Excelência pelo contato: <strong>${p.telefoneContato || '[Telefone / E-mail]'}</strong>.</p>
+      `;
+
+      document.getElementById('of-corpo-texto').innerHTML = corpoHtml;
+      document.getElementById('of-assina-nome').innerText = p.representanteLegal || '[Nome do(a) Presidente]';
+      document.getElementById('of-assina-osc').innerText = p.osc_nome || '[Nome da OSC]';
+    }
+
+    function obterTextoOficioPuro() {
+      const p = obterPayloadForm();
+      const total = (p.gnd3 || 0) + (p.gnd4 || 0);
+      const fmt = v => Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      const p3 = total > 0 ? (((p.gnd3 || 0) / total) * 100).toFixed(1) : '0';
+      const p4 = total > 0 ? (((p.gnd4 || 0) / total) * 100).toFixed(1) : '0';
+      const dataHoje = new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      return `OFÍCIO Nº ${p.numeroOficio || '001/2026'}
+
+${p.cidade || 'Brasília'}/${p.uf || 'DF'}, ${dataHoje}.
+
+A Sua Excelência o(a) Senhor(a)
+${p.parlamentar || 'Deputado(a) Federal / Senador(a)'}
+Congresso Nacional – Câmara dos Deputados / Senado Federal
+${p.gabinete || 'Gabinete Parlamentar'} – CEP: 70160-900 – Brasília/DF
+
+Assunto: Pleito de destinação de Emenda Parlamentar (${p.tipoEmenda || 'Individual'}) ao PLOA ${parseInt(p.exercicio || 2026) + 1} – Apoio ao projeto "${p.projeto || 'Nome do Projeto'}".
+
+Senhor(a) Parlamentar,
+
+1. Cumprimentando-o(a) cordialmente, dirigimo-nos a Vossa Excelência para apresentar nossos cumprimentos pelo profícuo mandato exercido e, na oportunidade, submeter pleito de inclusão de Emenda Parlamentar (${p.tipoEmenda || 'Individual'}) na Lei Orçamentária Anual para o exercício financeiro de ${parseInt(p.exercicio || 2026) + 1}.
+
+2. A ${p.osc_nome || '[Nome da OSC]'}, constituída formalmente desde ${p.ano_fundacao || '[Ano]'}, qualificada como organização da sociedade civil sem fins lucrativos, inscrita no CNPJ sob o nº ${p.cnpj || '[CNPJ]'}, desenvolve ações ininterruptas na área de ${p.areaAtuacao || 'desenvolvimento social'}, impactando a população do município de ${p.cidade || '[Cidade]'}/${p.uf || '[UF]'}.
+
+3. Para dar continuidade e ampliação a esse impacto, estruturamos o projeto "${p.projeto || '[Projeto]'}", cujo objetivo central é: ${p.objeto || '[Objeto da Proposta]'}. A iniciativa guarda estreita convergência com as diretrizes do ${p.ministerio || '[Ministério Concedente]'}.
+
+4. Segue síntese das coordenadas orçamentárias e operacionais da proposta:
+   a) Unidade Orçamentária Sugerida: ${p.ministerio || 'Ministério Competente'};
+   b) Ação Orçamentária Sugerida: ${p.acaoOrcamentaria || 'Conforme programa temático'};
+   c) Valor Total Pleiteado: ${fmt(total)}
+      • GND 3 (Custeio / Equipes e Insumos): ${fmt(p.gnd3)} (${p3}%)
+      • GND 4 (Capital / Equipamentos e Obras): ${fmt(p.gnd4)} (${p4}%)
+   d) Meta Física Estimada: Atendimento direto de ${p.metaBeneficiarios || 150} beneficiários.
+
+5. Informamos que a entidade atende plenamente aos requisitos previstos na Lei Federal nº 13.019/2014 (MROSC) — inclusive a comprovação de eficácia do registro há mais de 3 anos (Art. 33, III) e a dispensa de chamamento público (Art. 29) —, bem como às exigências de rastreabilidade e transparência da Lei Complementar nº 210/2024, encontrando-se apta técnica e juridicamente a operar no âmbito da Plataforma Transferegov.br.
+
+6. Anexamos a este ofício o Memorial Técnico Descritivo do Projeto contendo a justificativa detalhada e o histórico da instituição. Colocamo-nos à disposição de Vossa Excelência pelo contato: ${p.telefoneContato || '[Telefone / E-mail]'}.
+
+Respeitosamente,
+
+___________________________________________________
+${p.representanteLegal || '[Nome do(a) Presidente/Representante]'}
+Presidente / Diretor(a) Executivo(a)
+${p.osc_nome || '[Nome da OSC]'}
+CNPJ nº ${p.cnpj || '[CNPJ]'}`;
+    }
+
+    function copiarTextoOficio() {
+      const texto = obterTextoOficioPuro();
+      navigator.clipboard.writeText(texto);
+      showToast('Ofício copiado para a área de transferência!', 'success');
+    }
+
+    function baixarOficioTxt() {
+      const texto = obterTextoOficioPuro();
+      const blob = new Blob([texto], { type: 'text/plain;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `Oficio_Pleito_${(document.getElementById('projeto').value || 'emenda').replace(/\s+/g, '_')}.txt`;
+      a.click();
+    }
+
+    function imprimirOficio() {
+      atualizarVisualizacaoOficio();
+      trocarAba('aba-oficio');
+      setTimeout(() => {
+        window.print();
+      }, 150);
+    }
+
+    // Exportação Oficial em DOCX (Word)
+    async function baixarOficioDocx() {
+      const payload = obterPayloadForm();
+      showToast('Gerando documento DOCX oficial...', 'info');
+      try {
+        const resp = await fetch('/api/propostas/exportar-docx', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!resp.ok) throw new Error('Falha no servidor ao gerar DOCX');
+        const blob = await resp.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        const sanitizado = (payload.projeto || 'oficio-pleito').replace(/[/\\?%*:|"<>]/g, '-').slice(0, 30);
+        a.download = `Oficio_${sanitizado}_${Date.now()}.docx`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+        showToast('Ofício DOCX baixado com sucesso!', 'success');
+      } catch (err) {
+        showToast('Erro ao gerar DOCX: ' + err.message, 'warning');
+      }
+    }
+
+    // Termômetro e Cálculo do Checklist MROSC
+    function calcularProntidaoChecklist() {
+      let checados = 0;
+      for (let i = 1; i <= 8; i++) {
+        const el = document.getElementById(`chk-mrosc-${i}`);
+        if (el && el.checked) checados++;
+      }
+      const pct = Math.round((checados / 8) * 100);
+      const prog = document.getElementById('prog-checklist-mrosc');
+      const badge = document.getElementById('badge-prontidao-osc');
+      const statusTxt = document.getElementById('txt-status-prontidao');
+
+      if (prog) prog.style.width = `${pct}%`;
+      if (badge) {
+        badge.innerText = `Prontidão: ${pct}% (${checados}/8)`;
+        if (pct === 100) {
+          badge.className = 'text-xs px-2.5 py-1 rounded-full font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 w-fit';
+        } else if (pct >= 60) {
+          badge.className = 'text-xs px-2.5 py-1 rounded-full font-bold bg-amber-100 text-amber-800 border border-amber-300 w-fit';
+        } else {
+          badge.className = 'text-xs px-2.5 py-1 rounded-full font-bold bg-red-100 text-red-800 border border-red-300 w-fit';
+        }
+      }
+
+      if (statusTxt) {
+        if (pct === 100) {
+          statusTxt.className = 'text-emerald-700 font-extrabold';
+          statusTxt.innerText = 'Totalmente Apta para Celebrar Parceria e Receber Recursos';
+        } else if (pct >= 60) {
+          statusTxt.className = 'text-amber-700 font-extrabold';
+          statusTxt.innerText = 'Atenção: Pendências Documentais Sanáveis antes do Empenho';
+        } else {
+          statusTxt.className = 'text-red-700 font-extrabold';
+          statusTxt.innerText = 'Risco Elevado: Risco de Impedimento Técnico no Ministério';
+        }
+      }
+    }
+
+    // Modal Espelho Transferegov
+    function copiarEspelhoTransferegov() {
+      const p = obterPayloadForm();
+      const total = (p.gnd3 || 0) + (p.gnd4 || 0);
+      const fmt = v => Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      const p3 = total > 0 ? (((p.gnd3 || 0) / total) * 100).toFixed(1) : 0;
+      const p4 = total > 0 ? (((p.gnd4 || 0) / total) * 100).toFixed(1) : 0;
+
+      const txt = `================================================================================
+MINUTA DO PLANO DE TRABALHO - EMENDA PARLAMENTAR FEDERAL (TRANSFEREGOV.BR)
+CONFORMIDADE: MROSC (LEI 13.019/2014) & LEI COMPLEMENTAR Nº 210/2024
+================================================================================
+
+1. DADOS DA PROPONENTE (OSC)
+- Razão Social: ${p.osc_nome}
+- CNPJ: ${p.cnpj}
+- Fundação: ${p.ano_fundacao} | Município/UF: ${p.cidade}/${p.uf}
+- Habilitação MROSC: Atende aos Arts. 33 (3 anos União) e 39 (Regularidade Ativa).
+
+2. DESTINAÇÃO PARLAMENTAR
+- Parlamentar: ${p.parlamentar}
+- Modalidade: ${p.tipoEmenda}
+- Órgão Concedente Sugerido: ${p.ministerio}
+- Ação Orçamentária: ${p.acaoOrcamentaria}
+- Exercício Orçamentário: ${p.exercicio}
+
+3. CARACTERIZAÇÃO DO PROJETO
+- Título: ${p.projeto}
+- Objeto:
+${p.objeto}
+
+- Justificativa Social:
+${p.justificativa}
+
+- Meta Física: Atendimento de ${p.metaBeneficiarios} beneficiários diretos.
+
+4. PLANILHA ORÇAMENTÁRIA (TRANSFEREGOV.BR)
+- GND 3 (Custeio / Desp. Correntes): ${fmt(p.gnd3)} (${p3}%)
+- GND 4 (Capital / Investimento): ${fmt(p.gnd4)} (${p4}%)
+- TOTAL GLOBAL: ${fmt(total)} (100%)
+
+5. DISPENSA DE CHAMAMENTO & RASTREABILIDADE
+- Dispensa fundamentada no Art. 29 da Lei Federal nº 13.019/2014.
+- Rastreabilidade integral conforme a Lei Complementar nº 210/2024.
+- Conta bancária específica e bloqueada no Transferegov.br (Banco do Brasil/Caixa).
+================================================================================`;
+
+      document.getElementById('texto-espelho').value = txt;
+      document.getElementById('modal-espelho').classList.remove('hidden');
+    }
+
+    function fecharModal() {
+      document.getElementById('modal-espelho').classList.add('hidden');
+    }
+
+    function copiarTextoEspelho() {
+      navigator.clipboard.writeText(document.getElementById('texto-espelho').value);
+      showToast('Espelho copiado com sucesso!', 'success');
+      fecharModal();
+    }
+
+    // Histórico de Propostas
+    async function carregarHistorico() {
+      try {
+        const resp = await fetch('/api/propostas');
+        const propostas = await resp.json();
+        const lista = document.getElementById('lista-propostas');
+        const contador = document.getElementById('contador-propostas');
+        lista.innerHTML = '';
+
+        if (!propostas || propostas.length === 0) {
+          lista.innerHTML = `<p class="py-4 text-center text-slate-400">Nenhuma proposta cadastrada ainda.</p>`;
+          contador.innerText = '0 registradas';
+          return;
+        }
+
+        contador.innerText = `${propostas.length} registrada(s)`;
+        propostas.forEach(p => {
+          const item = document.createElement('div');
+          item.className = 'py-3 flex items-center justify-between hover:bg-slate-50 px-2 rounded-xl transition';
+          item.innerHTML = `
+            <div>
+              <strong class="text-slate-800 text-sm">${p.projeto || 'Sem título'}</strong>
+              <div class="text-[11px] text-slate-500">
+                OSC: ${p.osc_nome || 'N/D'} | Parlamentar: ${p.parlamentar || 'N/D'} | Valor: R$ ${Number(p.valorTotal || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <a href="/api/propostas/${p.id}/docx" download target="_blank" class="px-2.5 py-1 bg-emerald-50 text-emerald-800 border border-emerald-300 rounded font-bold text-xs hover:bg-emerald-100 flex items-center gap-1 transition">
+                <i data-lucide="file-text" class="w-3.5 h-3.5"></i> DOCX
+              </a>
+              <button onclick="carregarNoForm('${p.id}')" class="px-2.5 py-1 bg-govblue text-white rounded font-bold text-xs hover:bg-govdark">Carregar</button>
+              <button onclick="excluirProposta('${p.id}')" class="text-slate-400 hover:text-red-600 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+            </div>
+          `;
+          lista.appendChild(item);
+        });
+        lucide.createIcons();
+      } catch (e) {}
+    }
+
+    async function carregarNoForm(id) {
+      const resp = await fetch('/api/propostas');
+      const propostas = await resp.json();
+      const p = propostas.find(item => item.id === id);
+      if (!p) return;
+
+      estadoAtual.id = p.id;
+      document.getElementById('cnpj').value = p.cnpj || '';
+      document.getElementById('osc_nome').value = p.osc_nome || '';
+      document.getElementById('ano_fundacao').value = p.ano_fundacao || '';
+      document.getElementById('cidade').value = p.cidade || '';
+      document.getElementById('uf').value = p.uf || '';
+      if (p.areaAtuacao) document.getElementById('areaAtuacao').value = p.areaAtuacao;
+      if (p.tipoEmenda) document.getElementById('tipoEmenda').value = p.tipoEmenda;
+      document.getElementById('parlamentar').value = p.parlamentar || '';
+      document.getElementById('exercicio').value = p.exercicio || 2026;
+      if (p.ministerio) document.getElementById('ministerio').value = p.ministerio;
+      document.getElementById('acaoOrcamentaria').value = p.acaoOrcamentaria || '';
+      document.getElementById('gabinete').value = p.gabinete || '';
+      document.getElementById('projeto').value = p.projeto || '';
+      document.getElementById('metaBeneficiarios').value = p.metaBeneficiarios || 150;
+      document.getElementById('objeto').value = p.objeto || '';
+      document.getElementById('justificativa').value = p.justificativa || '';
+      document.getElementById('gnd3').value = p.gnd3 || 0;
+      document.getElementById('gnd4').value = p.gnd4 || 0;
+      document.getElementById('numeroOficio').value = p.numeroOficio || '001/2026';
+      document.getElementById('representanteLegal').value = p.representanteLegal || '';
+      document.getElementById('telefoneContato').value = p.telefoneContato || '';
+
+      calcularTotais();
+      trocarAba('aba-elaborador');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showToast(`Proposta "${p.projeto}" carregada!`, 'info');
+    }
+
+    async function excluirProposta(id) {
+      if (!confirm('Deseja excluir esta proposta?')) return;
+      await fetch(`/api/propostas/${id}`, { method: 'DELETE' });
+      showToast('Proposta removida.', 'info');
+      carregarHistorico();
+    }
+
+    let emendasPesquisadasCache = [];
+
+    function aplicarFiltroRapido(termo) {
+      document.getElementById('filtro-pesq-q').value = termo;
+      executarPesquisaEmendas();
+    }
+
+    function limparFiltrosPesquisa() {
+      document.getElementById('filtro-pesq-q').value = '';
+      document.getElementById('filtro-pesq-uf').value = '';
+      executarPesquisaEmendas();
+    }
+
+    async function executarPesquisaEmendas() {
+      const q = document.getElementById('filtro-pesq-q').value;
+      const uf = document.getElementById('filtro-pesq-uf').value;
+      const btn = document.getElementById('btn-exec-pesquisa');
+      const grid = document.getElementById('grid-resultados-emendas');
+      const labelStatus = document.getElementById('label-status-pesquisa');
+
+      btn.disabled = true;
+      btn.innerHTML = `<span class="animate-spin">⏳</span> Buscando...`;
+
+      try {
+        const url = `/api/emendas/pesquisa?q=${encodeURIComponent(q)}&uf=${encodeURIComponent(uf)}`;
+        const resp = await fetch(url);
+        const data = await resp.json();
+
+        emendasPesquisadasCache = data.emendas || [];
+        labelStatus.innerText = `${emendasPesquisadasCache.length} emenda(s) encontrada(s):`;
+        grid.innerHTML = '';
+
+        if (emendasPesquisadasCache.length === 0) {
+          grid.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400 text-xs">Nenhuma emenda parlamentar encontrada com esses critérios de busca.</div>`;
+          return;
+        }
+
+        emendasPesquisadasCache.forEach((e, idx) => {
+          const isSenado = e.casaLegislativa === 'Senado Federal' || (e.cargo && e.cargo.includes('Senador')) || String(e.numero).startsWith('SEN');
+          const badgeCasa = isSenado 
+            ? '<span class="text-[10px] bg-purple-100 text-purple-900 border border-purple-300 px-2 py-0.5 rounded font-bold ml-1 flex items-center gap-1">🏛️ Senado Federal</span>'
+            : '<span class="text-[10px] bg-sky-100 text-sky-900 border border-sky-300 px-2 py-0.5 rounded font-bold ml-1 flex items-center gap-1">🏛️ Câmara dos Deputados</span>';
+
+          const card = document.createElement('div');
+          card.className = 'p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-500 hover:shadow-md transition space-y-3';
+          card.innerHTML = `
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono font-bold">Emenda nº ${e.numero}</span>
+                  <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-bold">${e.tipo}</span>
+                  ${badgeCasa}
+                </div>
+                <h4 class="font-bold text-slate-900 text-sm mt-1.5">${e.autor} (${e.partido || ''} - ${e.uf})</h4>
+              </div>
+              <span class="text-xs font-bold text-emerald-700 whitespace-nowrap">R$ ${Number(e.valorProposto || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+            </div>
+            
+            <div class="text-[11px] text-slate-600 space-y-0.5 border-t border-slate-100 pt-2">
+              <p><strong>Função/Área:</strong> ${e.funcao} &bull; <strong>Subfunção:</strong> ${e.subfuncao || '-'}</p>
+              <p><strong>Ação Orçamentária:</strong> ${e.acao}</p>
+              <p><strong>Órgão:</strong> ${e.ministerio}</p>
+              <p class="text-slate-500 italic">"${e.beneficiarios}"</p>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+              <span class="text-[10px] text-slate-400">Pago: R$ ${Number(e.valorPago || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+              <button onclick="usarEmendaReferencia(${idx})" class="px-3 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-lg text-xs font-bold flex items-center gap-1 transition">
+                <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Usar como Referência
+              </button>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+        lucide.createIcons();
+      } catch (err) {
+        grid.innerHTML = `<div class="col-span-full py-4 text-center text-red-500 text-xs">Erro na busca: ${err.message}</div>`;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<i data-lucide="search" class="w-4 h-4"></i> Pesquisar Emendas`;
+        lucide.createIcons();
+      }
+    }
+
+    // =========================================================================
+    // CONTROLE DE SUB-ABAS E POLÍTICAS PÚBLICAS MINISTERIAIS
+    // =========================================================================
+    let politicasPesquisadasCache = [];
+    let naturezaFiltroAtual = 'todos';
+
+    function trocarSubAbaPesquisa(subAbaId) {
+      document.getElementById('sub-politicas-container').classList.add('hidden');
+      document.getElementById('sub-emendas-container').classList.add('hidden');
+      document.getElementById('btn-sub-politicas').classList.remove('border-govblue', 'text-govblue');
+      document.getElementById('btn-sub-politicas').classList.add('border-transparent', 'text-slate-500');
+      document.getElementById('btn-sub-emendas').classList.remove('border-govblue', 'text-govblue');
+      document.getElementById('btn-sub-emendas').classList.add('border-transparent', 'text-slate-500');
+
+      if (subAbaId === 'sub-politicas') {
+        document.getElementById('sub-politicas-container').classList.remove('hidden');
+        document.getElementById('btn-sub-politicas').classList.add('border-govblue', 'text-govblue');
+        document.getElementById('btn-sub-politicas').classList.remove('border-transparent', 'text-slate-500');
+        if (politicasPesquisadasCache.length === 0) executarPesquisaPoliticas();
+      } else {
+        document.getElementById('sub-emendas-container').classList.remove('hidden');
+        document.getElementById('btn-sub-emendas').classList.add('border-govblue', 'text-govblue');
+        document.getElementById('btn-sub-emendas').classList.remove('border-transparent', 'text-slate-500');
+        if (emendasPesquisadasCache.length === 0) executarPesquisaEmendas();
+      }
+      lucide.createIcons();
+    }
+
+    function filtrarNaturezaPolitica(natureza) {
+      naturezaFiltroAtual = natureza;
+      document.querySelectorAll('.btn-nat').forEach(b => {
+        b.className = 'btn-nat px-3 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-full text-[11px] font-bold transition';
+      });
+
+      const btnAtivo = document.getElementById(`btn-nat-${natureza}`);
+      if (btnAtivo) {
+        if (natureza === 'impositivo') {
+          btnAtivo.className = 'btn-nat px-3 py-1 bg-emerald-700 text-white rounded-full text-[11px] font-bold transition shadow';
+        } else if (natureza === 'discricionario') {
+          btnAtivo.className = 'btn-nat px-3 py-1 bg-amber-600 text-white rounded-full text-[11px] font-bold transition shadow';
+        } else {
+          btnAtivo.className = 'btn-nat px-3 py-1 bg-govblue text-white rounded-full text-[11px] font-bold transition shadow';
+        }
+      }
+      executarPesquisaPoliticas();
+    }
+
+    async function executarPesquisaPoliticas() {
+      const q = document.getElementById('filtro-pol-q').value;
+      const min = document.getElementById('filtro-pol-min').value;
+      const btn = document.getElementById('btn-exec-politicas');
+      const grid = document.getElementById('grid-resultados-politicas');
+      const label = document.getElementById('label-status-politicas');
+
+      btn.disabled = true;
+      btn.innerHTML = `<span class="animate-spin">⏳</span> Filtrando...`;
+
+      try {
+        const url = `/api/politicas-publicas/pesquisa?q=${encodeURIComponent(q)}&ministerio=${encodeURIComponent(min)}&natureza=${encodeURIComponent(naturezaFiltroAtual)}`;
+        const resp = await fetch(url);
+        const data = await resp.json();
+
+        politicasPesquisadasCache = data.politicas || [];
+        label.innerText = `${politicasPesquisadasCache.length} política(s) pública(s) encontrada(s):`;
+        grid.innerHTML = '';
+
+        if (politicasPesquisadasCache.length === 0) {
+          grid.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400 text-xs">Nenhuma política pública ou ação orçamentária localizada com esses filtros.</div>`;
+          return;
+        }
+
+        const fmt = v => Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+        politicasPesquisadasCache.forEach((pol, idx) => {
+          const card = document.createElement('div');
+          card.className = 'p-5 rounded-2xl border border-slate-200 bg-white hover:border-govblue hover:shadow-lg transition space-y-3 flex flex-col justify-between';
+          
+          const isImpositivo = pol.permiteImpositivo;
+          const isDiscricionario = pol.permiteDiscricionario;
+
+          card.innerHTML = `
+            <div class="space-y-2">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span class="text-[10px] bg-govdark text-govgold px-2 py-0.5 rounded font-mono font-bold tracking-wider">Ação ${pol.codigoAcao}</span>
+                    <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-bold">${pol.siglaMinisterio}</span>
+                    ${isImpositivo ? '<span class="text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-bold flex items-center gap-1">🟢 Impositivo (RP 6/7)</span>' : ''}
+                    ${isDiscricionario ? '<span class="text-[10px] bg-amber-100 text-amber-800 border border-amber-300 px-2 py-0.5 rounded font-bold flex items-center gap-1">🟡 Discricionário (RP 2)</span>' : ''}
+                  </div>
+                  <h4 class="font-bold text-slate-900 text-sm mt-1.5 leading-snug">${pol.nome}</h4>
+                </div>
+              </div>
+
+              <p class="text-[11px] text-slate-500 font-medium">${pol.ministerio} &bull; <span class="italic">${pol.orgaoGestor}</span></p>
+
+              <!-- Painel de Valores no OGU / LOA -->
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 grid grid-cols-2 gap-2 text-[11px]">
+                <div>
+                  <span class="text-slate-500 block text-[10px] uppercase font-bold">Dotação Total LOA:</span>
+                  <strong class="text-slate-900 font-extrabold text-xs">${fmt(pol.dotacaoLOA)}</strong>
+                </div>
+                <div>
+                  <span class="text-slate-500 block text-[10px] uppercase font-bold">Modalidade no MROSC:</span>
+                  <span class="text-slate-800 font-semibold truncate block text-[10px]">${pol.instrumentoMrosc}</span>
+                </div>
+              </div>
+
+              <!-- Diretrizes de Custeio vs Capital -->
+              <div class="space-y-1 text-[11px] bg-blue-50/50 p-2.5 rounded-xl border border-blue-100">
+                <p><strong class="text-blue-900">GND 3 (Custeio):</strong> <span class="text-slate-600">${pol.diretrizesGND.gnd3_custeio}</span></p>
+                <p><strong class="text-purple-900">GND 4 (Capital):</strong> <span class="text-slate-600">${pol.diretrizesGND.gnd4_capital}</span></p>
+              </div>
+
+              <div class="text-[10px] text-slate-500 italic">
+                <strong>Público-alvo:</strong> ${pol.publicoAlvo}
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <span class="text-[10px] text-emerald-700 font-semibold flex items-center gap-1">
+                ${pol.permiteImpositivo ? '✔ Dispensa Chamamento (Art. 29)' : '⚠ Chamamento via Edital (Art. 16)'}
+              </span>
+              <button type="button" onclick="vincularPoliticaPublica('${pol.id}')" class="px-3.5 py-1.5 bg-govblue hover:bg-govdark text-white rounded-lg text-xs font-bold transition flex items-center gap-1 shadow">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-govgold"></i> Vincular ao meu Pleito &rarr;
+              </button>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+        lucide.createIcons();
+      } catch (e) {
+        grid.innerHTML = `<div class="col-span-full py-4 text-center text-red-500 text-xs">Erro ao carregar políticas públicas: ${e.message}</div>`;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<i data-lucide="search" class="w-4 h-4"></i> Filtrar Orçamento`;
+        lucide.createIcons();
+      }
+    }
+
+    function vincularPoliticaPublica(id) {
+      const pol = politicasPesquisadasCache.find(p => p.id === id);
+      if (!pol) return;
+
+      // 1. Atualiza Ministério e Ação Orçamentária no Elaborador
+      const selMin = document.getElementById('ministerio');
+      for (let i = 0; i < selMin.options.length; i++) {
+        if (selMin.options[i].value.includes(pol.siglaMinisterio) || normalizarTexto(selMin.options[i].text).includes(normalizarTexto(pol.siglaMinisterio))) {
+          selMin.selectedIndex = i;
+          break;
+        }
+      }
+
+      document.getElementById('acaoOrcamentaria').value = `${pol.codigoAcao} - ${pol.nome}`;
+      
+      // Se a justificativa estiver vazia ou padrão, sugere a justificativa técnica modelo
+      const justAtual = document.getElementById('justificativa').value.trim();
+      if (!justAtual || justAtual.length < 30) {
+        document.getElementById('justificativa').value = pol.justificativaModelo;
+      }
+
+      // Se o objeto estiver vazio, preenche com sugestão da política
+      const objAtual = document.getElementById('objeto').value.trim();
+      if (!objAtual || objAtual.length < 15) {
+        document.getElementById('objeto').value = `Execução de projeto comunitário para ${pol.publicoAlvo}, no âmbito do programa ${pol.nome}.`;
+      }
+
+      // Se for estritamente impositivo, ajusta o tipo de emenda
+      if (pol.permiteImpositivo && !pol.permiteDiscricionario) {
+        document.getElementById('tipoEmenda').value = 'Individual (RP 6 - Impositiva)';
+      }
+
+      trocarAba('aba-elaborador');
+      showToast(`Política Pública da Ação ${pol.codigoAcao} vinculada ao seu pleito!`, 'success');
+      setTimeout(() => {
+        document.getElementById('acaoOrcamentaria').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 150);
+    }
+
+    function usarEmendaReferencia(idx) {
+      const e = emendasPesquisadasCache[idx];
+      if (!e) return;
+
+      document.getElementById('parlamentar').value = `${e.autor} (${e.partido || ''}/${e.uf || ''})`;
+      if (e.tipo) document.getElementById('tipoEmenda').value = e.tipo.includes('Bancada') ? 'Bancada Estadual (RP 7 - Impositiva)' : (e.tipo.includes('Comissão') ? 'Comissão Temática (RP 8 - Não Impositiva)' : 'Individual (RP 6 - Impositiva)');
+      if (e.uf && e.uf !== 'BR') document.getElementById('uf').value = e.uf;
+      document.getElementById('acaoOrcamentaria').value = e.acao || '';
+      
+      const isSenado = e.casaLegislativa === 'Senado Federal' || (e.cargo && e.cargo.includes('Senador')) || String(e.numero).startsWith('SEN');
+      const elCasa = document.getElementById('casaLegislativa');
+      if (elCasa) {
+        elCasa.value = isSenado ? 'Senado Federal' : 'Câmara dos Deputados';
+      }
+
+      // Proposta orçamentária proporcional de exemplo baseada na emenda
+      const vlr = Number(e.valorProposto || 200000);
+      const vlrGnd3 = Math.round(vlr * 0.6);
+      const vlrGnd4 = vlr - vlrGnd3;
+      document.getElementById('gnd3').value = vlrGnd3;
+      document.getElementById('gnd4').value = vlrGnd4;
+
+      calcularTotais();
+      trocarAba('aba-elaborador');
+      showToast(`Dados da Emenda nº ${e.numero} carregados no Elaborador!`, 'success');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      calcularTotais();
+      calcularProntidaoChecklist();
+      carregarHistorico();
+      atualizarVisualizacaoOficio();
+      executarPesquisaPoliticas();
+    });
+  </script>
+</body>
+</html>
