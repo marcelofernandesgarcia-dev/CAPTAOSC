@@ -2,8 +2,19 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>CaptaOSC - Gestão Estratégica de Emendas Parlamentares (MROSC & Transferegov)</title>
+  
+  <!-- PWA & Mobile Meta Tags -->
+  <meta name="theme-color" content="#0C326F">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="CaptaOSC">
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+  <link rel="apple-touch-icon" href="/icon.svg">
+  <link rel="manifest" href="/manifest.json">
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
@@ -55,7 +66,7 @@
   <header class="bg-govblue text-white shadow-md border-b-4 border-govgold sticky top-0 z-40 no-print">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-2xl shadow-inner">
+        <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-2xl shadow-inner flex-shrink-0">
           🏛️
         </div>
         <div>
@@ -66,16 +77,73 @@
           <p class="text-xs text-blue-100 hidden sm:block">Plataforma Técnica e Estratégica para Captação de Emendas Parlamentares Federais</p>
         </div>
       </div>
-      <div class="flex items-center gap-3">
-        <span class="text-xs bg-govdark text-emerald-300 px-3 py-1.5 rounded-full border border-blue-400/30 flex items-center gap-1.5 font-medium">
+      <div class="flex items-center gap-2">
+        <span class="text-xs bg-govdark text-emerald-300 px-3 py-1.5 rounded-full border border-blue-400/30 hidden sm:flex items-center gap-1.5 font-medium">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sistema Ativo (:3000)
         </span>
+        <!-- Botão Menu Hambúrguer (Mobile) -->
+        <button onclick="abrirDrawerMobile()" aria-label="Abrir Menu de Módulos" class="md:hidden p-2 bg-white/10 hover:bg-white/20 rounded-xl text-white border border-white/20 flex items-center justify-center">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Navegação por Módulos Estratégicos Reorganizada -->
-  <nav class="bg-white border-b border-slate-200 shadow-sm sticky top-[68px] z-30 no-print">
+  <!-- Drawer Retrátil de Navegação Completa (Mobile) -->
+  <div id="drawer-mobile" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex justify-end no-print transition-all">
+    <div class="w-4/5 max-w-xs bg-white h-full shadow-2xl flex flex-col justify-between p-5 overflow-y-auto">
+      <div class="space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-2.5">
+            <span class="text-2xl">🏛️</span>
+            <div>
+              <h3 class="font-extrabold text-govblue text-sm">CaptaOSC</h3>
+              <p class="text-[10px] text-slate-500">MROSC &bull; Transferegov.br</p>
+            </div>
+          </div>
+          <button onclick="fecharDrawerMobile()" class="p-1.5 text-slate-400 hover:text-slate-800 rounded-lg">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-1">Módulos da Plataforma</div>
+
+        <nav class="space-y-1 text-xs font-bold text-slate-700">
+          <button onclick="navegarMobile('aba-guia')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
+            <span class="text-base">💡</span> Guia &amp; Usabilidade
+          </button>
+          <button onclick="navegarMobile('aba-pesquisa-emendas')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
+            <span class="text-base">🔎</span> 1. Consulta &amp; Inteligência
+          </button>
+          <button onclick="navegarMobile('aba-elaborador')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
+            <span class="text-base">📝</span> 2. Elaborador do Pleito
+          </button>
+          <button onclick="navegarMobile('aba-oficio')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
+            <span class="text-base">✉️</span> 3. Ofício ao Parlamentar
+          </button>
+          <button onclick="navegarMobile('aba-ciclo')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
+            <span class="text-base">📅</span> 4. Ciclo &amp; Calendário
+          </button>
+          <button onclick="navegarMobile('aba-trilha')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
+            <span class="text-base">🚀</span> 5. Trilha Transferegov
+          </button>
+          <button onclick="navegarMobile('aba-marco')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
+            <span class="text-base">⚖️</span> 6. Marco Legal (LC 210)
+          </button>
+        </nav>
+      </div>
+
+      <div class="border-t border-slate-100 pt-3 text-[11px] text-slate-500 space-y-2">
+        <a href="https://github.com/marcelofernandesgarcia-dev/CAPTAOSC" target="_blank" class="w-full py-2.5 px-3 bg-slate-900 text-white rounded-xl flex items-center justify-center gap-1.5 font-bold shadow">
+          <i data-lucide="github" class="w-4 h-4"></i> GitHub Repositório
+        </a>
+        <p class="text-center text-[10px] text-slate-400">Versão 3.1.0 &bull; PWA Habilitado</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navegação por Módulos Estratégicos (Desktop) -->
+  <nav class="bg-white border-b border-slate-200 shadow-sm sticky top-[68px] z-30 no-print hidden md:block">
     <div class="max-w-6xl mx-auto px-4 flex space-x-2 sm:space-x-6 overflow-x-auto text-xs font-bold uppercase tracking-wider">
       <button onclick="trocarAba('aba-guia')" id="btn-aba-guia" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-2 whitespace-nowrap">
         <i data-lucide="help-circle" class="w-4 h-4 text-govgold"></i> 💡 Guia &amp; Usabilidade
@@ -104,8 +172,8 @@
   <!-- Notificações Toast -->
   <div id="toast-container" class="fixed top-20 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-  <!-- Container Principal -->
-  <main class="max-w-6xl mx-auto px-4 py-6 flex-1 w-full space-y-6">
+  <!-- Container Principal com espaçamento inferior para Barra Mobile -->
+  <main class="max-w-6xl mx-auto px-4 py-6 flex-1 w-full space-y-6 pb-24 md:pb-8">
 
     <!-- ================================================================= -->
     <!-- MÓDULO 0: GUIA DE EXPLICAÇÃO & USABILIDADE DO APLICATIVO -->
@@ -384,9 +452,9 @@
 
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">CNPJ da Entidade *</label>
-            <div class="flex gap-2">
-              <input type="text" id="cnpj" maxlength="18" placeholder="Digite apenas números (14 dígitos)" class="flex-1 text-sm px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-govblue outline-none" required>
-              <button type="button" onclick="consultarCNPJ()" id="btn-cnpj" class="bg-govblue hover:bg-govdark text-white text-xs px-4 py-2 rounded-lg font-bold transition flex items-center gap-1.5 shadow">
+            <div class="flex flex-col sm:flex-row gap-2">
+              <input type="text" id="cnpj" inputmode="numeric" maxlength="18" placeholder="Digite apenas números (14 dígitos)" class="flex-1 text-sm px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-govblue outline-none" required>
+              <button type="button" onclick="consultarCNPJ()" id="btn-cnpj" class="bg-govblue hover:bg-govdark text-white text-xs px-4 py-2.5 rounded-lg font-bold transition flex items-center justify-center gap-1.5 shadow">
                 <i data-lucide="search" class="w-4 h-4"></i> Consultar Receita &amp; MROSC
               </button>
             </div>
@@ -400,7 +468,7 @@
             </div>
             <div>
               <label class="block text-xs font-bold text-slate-700 mb-1">Ano de Fundação</label>
-              <input type="number" id="ano_fundacao" placeholder="Ex: 2012" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 text-center font-bold">
+              <input type="number" id="ano_fundacao" inputmode="numeric" placeholder="Ex: 2012" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 text-center font-bold">
             </div>
             <div>
               <label class="block text-xs font-bold text-slate-700 mb-1">Situação Cadastral</label>
@@ -464,7 +532,7 @@
             </div>
             <div>
               <label class="block text-xs font-bold text-slate-700 mb-1">Exercício (PLOA)</label>
-              <input type="number" id="exercicio" value="2026" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg text-center font-bold">
+              <input type="number" id="exercicio" inputmode="numeric" value="2026" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg text-center font-bold">
             </div>
           </div>
 
@@ -510,7 +578,7 @@
             </div>
             <div>
               <label class="block text-xs font-bold text-slate-700 mb-1">Meta Física (Nº de Beneficiários Diretos)</label>
-              <input type="number" id="metaBeneficiarios" placeholder="Ex: 200" value="150" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg text-center font-bold">
+              <input type="number" id="metaBeneficiarios" inputmode="numeric" placeholder="Ex: 200" value="150" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg text-center font-bold">
             </div>
           </div>
 
@@ -547,7 +615,7 @@
               <p class="text-[11px] text-slate-500">Pessoal próprio, instrutores, materiais de consumo, lanches, eventos, serviços de terceiros e diárias.</p>
               <div class="relative">
                 <span class="absolute left-3 top-2.5 text-xs font-bold text-slate-400">R$</span>
-                <input type="number" step="0.01" id="gnd3" oninput="calcularTotais()" placeholder="0,00" value="120000" class="w-full text-base font-bold pl-9 pr-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-800">
+                <input type="number" step="0.01" id="gnd3" inputmode="decimal" oninput="calcularTotais()" placeholder="0,00" value="120000" class="w-full text-base font-bold pl-9 pr-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-800">
               </div>
             </div>
 
@@ -562,7 +630,7 @@
               <p class="text-[11px] text-slate-500">Equipamentos permanentes, computadores, maquinários, veículos e obras de reforma/infraestrutura.</p>
               <div class="relative">
                 <span class="absolute left-3 top-2.5 text-xs font-bold text-slate-400">R$</span>
-                <input type="number" step="0.01" id="gnd4" oninput="calcularTotais()" placeholder="0,00" value="80000" class="w-full text-base font-bold pl-9 pr-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-800">
+                <input type="number" step="0.01" id="gnd4" inputmode="decimal" oninput="calcularTotais()" placeholder="0,00" value="80000" class="w-full text-base font-bold pl-9 pr-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-800">
               </div>
             </div>
           </div>
@@ -683,7 +751,7 @@
         </div>
 
         <!-- Área Timbrada de Visualização do Ofício -->
-        <div id="area-impressao" class="bg-white p-8 sm:p-12 border border-slate-300 rounded-xl shadow-inner font-serif text-slate-900 leading-relaxed text-sm max-w-3xl mx-auto space-y-4">
+        <div id="area-impressao" class="bg-white p-4 sm:p-8 md:p-12 border border-slate-300 rounded-xl shadow-inner font-serif text-slate-900 leading-relaxed text-sm max-w-3xl mx-auto space-y-4">
           <div class="text-center pb-4 border-b border-slate-200">
             <h3 id="of-cabecalho-osc" class="font-bold text-base uppercase tracking-wider text-slate-900">ORGANIZAÇÃO DA SOCIEDADE CIVIL</h3>
             <p id="of-cabecalho-cnpj" class="text-xs text-slate-600">CNPJ nº 00.000.000/0001-00</p>
@@ -2163,6 +2231,24 @@ ${p.justificativa}
       showToast(`Dados da Emenda nº ${e.numero} carregados no Elaborador!`, 'success');
     }
 
+    // Funções do Drawer & Navegação Mobile
+    function abrirDrawerMobile() {
+      const d = document.getElementById('drawer-mobile');
+      if (d) d.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function fecharDrawerMobile() {
+      const d = document.getElementById('drawer-mobile');
+      if (d) d.classList.add('hidden');
+    }
+
+    function navegarMobile(abaId) {
+      fecharDrawerMobile();
+      trocarAba(abaId);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
       calcularTotais();
@@ -2172,5 +2258,29 @@ ${p.justificativa}
       executarPesquisaPoliticas();
     });
   </script>
+
+  <!-- Barra de Navegação Inferior Fixa (Mobile Bottom Navigation) -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-2 py-1.5 flex justify-around items-center shadow-[0_-4px_20px_rgba(0,0,0,0.08)] no-print">
+    <button onclick="trocarAba('aba-guia')" class="flex flex-col items-center gap-0.5 py-1 px-2 text-slate-500 hover:text-govblue active:scale-95 transition">
+      <i data-lucide="help-circle" class="w-5 h-5 text-govgold"></i>
+      <span class="text-[9px] font-bold">Guia</span>
+    </button>
+    <button onclick="trocarAba('aba-pesquisa-emendas')" class="flex flex-col items-center gap-0.5 py-1 px-2 text-slate-500 hover:text-govblue active:scale-95 transition">
+      <i data-lucide="search-check" class="w-5 h-5 text-emerald-600"></i>
+      <span class="text-[9px] font-bold">Consulta</span>
+    </button>
+    <button onclick="trocarAba('aba-elaborador')" class="flex flex-col items-center gap-0.5 py-1 px-2 text-slate-500 hover:text-govblue active:scale-95 transition">
+      <i data-lucide="file-edit" class="w-5 h-5 text-govblue"></i>
+      <span class="text-[9px] font-bold">Pleito</span>
+    </button>
+    <button onclick="trocarAba('aba-oficio')" class="flex flex-col items-center gap-0.5 py-1 px-2 text-slate-500 hover:text-govblue active:scale-95 transition">
+      <i data-lucide="mail" class="w-5 h-5 text-purple-600"></i>
+      <span class="text-[9px] font-bold">Ofício</span>
+    </button>
+    <button onclick="abrirDrawerMobile()" class="flex flex-col items-center gap-0.5 py-1 px-2 text-slate-500 hover:text-govblue active:scale-95 transition">
+      <i data-lucide="menu" class="w-5 h-5"></i>
+      <span class="text-[9px] font-bold">Mais</span>
+    </button>
+  </div>
 </body>
 </html>

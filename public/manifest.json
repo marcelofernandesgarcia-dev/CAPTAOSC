@@ -1,0 +1,18 @@
+{
+  "name": "CaptaOSC - Gestão de Emendas e MROSC",
+  "short_name": "CaptaOSC",
+  "description": "Plataforma Técnica e Estratégica para Captação de Emendas Parlamentares Federais (MROSC & Transferegov.br)",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0C326F",
+  "theme_color": "#0C326F",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
