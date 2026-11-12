@@ -34,6 +34,51 @@
     }
   </script>
   <style>
+    /* Variáveis e Revelação Progressiva (Progressive Disclosure) */
+    :root {
+      --cor-iniciante: #059669;
+      --cor-gestor: #d97706;
+      --cor-tecnico: #dc2626;
+      --transicao-suave: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes surgirSuave {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animar-surgir {
+      animation: surgirSuave 0.3s ease-out forwards;
+    }
+
+    /* Micro-interações táteis */
+    .interativo-suave {
+      transition: var(--transicao-suave);
+    }
+    .interativo-suave:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Controle de Visibilidade por Nível de Experiência */
+    body.modo-iniciante .visivel-gestor-apenas,
+    body.modo-iniciante .visivel-tecnico-apenas {
+      display: none !important;
+    }
+
+    body.modo-gestor .visivel-iniciante-apenas,
+    body.modo-gestor .visivel-tecnico-apenas {
+      display: none !important;
+    }
+
+    body.modo-tecnico .visivel-iniciante-apenas,
+    body.modo-tecnico .visivel-gestor-apenas {
+      display: none !important;
+    }
+
+    /* Destaques contextuais */
+    .dica-exp-box {
+      animation: surgirSuave 0.3s ease-out forwards;
+    }
+
     @media print {
       body {
         background-color: white !important;
@@ -52,7 +97,7 @@
         border: none !important;
         box-shadow: none !important;
       }
-      .no-print, header, nav, footer, button, #toast-container { display: none !important; }
+      .no-print, header, nav, footer, button, #toast-container, #barra-nivel-experiencia { display: none !important; }
       @page {
         size: A4 portrait;
         margin: 25mm 20mm 20mm 25mm;
@@ -104,6 +149,15 @@
           <button onclick="fecharDrawerMobile()" class="p-1.5 text-slate-400 hover:text-slate-800 rounded-lg">
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
+        </div>
+
+        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 block">Nível de Informação:</span>
+          <div class="grid grid-cols-3 gap-1">
+            <button onclick="definirNivelExperiencia('iniciante'); fecharDrawerMobile();" id="btn-m-exp-iniciante" class="p-1.5 text-center rounded-lg text-[10px] font-bold border border-emerald-400 bg-emerald-50 text-emerald-800">🟢 Básico</button>
+            <button onclick="definirNivelExperiencia('gestor'); fecharDrawerMobile();" id="btn-m-exp-gestor" class="p-1.5 text-center rounded-lg text-[10px] font-bold border border-slate-200 bg-white text-slate-700">🟡 Gestor</button>
+            <button onclick="definirNivelExperiencia('tecnico'); fecharDrawerMobile();" id="btn-m-exp-tecnico" class="p-1.5 text-center rounded-lg text-[10px] font-bold border border-slate-200 bg-white text-slate-700">🔴 Jurídico</button>
+          </div>
         </div>
 
         <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-1">Módulos da Plataforma</div>
@@ -175,6 +229,37 @@
     </div>
   </nav>
 
+  <!-- BARRA DE REVELAÇÃO PROGRESSIVA & CONTROLE DE EXPERIÊNCIA (3 NÍVEIS) -->
+  <div id="barra-nivel-experiencia" class="bg-gradient-to-r from-slate-900 via-govdark to-slate-900 text-white border-b border-slate-700/60 shadow-md no-print py-2 px-4 transition-all">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-govgold/20 text-govgold font-black text-xs">
+          🎯
+        </span>
+        <div>
+          <span class="font-bold text-slate-200">Nível de Informação:</span>
+          <span id="descricao-modo-atual" class="text-emerald-300 text-[11px] font-medium ml-1">🟢 Visão Simples (Iniciante) • Linguagem acolhedora e passo a passo</span>
+        </div>
+      </div>
+      
+      <!-- Seletor dos 3 Perfis com Micro-interações -->
+      <div class="flex items-center gap-1 bg-black/40 p-1 rounded-xl border border-white/10 w-full sm:w-auto justify-center" role="group" aria-label="Nível de Profundidade da Informação">
+        <button type="button" onclick="definirNivelExperiencia('iniciante', this)" id="btn-exp-iniciante" class="btn-nivel-exp flex-1 sm:flex-initial px-3 py-1.5 rounded-lg font-bold text-[11px] transition flex items-center justify-center gap-1.5 bg-emerald-600 text-white shadow">
+          <span>🟢</span>
+          <span>Iniciante</span>
+        </button>
+        <button type="button" onclick="definirNivelExperiencia('gestor', this)" id="btn-exp-gestor" class="btn-nivel-exp flex-1 sm:flex-initial px-3 py-1.5 rounded-lg font-bold text-[11px] transition flex items-center justify-center gap-1.5 text-slate-300 hover:text-white hover:bg-white/10">
+          <span>🟡</span>
+          <span>Gestor</span>
+        </button>
+        <button type="button" onclick="definirNivelExperiencia('tecnico', this)" id="btn-exp-tecnico" class="btn-nivel-exp flex-1 sm:flex-initial px-3 py-1.5 rounded-lg font-bold text-[11px] transition flex items-center justify-center gap-1.5 text-slate-300 hover:text-white hover:bg-white/10">
+          <span>🔴</span>
+          <span>Jurídico / Técnico</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Notificações Toast -->
   <div id="toast-container" class="fixed top-20 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
@@ -208,6 +293,50 @@
             <button onclick="trocarAba('aba-ciclo')" class="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold border border-white/20 flex items-center gap-1.5 transition">
               <i data-lucide="calendar" class="w-4 h-4"></i> Calendário &amp; Prazos TCE
             </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Banner Didático de Revelação Progressiva -->
+      <div class="p-5 bg-white rounded-2xl shadow-sm border border-slate-200 space-y-4">
+        <div class="flex items-center justify-between border-b pb-3">
+          <div>
+            <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+              <span class="text-lg">🎯</span> Arquitetura de Revelação Progressiva (Progressive Disclosure)
+            </h3>
+            <p class="text-xs text-slate-500">O CaptaOSC adapta automaticamente a profundidade técnica das informações ao seu perfil de uso sem poluir a sua tela.</p>
+          </div>
+          <span class="text-[10px] bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold border border-blue-200">
+            Design Inclusivo MROSC
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+          <!-- Card 1 -->
+          <div onclick="definirNivelExperiencia('iniciante')" class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/60 hover:bg-emerald-50 cursor-pointer transition space-y-1.5 interativo-suave">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-emerald-800 flex items-center gap-1.5">🟢 Modo Simples (Iniciante)</span>
+              <span class="text-[10px] bg-emerald-200 text-emerald-900 px-1.5 py-0.5 rounded font-bold">Linguagem Cidadã</span>
+            </div>
+            <p class="text-[11px] text-slate-600">Ideal para líderes comunitários e pequenas OSCs. Remove termos jurídicos complexos, inclui dicas amigáveis de "como fazer" e passo a passo visual.</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div onclick="definirNivelExperiencia('gestor')" class="p-3.5 rounded-xl border border-amber-200 bg-amber-50/60 hover:bg-amber-50 cursor-pointer transition space-y-1.5 interativo-suave">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-amber-800 flex items-center gap-1.5">🟡 Modo Gestor (Padrão)</span>
+              <span class="text-[10px] bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded font-bold">Foco em Prazos</span>
+            </div>
+            <p class="text-[11px] text-slate-600">Ideal para captadores e administradores de projetos. Foca em cronogramas, cotações de preços (3 orçamentos), planilhas de custos e rotinas do Transferegov.</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div onclick="definirNivelExperiencia('tecnico')" class="p-3.5 rounded-xl border border-rose-200 bg-rose-50/60 hover:bg-rose-50 cursor-pointer transition space-y-1.5 interativo-suave">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-rose-800 flex items-center gap-1.5">🔴 Modo Jurídico &amp; Técnico</span>
+              <span class="text-[10px] bg-rose-200 text-rose-900 px-1.5 py-0.5 rounded font-bold">Rigor Normativo</span>
+            </div>
+            <p class="text-[11px] text-slate-600">Para advogados, contadores e analistas de prestação de contas. Exibe artigos estritos da Lei 13.019/14, Decreto 11.948/24, espelho JSON/Transferegov e acórdãos do TCU.</p>
           </div>
         </div>
       </div>
@@ -465,6 +594,36 @@
         <button onclick="trocarAba('aba-guia')" class="px-3.5 py-1.5 bg-govblue hover:bg-govdark text-white rounded-lg text-xs font-bold whitespace-nowrap transition flex items-center gap-1.5 shadow">
           <i data-lucide="help-circle" class="w-3.5 h-3.5 text-govgold"></i> Abrir Guia de Usabilidade
         </button>
+      </div>
+
+      <!-- Blocos Adaptáveis por Nível de Experiência (Revelação Progressiva) -->
+      <div class="visivel-iniciante-apenas p-4 bg-emerald-50 border-l-4 border-emerald-600 rounded-r-2xl text-xs space-y-1.5 dica-exp-box shadow-sm no-print">
+        <div class="flex items-center gap-2 text-emerald-900 font-bold text-sm">
+          <span>🌱</span> Como Preencher Sem Medo (Linguagem Cidadã):
+        </div>
+        <p class="text-slate-700 leading-relaxed">
+          • <strong>Objeto:</strong> Diga em poucas palavras o que o recurso vai fazer (ex.: <em>"Oferecer oficinas de música e informática para 60 crianças da comunidade"</em>).<br>
+          • <strong>Cotações de Preço:</strong> Você precisará de 3 orçamentos para cada compra ou serviço planejado.<br>
+          • O sistema se encarrega de formatar a justificativa técnica e o ofício formal para você entregar ao parlamentar ou cadastrar no Transferegov!
+        </p>
+      </div>
+
+      <div class="visivel-gestor-apenas p-4 bg-amber-50 border-l-4 border-amber-600 rounded-r-2xl text-xs space-y-1.5 dica-exp-box shadow-sm no-print">
+        <div class="flex items-center gap-2 text-amber-900 font-bold text-sm">
+          <span>🟡</span> Checklist do Gestor de Projetos:
+        </div>
+        <p class="text-slate-700 leading-relaxed">
+          Certifique-se de separar claramente itens de <strong>Custeio (GND 3 - materiais de consumo, serviços de terceiros, combustível)</strong> de itens de <strong>Capital (GND 4 - equipamentos, veículos, reformas)</strong>. A coerência entre as metas físicas e o cronograma de desembolso é o principal critério de aprovação pelos analistas dos Ministérios.
+        </p>
+      </div>
+
+      <div class="visivel-tecnico-apenas p-4 bg-rose-50 border-l-4 border-rose-600 rounded-r-2xl text-xs space-y-1.5 dica-exp-box shadow-sm no-print">
+        <div class="flex items-center gap-2 text-rose-900 font-bold text-sm">
+          <span>⚖️</span> Conformidade Prévia com as Vedações do Art. 45 da Lei nº 13.019/2014:
+        </div>
+        <p class="text-slate-700 leading-relaxed">
+          É expressamente vedado: destinar recursos para finalidade alheia ao objeto; pagar servidor público da administração pública com recursos da parceria; remunerar membros da diretoria sem previsão expressa estatutária e contratual no regime CLT; e realizar despesas retroativas ou multas de mora.
+        </p>
       </div>
 
       <form id="form-proposta" onsubmit="event.preventDefault(); salvarPropostaCompleta();" class="space-y-6">
@@ -1365,6 +1524,26 @@
         </p>
       </div>
 
+      <!-- Blocos Adaptáveis por Nível de Experiência (Revelação Progressiva) -->
+      <div class="visivel-iniciante-apenas p-4 bg-emerald-50 border-l-4 border-emerald-600 rounded-r-2xl text-xs space-y-1.5 dica-exp-box shadow-sm">
+        <div class="flex items-center gap-2 text-emerald-900 font-bold text-sm">
+          <span>🌱</span> Guia Amigável para Iniciantes: Por que fazer este diagnóstico?
+        </div>
+        <p class="text-slate-700 leading-relaxed">
+          Muitas organizações comunitárias perdem recursos federais por detalhes cadastrais simples no estatuto ou certidões tributárias vencidas. 
+          Neste módulo, você só precisa <strong>escolher se quer recurso do Governo Federal (3 anos) ou da Prefeitura (1 ano)</strong> e digitar o CNPJ da sua entidade. O CaptaOSC analisa tudo na hora e mostra o que já está certo e o que precisa ajustar!
+        </p>
+      </div>
+
+      <div class="visivel-tecnico-apenas p-4 bg-rose-50 border-l-4 border-rose-600 rounded-r-2xl text-xs space-y-1.5 dica-exp-box shadow-sm">
+        <div class="flex items-center gap-2 text-rose-900 font-bold text-sm">
+          <span>⚖️</span> Enquadramento Jurídico e Matriz de Conformidade (Lei 13.019/2014 &amp; Decreto 11.948/2024):
+        </div>
+        <p class="text-slate-700 leading-relaxed">
+          A verificação preliminar afere o cumprimento cumulativo dos requisitos do <strong>Art. 33 (eficácia temporal e capacidade técnico-operacional)</strong>, vedações absolutas de dirigentes do <strong>Art. 39</strong> e ausência de restrições em sistemas federais (CADIN, TCU, CEIS/CNEP), mitigando o risco de diligências formais na celebração de Termos de Fomento/Colaboração.
+        </p>
+      </div>
+
       <!-- 1.1 Seletor de Esfera Federativa & Busca Integrada de CNPJ -->
       <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 space-y-5">
         <div>
@@ -1501,6 +1680,27 @@
           </h2>
           <p class="text-xs text-slate-500">
             Pesquise o orçamento disponível no Orçamento Geral da União (OGU), identifique a Ação Orçamentária correta e verifique se a via de acesso é por <strong>Orçamento Impositivo (Emendas)</strong> ou <strong>Orçamento Discricionário (Editais Transferegov)</strong>.
+          </p>
+        </div>
+
+        <!-- Blocos Adaptáveis por Nível de Experiência (Revelação Progressiva) -->
+        <div class="visivel-iniciante-apenas p-3.5 bg-blue-50 border-l-4 border-blue-600 rounded-r-xl text-xs space-y-1.5 dica-exp-box shadow-sm">
+          <span class="font-bold text-blue-900 block flex items-center gap-1.5">
+            <span>💡</span> Entenda as 3 vias de captação disponíveis aqui:
+          </span>
+          <p class="text-slate-700 leading-relaxed">
+            • <strong>Políticas Públicas dos Ministérios:</strong> São os programas permanentes do Governo Federal (saúde, cultura, esporte, assistência). Mostra onde tem verba e se você pode pedir.<br>
+            • <strong>Emendas Parlamentares:</strong> Recursos indicados por Deputados Federais ou Senadores para atender entidades do estado/município.<br>
+            • <strong>Radar de Editais Abertos:</strong> Oportunidades ativas com inscrições abertas agora em todo o país (Mapa das OSC e Prosas) onde sua entidade pode concorrer.
+          </p>
+        </div>
+
+        <div class="visivel-tecnico-apenas p-3.5 bg-slate-900 text-slate-200 border-l-4 border-govgold rounded-r-xl text-xs space-y-1.5 dica-exp-box shadow-sm">
+          <span class="font-bold text-govgold block flex items-center gap-1.5">
+            <span>⚖️</span> Roteador Normativo: Orçamento Impositivo vs. Discricionário
+          </span>
+          <p class="text-slate-300 leading-relaxed">
+            A via de acesso define a exigência jurídica de chamamento: Emendas Individuais e de Bancada (Art. 166 da CF) operam por <strong>Dispensa de Chamamento (Art. 29 da Lei 13.019/2014)</strong>, exigindo formalização de Plano de Trabalho. Já os Editais e Ações Discricionárias submetem-se ao <strong>Chamamento Concorrencial (Art. 24 da Lei 13.019/2014)</strong> ou Acordo de Cooperação se não houver transferência monetária.
           </p>
         </div>
 
@@ -3472,8 +3672,70 @@ ${p.justificativa}
       });
     }
 
+    // =========================================================================
+    // ARQUITETURA DE REVELAÇÃO PROGRESSIVA (3 NÍVEIS DE EXPERIÊNCIA)
+    // =========================================================================
+    let nivelExperienciaAtual = 'iniciante';
+
+    function definirNivelExperiencia(nivel, botaoClicado = null) {
+      if (!['iniciante', 'gestor', 'tecnico'].includes(nivel)) nivel = 'iniciante';
+      nivelExperienciaAtual = nivel;
+      localStorage.setItem('captaosc_nivel_experiencia', nivel);
+
+      // 1. Atualiza classes do body
+      document.body.classList.remove('modo-iniciante', 'modo-gestor', 'modo-tecnico');
+      document.body.classList.add(`modo-${nivel}`);
+
+      // 2. Atualiza botões da barra superior
+      ['iniciante', 'gestor', 'tecnico'].forEach(n => {
+        const el = document.getElementById(`btn-exp-${n}`);
+        if (el) {
+          el.className = 'btn-nivel-exp flex-1 sm:flex-initial px-3 py-1.5 rounded-lg font-bold text-[11px] transition flex items-center justify-center gap-1.5 text-slate-300 hover:text-white hover:bg-white/10';
+        }
+      });
+
+      const btnAtivo = document.getElementById(`btn-exp-${nivel}`);
+      if (btnAtivo) {
+        const corAtiva = nivel === 'iniciante' ? 'bg-emerald-600' : (nivel === 'gestor' ? 'bg-amber-600' : 'bg-rose-700');
+        btnAtivo.className = `btn-nivel-exp flex-1 sm:flex-initial px-3 py-1.5 rounded-lg font-bold text-[11px] transition flex items-center justify-center gap-1.5 ${corAtiva} text-white shadow animar-surgir`;
+      }
+
+      // 3. Atualiza botões no drawer mobile
+      ['iniciante', 'gestor', 'tecnico'].forEach(n => {
+        const mBtn = document.getElementById(`btn-m-exp-${n}`);
+        if (mBtn) {
+          if (n === nivel) {
+            const bgM = n === 'iniciante' ? 'border-emerald-400 bg-emerald-50 text-emerald-800' : (n === 'gestor' ? 'border-amber-400 bg-amber-50 text-amber-800' : 'border-rose-400 bg-rose-50 text-rose-800');
+            mBtn.className = `p-1.5 text-center rounded-lg text-[10px] font-bold border ${bgM}`;
+          } else {
+            mBtn.className = 'p-1.5 text-center rounded-lg text-[10px] font-bold border border-slate-200 bg-white text-slate-700';
+          }
+        }
+      });
+
+      // 4. Atualiza a descrição textual na barra
+      const descEl = document.getElementById('descricao-modo-atual');
+      if (descEl) {
+        if (nivel === 'iniciante') {
+          descEl.className = 'text-emerald-300 text-[11px] font-medium ml-1';
+          descEl.innerHTML = '🟢 Visão Simples (Iniciante) • Linguagem acolhedora e passo a passo';
+        } else if (nivel === 'gestor') {
+          descEl.className = 'text-amber-300 text-[11px] font-medium ml-1';
+          descEl.innerHTML = '🟡 Modo Gestor • Foco em prazos, orçamentos, cotações e cronogramas';
+        } else if (nivel === 'tecnico') {
+          descEl.className = 'text-rose-300 text-[11px] font-medium ml-1';
+          descEl.innerHTML = '🔴 Modo Jurídico / Técnico • Leis, decretos, espelhos JSON e auditoria';
+        }
+      }
+
+      showToast(`Modo ativo: ${nivel === 'iniciante' ? '🟢 Iniciante' : (nivel === 'gestor' ? '🟡 Gestor' : '🔴 Jurídico/Técnico')}`, 'info');
+      lucide.createIcons();
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      const nivelSalvo = localStorage.getItem('captaosc_nivel_experiencia') || 'iniciante';
+      definirNivelExperiencia(nivelSalvo);
       renderizarCriteriosElegibilidade();
       renderizarItensCotacao();
       renderizarDirigentesArt39();
