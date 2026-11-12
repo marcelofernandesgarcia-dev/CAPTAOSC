@@ -1805,160 +1805,274 @@
     </div>
 
     <!-- ================================================================= -->
-    <!-- MÓDULO 1: DIAGNÓSTICO & SIMULADOR DE ELEGIBILIDADE MROSC -->
+    <!-- MÓDULO 1: DIAGNÓSTICO & SIMULADOR DE ELEGIBILIDADE MROSC (VISUAL LAW & PGFN) -->
     <!-- ================================================================= -->
     <div id="aba-elegibilidade" class="modulo-conteudo hidden space-y-6">
       
-      <!-- Hero Banner Informativo -->
-      <div class="bg-gradient-to-r from-emerald-900 via-teal-900 to-govdark text-white p-6 sm:p-7 rounded-3xl shadow-md border-2 border-emerald-500/40 space-y-3">
-        <div class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-emerald-500/30">
-          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> Diagnóstico de Prontidão Jurídica da OSC
+      <!-- Hero Banner Informativo: Estilo PGFN / Visual Law -->
+      <div class="bg-gradient-to-r from-emerald-800 via-teal-800 to-govblue text-white p-6 sm:p-7 rounded-3xl shadow-lg border-2 border-emerald-400/50 space-y-4 relative overflow-hidden">
+        <div class="absolute -right-8 -top-8 w-44 h-44 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/15 pb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-400 text-slate-950 font-black text-2xl flex items-center justify-center shadow-md">
+              ✓
+            </div>
+            <div>
+              <span class="text-[10px] font-black uppercase tracking-widest bg-white/20 text-emerald-200 px-2.5 py-0.5 rounded-full">
+                Legal Design &bull; Marco Regulatório (Lei nº 13.019/2014)
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-white mt-0.5">
+                VAMOS REGULARIZAR SUA OSC?
+              </h2>
+            </div>
+          </div>
+          <span class="text-xs bg-emerald-500/20 text-emerald-200 px-3 py-1 rounded-full font-bold border border-emerald-400/30 self-start sm:self-auto">
+            ⏱️ Diagnóstico Rápido em 2 minutos
+          </span>
         </div>
-        <h2 class="text-xl sm:text-2xl font-black text-white">
-          1. Simulador de Elegibilidade MROSC (Lei nº 13.019/2014 &amp; Decreto nº 11.948/2024)
-        </h2>
+
         <p class="text-xs sm:text-sm text-emerald-100 max-w-3xl leading-relaxed">
-          Antes de pleitear emendas parlamentares ou submeter propostas no <strong>Transferegov.br</strong>, verifique preventivamente se a sua instituição atende aos <strong>8 requisitos legais obrigatórios</strong> do Marco Regulatório e possui o <strong>tempo mínimo de registro ativo por esfera federativa</strong> (Art. 33, V, "a").
+          Verificamos preventivamente se a sua entidade cumpre os <strong>requisitos legais obrigatórios</strong> para celebrar parcerias com o Poder Público. Entenda a seguir qual a sua situação, o que fazer em caso de pendências e como avançar com segurança técnica.
         </p>
       </div>
 
       <!-- Blocos Adaptáveis por Nível de Experiência (Revelação Progressiva) -->
       <div class="visivel-iniciante-apenas p-4 bg-emerald-50 border-l-4 border-emerald-600 rounded-r-2xl text-xs space-y-1.5 dica-exp-box shadow-sm">
         <div class="flex items-center gap-2 text-emerald-900 font-bold text-sm">
-          <span>🌱</span> Guia Amigável para Iniciantes: Por que fazer este diagnóstico?
+          <span>🌱</span> Guia Cidadão: Por que fazer este diagnóstico agora?
         </div>
         <p class="text-slate-700 leading-relaxed">
-          Muitas organizações comunitárias perdem recursos federais por detalhes cadastrais simples no estatuto ou certidões tributárias vencidas. 
-          Neste módulo, você só precisa <strong>escolher se quer recurso do Governo Federal (3 anos) ou da Prefeitura (1 ano)</strong> e digitar o CNPJ da sua entidade. O CaptaOSC analisa tudo na hora e mostra o que já está certo e o que precisa ajustar!
+          Muitas OSCs perdem recursos federais ou sofrem cancelamento de propostas por pequenos detalhes no estatuto social ou certidões vencidas. 
+          Aqui, você só precisa selecionar quem vai repassar o recurso (União, Estado ou Município) e consultar o CNPJ. O sistema analisa os requisitos e orienta exatamente o que fazer!
         </p>
       </div>
 
       <div class="visivel-tecnico-apenas p-4 bg-rose-50 border-l-4 border-rose-600 rounded-r-2xl text-xs space-y-1.5 dica-exp-box shadow-sm">
         <div class="flex items-center gap-2 text-rose-900 font-bold text-sm">
-          <span>⚖️</span> Enquadramento Jurídico e Matriz de Conformidade (Lei 13.019/2014 &amp; Decreto 11.948/2024):
+          <span>⚖️</span> Matriz de Conformidade Normativa (Lei 13.019/2014, Decreto 11.948/2024 e LC 210/2024):
         </div>
         <p class="text-slate-700 leading-relaxed">
-          A verificação preliminar afere o cumprimento cumulativo dos requisitos do <strong>Art. 33 (eficácia temporal e capacidade técnico-operacional)</strong>, vedações absolutas de dirigentes do <strong>Art. 39</strong> e ausência de restrições em sistemas federais (CADIN, TCU, CEIS/CNEP), mitigando o risco de diligências formais na celebração de Termos de Fomento/Colaboração.
+          Aferição cumulativa dos requisitos de habilitação jurídica do <strong>Art. 33 (eficácia temporal e capacidade técnico-operacional)</strong>, vedações absolutas de dirigentes do <strong>Art. 39</strong> e ausência de restrições em sistemas federais (CADIN, TCU, CEIS/CNEP), mitigando o risco de diligências formais na celebração de Termos de Fomento/Colaboração.
         </p>
       </div>
 
-      <!-- 1.1 Seletor de Esfera Federativa & Busca Integrada de CNPJ -->
-      <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 space-y-5">
-        <div>
-          <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-1 uppercase tracking-wide">
-            <i data-lucide="landmark" class="w-4 h-4 text-govblue"></i> Etapa A: Selecione a Esfera de Governo Pretendida
-          </h3>
-          <p class="text-xs text-slate-500">
+      <!-- FAIXA 1: PERGUNTA ORIENTADA (ESFERA DE GOVERNO) -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="bg-govblue text-white px-5 py-3 flex items-center justify-between">
+          <span class="text-xs sm:text-sm font-black uppercase tracking-wider flex items-center gap-2">
+            <span>🏛️</span> QUAL É A ESFERA DE GOVERNO PRETENDIDA?
+          </span>
+          <span class="text-[11px] bg-white/20 text-white px-2.5 py-0.5 rounded-full font-bold">Passo 1 de 3</span>
+        </div>
+        
+        <div class="p-5 sm:p-6 space-y-3">
+          <p class="text-xs text-slate-600">
             O tempo mínimo de existência formal da entidade varia legalmente conforme o ente concedente dos recursos (Art. 33, V, "a" da Lei 13.019/2014):
           </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            <!-- Esfera Federal -->
+            <div onclick="selecionarEsferaElegibilidade('uniao')" id="opt-esfera-uniao" class="cursor-pointer border-2 border-govblue bg-blue-50/50 p-4 rounded-xl flex items-start gap-3 transition">
+              <input type="radio" name="radioEsfera" id="radio-uniao" value="uniao" checked class="mt-1 text-govblue focus:ring-govblue">
+              <div>
+                <div class="flex items-center gap-1.5 font-bold text-xs text-govblue">
+                  <span>🏛️</span> Esfera Federal (União)
+                  <span class="bg-govblue text-white text-[9px] px-1.5 py-0.5 rounded font-bold">Padrão OGU</span>
+                </div>
+                <p class="text-[11px] text-slate-700 mt-1 font-semibold">Exigência: <strong>3 anos mínimos</strong> de existência ativa</p>
+                <p class="text-[10px] text-slate-500 mt-0.5">Ministérios, Emendas Parlamentares Federais e Editais Transferegov.br.</p>
+              </div>
+            </div>
+
+            <!-- Esfera Estadual -->
+            <div onclick="selecionarEsferaElegibilidade('estado')" id="opt-esfera-estado" class="cursor-pointer border-2 border-slate-200 bg-white p-4 rounded-xl flex items-start gap-3 transition hover:border-slate-300">
+              <input type="radio" name="radioEsfera" id="radio-estado" value="estado" class="mt-1 text-govblue focus:ring-govblue">
+              <div>
+                <div class="flex items-center gap-1.5 font-bold text-xs text-slate-800">
+                  <span>🏢</span> Esfera Estadual / DF
+                </div>
+                <p class="text-[11px] text-slate-700 mt-1 font-semibold">Exigência: <strong>2 anos mínimos</strong> de existência ativa</p>
+                <p class="text-[10px] text-slate-500 mt-0.5">Secretarias Estaduais e Fundos Estaduais.</p>
+              </div>
+            </div>
+
+            <!-- Esfera Municipal -->
+            <div onclick="selecionarEsferaElegibilidade('municipio')" id="opt-esfera-municipio" class="cursor-pointer border-2 border-slate-200 bg-white p-4 rounded-xl flex items-start gap-3 transition hover:border-slate-300">
+              <input type="radio" name="radioEsfera" id="radio-municipio" value="municipio" class="mt-1 text-govblue focus:ring-govblue">
+              <div>
+                <div class="flex items-center gap-1.5 font-bold text-xs text-slate-800">
+                  <span>🏙️</span> Esfera Municipal
+                </div>
+                <p class="text-[11px] text-slate-700 mt-1 font-semibold">Exigência: <strong>1 ano mínimo</strong> de existência ativa</p>
+                <p class="text-[10px] text-slate-500 mt-0.5">Prefeituras Municipais e Conselhos Municipais de Direitos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAIXA 2: PERGUNTA ORIENTADA (CONSULTA DE CNPJ COM TABELA PGFN) -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="bg-govblue text-white px-5 py-3 flex items-center justify-between">
+          <span class="text-xs sm:text-sm font-black uppercase tracking-wider flex items-center gap-2">
+            <span>🔍</span> QUAL É O CNPJ DA SUA ENTIDADE?
+          </span>
+          <span class="text-[11px] bg-white/20 text-white px-2.5 py-0.5 rounded-full font-bold">Passo 2 de 3</span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-          <!-- Esfera Federal -->
-          <div onclick="selecionarEsferaElegibilidade('uniao')" id="opt-esfera-uniao" class="cursor-pointer border-2 border-govblue bg-blue-50/50 p-4 rounded-xl flex items-start gap-3 transition">
-            <input type="radio" name="radioEsfera" id="radio-uniao" value="uniao" checked class="mt-1 text-govblue focus:ring-govblue">
-            <div>
-              <div class="flex items-center gap-1.5 font-bold text-xs text-govblue">
-                <span>🏛️</span> Esfera Federal (União)
-                <span class="bg-govblue text-white text-[9px] px-1.5 py-0.5 rounded font-bold">Padrão OGU</span>
-              </div>
-              <p class="text-[11px] text-slate-700 mt-1 font-semibold">Exigência: <strong>3 anos mínimos</strong> de existência ativa</p>
-              <p class="text-[10px] text-slate-500 mt-0.5">Ministérios, Emendas Parlamentares Federais e Editais Transferegov.br.</p>
-            </div>
-          </div>
-
-          <!-- Esfera Estadual -->
-          <div onclick="selecionarEsferaElegibilidade('estado')" id="opt-esfera-estado" class="cursor-pointer border-2 border-slate-200 bg-white p-4 rounded-xl flex items-start gap-3 transition hover:border-slate-300">
-            <input type="radio" name="radioEsfera" id="radio-estado" value="estado" class="mt-1 text-govblue focus:ring-govblue">
-            <div>
-              <div class="flex items-center gap-1.5 font-bold text-xs text-slate-800">
-                <span>🏢</span> Esfera Estadual / DF
-              </div>
-              <p class="text-[11px] text-slate-700 mt-1 font-semibold">Exigência: <strong>2 anos mínimos</strong> de existência ativa</p>
-              <p class="text-[10px] text-slate-500 mt-0.5">Secretarias Estaduais e Fundos Estaduais.</p>
-            </div>
-          </div>
-
-          <!-- Esfera Municipal -->
-          <div onclick="selecionarEsferaElegibilidade('municipio')" id="opt-esfera-municipio" class="cursor-pointer border-2 border-slate-200 bg-white p-4 rounded-xl flex items-start gap-3 transition hover:border-slate-300">
-            <input type="radio" name="radioEsfera" id="radio-municipio" value="municipio" class="mt-1 text-govblue focus:ring-govblue">
-            <div>
-              <div class="flex items-center gap-1.5 font-bold text-xs text-slate-800">
-                <span>🏙️</span> Esfera Municipal
-              </div>
-              <p class="text-[11px] text-slate-700 mt-1 font-semibold">Exigência: <strong>1 ano mínimo</strong> de existência ativa</p>
-              <p class="text-[10px] text-slate-500 mt-0.5">Prefeituras Municipais e Conselhos Municipais de Direitos.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Consulta Automatizada de CNPJ -->
-        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
-          <label class="block text-xs font-bold text-slate-700">Verificação Automática de CNPJ na Base Oficial da Receita Federal:</label>
+        <div class="p-5 sm:p-6 space-y-4">
           <div class="flex flex-col sm:flex-row gap-2">
             <div class="relative flex-1">
-              <input type="text" id="cnpj-eleg" onkeypress="if(event.key==='Enter') consultarCnpjElegibilidade()" placeholder="Digite o CNPJ da entidade (ex: 00.000.000/0001-00)" class="w-full text-xs p-2.5 pl-9 border border-slate-300 rounded-lg bg-white outline-none focus:ring-2 focus:ring-govblue font-mono font-bold">
-              <i data-lucide="building-2" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+              <input type="text" id="cnpj-eleg" onkeypress="if(event.key==='Enter') consultarCnpjElegibilidade()" placeholder="Digite o CNPJ da entidade (ex: 00.000.000/0001-00)" class="w-full text-xs p-3 pl-9 border border-slate-300 rounded-xl bg-white outline-none focus:ring-2 focus:ring-govblue font-mono font-bold">
+              <i data-lucide="building-2" class="w-4 h-4 text-slate-400 absolute left-3 top-3.5"></i>
             </div>
-            <button type="button" onclick="consultarCnpjElegibilidade()" id="btn-busca-cnpj-eleg" class="px-5 py-2.5 bg-govblue hover:bg-govdark text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition shadow">
+            <button type="button" onclick="consultarCnpjElegibilidade()" id="btn-busca-cnpj-eleg" class="px-5 py-3 bg-govblue hover:bg-govdark text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow">
               <i data-lucide="search" class="w-4 h-4"></i> Consultar Receita
             </button>
           </div>
 
-          <div id="box-resultado-cnpj-eleg" class="hidden p-3.5 bg-white border border-slate-200 rounded-xl text-xs space-y-2">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-2">
-              <div>
-                <strong id="res-nome-osc" class="text-sm font-bold text-slate-900 block"></strong>
-                <span id="res-dados-osc" class="text-[11px] text-slate-500"></span>
-              </div>
-              <div class="flex items-center gap-1.5">
+          <!-- Tabela Sintética de Alto Contraste (Estilo PGFN) -->
+          <div id="box-resultado-cnpj-eleg" class="hidden space-y-3 animar-surgir">
+            <div class="overflow-x-auto rounded-xl border-2 border-emerald-500 shadow-sm">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-emerald-700 text-white font-black text-[11px] uppercase tracking-wider">
+                  <tr>
+                    <th class="p-3">Razão Social da OSC</th>
+                    <th class="p-3">CNPJ</th>
+                    <th class="p-3">Município / UF</th>
+                    <th class="p-3">Fundação (Tempo)</th>
+                    <th class="p-3">Situação Cadastral</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-emerald-50/70 divide-y divide-emerald-200 text-slate-800 font-medium">
+                  <tr>
+                    <td class="p-3 font-bold text-slate-900" id="res-nome-osc">-</td>
+                    <td class="p-3 font-mono font-bold" id="res-cnpj-osc">-</td>
+                    <td class="p-3" id="res-local-osc">-</td>
+                    <td class="p-3" id="res-tempo-osc">-</td>
+                    <td class="p-3" id="res-status-osc">-</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Parecer do Enquadramento Legal -->
+            <div class="p-3 bg-emerald-50 border border-emerald-300 rounded-xl text-xs flex items-center justify-between gap-3">
+              <p id="res-parecer-tempo" class="text-slate-800 leading-snug"></p>
+              <div class="flex items-center gap-1.5 flex-shrink-0">
                 <span id="badge-tempo-osc" class="px-2.5 py-1 rounded-full text-[11px] font-bold"></span>
                 <span id="badge-status-cnpj" class="px-2.5 py-1 rounded-full text-[11px] font-bold"></span>
               </div>
             </div>
-            <p id="res-parecer-tempo" class="text-[11px] text-slate-700"></p>
           </div>
         </div>
       </div>
 
-      <!-- 1.2 Os 8 Requisitos Legais MROSC -->
-      <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-        <div class="border-b border-slate-100 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div>
-            <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2 uppercase tracking-wide">
-              <i data-lucide="check-square" class="w-4 h-4 text-emerald-600"></i> Etapa B: Checklist dos 8 Requisitos de Habilitação (Lei 13.019/2014)
-            </h3>
-            <p class="text-xs text-slate-500">Marque a situação atual da sua organização para gerar o diagnóstico de prontidão:</p>
+      <!-- FAIXA 3: PERGUNTA ORIENTADA (CHECKLIST DOS 8 REQUISITOS LEGAIS) -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="bg-govblue text-white px-5 py-3 flex items-center justify-between">
+          <span class="text-xs sm:text-sm font-black uppercase tracking-wider flex items-center gap-2">
+            <span>📋</span> QUAIS SÃO OS 8 REQUISITOS OBRIGATÓRIOS DO MROSC?
+          </span>
+          <span class="text-[11px] bg-white/20 text-white px-2.5 py-0.5 rounded-full font-bold" id="progresso-checklist-eleg">0/8 verificados</span>
+        </div>
+
+        <div class="p-5 sm:p-6 space-y-4">
+          <p class="text-xs text-slate-600">
+            Responda abaixo à situação atual da sua OSC para calcular a elegibilidade jurídica e destravar os próximos passos:
+          </p>
+
+          <div id="grid-criterios-elegibilidade" class="space-y-3">
+            <!-- Injetado dinamicamente via JS -->
           </div>
-          <span class="text-xs bg-slate-100 text-slate-700 font-bold px-2.5 py-1 rounded-full border border-slate-200" id="progresso-checklist-eleg">0/8 verificados</span>
+        </div>
+      </div>
+
+      <!-- FAIXA 4: ÁRVORE DECISÓRIA BIFURCADA (ESTILO VISUAL LAW DA PGFN) -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden space-y-0">
+        <div class="bg-govdark text-white px-5 py-3 flex items-center justify-between">
+          <span class="text-xs sm:text-sm font-black uppercase tracking-wider flex items-center gap-2">
+            <span>💬</span> O QUE FAZER COM O RESULTADO DO DIAGNÓSTICO?
+          </span>
+          <span class="text-[11px] bg-govgold text-govdark px-2.5 py-0.5 rounded-full font-extrabold">Árvore de Ação</span>
         </div>
 
-        <div id="grid-criterios-elegibilidade" class="space-y-3">
-          <!-- Injetado dinamicamente via JS -->
-        </div>
+        <div class="p-5 sm:p-6 space-y-4">
+          <!-- Grade Bifurcada Paralela (Se você estiver regular vs Se houver pendências) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-        <!-- Semáforo de Prontidão Consolidado -->
-        <div id="painel-diagnostico-eleg" class="p-5 rounded-2xl border transition space-y-3 bg-slate-50 border-slate-200 mt-4">
-          <div class="flex items-start sm:items-center gap-3">
-            <div id="icone-diagnostico-eleg" class="text-3xl flex-shrink-0">⚪</div>
-            <div class="space-y-0.5">
-              <h4 id="titulo-diagnostico-eleg" class="font-bold text-sm text-slate-800">Status de Elegibilidade: Não avaliado</h4>
-              <p id="desc-diagnostico-eleg" class="text-xs text-slate-600">Responda aos requisitos acima para calcular a prontidão jurídica da sua entidade.</p>
+            <!-- Card Decisório 1: SE SUA OSC ESTIVER REGULAR -->
+            <div id="card-decisao-regular" class="rounded-2xl border-2 border-emerald-400 bg-emerald-50/60 p-5 flex flex-col justify-between space-y-4 transition duration-300 shadow-xs">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-black uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
+                    <span>☑️</span> SE SUA OSC ESTIVER REGULAR
+                  </span>
+                  <span class="text-[10px] bg-emerald-200 text-emerald-900 font-bold px-2 py-0.5 rounded-full">Prontidão Plena</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed">
+                  Sua entidade atende cumulativamente aos requisitos da Lei nº 13.019/2014. O caminho está 100% desimpedido para disputar editais e solicitar emendas parlamentares.
+                </p>
+
+                <!-- Pílula Semafórica de Consequência Real -->
+                <div class="p-2.5 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-bold flex items-center gap-2">
+                  <span>✅</span>
+                  <span>Situação Cadastral Plena: Habilitada para Termo de Fomento ou Colaboração.</span>
+                </div>
+              </div>
+
+              <!-- Ações Práticas -->
+              <div class="space-y-2 pt-3 border-t border-emerald-200">
+                <button type="button" onclick="transportarElegibilidadeParaElaborador()" class="w-full py-2.5 bg-govblue hover:bg-govdark text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow">
+                  <i data-lucide="arrow-right-circle" class="w-4 h-4"></i> Carregar no Criador de Projetos &rarr;
+                </button>
+                <div class="grid grid-cols-2 gap-2">
+                  <button type="button" onclick="trocarAba('aba-pesquisa-emendas')" class="py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-[11px] font-bold transition flex items-center justify-center gap-1 shadow">
+                    <i data-lucide="search" class="w-3.5 h-3.5"></i> Consultar Emendas
+                  </button>
+                  <button type="button" onclick="trocarAba('aba-pesquisa-emendas'); trocarSubAbaPesquisa('sub-editais');" class="py-2 bg-purple-700 hover:bg-purple-800 text-white rounded-lg text-[11px] font-bold transition flex items-center justify-center gap-1 shadow">
+                    <i data-lucide="compass" class="w-3.5 h-3.5"></i> Ver Radar Editais
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div id="box-pendencias-eleg" class="hidden space-y-1.5 pt-3 border-t border-slate-200 text-xs">
-            <span class="font-bold text-slate-700 block">Itens que Exigem Atenção ou Regularização:</span>
-            <ul id="lista-pendencias-eleg" class="list-disc pl-5 space-y-1 text-slate-600"></ul>
-          </div>
+            <!-- Card Decisório 2: SE HOUVER PENDÊNCIAS OU ITENS EM ANÁLISE -->
+            <div id="card-decisao-pendente" class="rounded-2xl border-2 border-amber-300 bg-amber-50/60 p-5 flex flex-col justify-between space-y-4 transition duration-300 shadow-xs">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-black uppercase tracking-wider text-amber-900 flex items-center gap-1.5">
+                    <span>✖️</span> SE HOUVER PENDÊNCIAS
+                  </span>
+                  <span class="text-[10px] bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded-full" id="tag-pendencias-count">Ajuste Obrigatório</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed">
+                  Identificamos itens que gerariam diligência ou rejeição sumária perante Ministérios e órgãos repassadores. Sanar essas pendências evita que a OSC perca o recurso.
+                </p>
 
-          <div class="pt-2 flex flex-wrap gap-2.5">
-            <button type="button" onclick="transportarElegibilidadeParaElaborador()" class="px-4 py-2.5 bg-govblue hover:bg-govdark text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow">
-              <i data-lucide="arrow-right-circle" class="w-4 h-4"></i> Carregar Dados no Elaborador do Pleito
-            </button>
-            <button type="button" onclick="trocarAba('aba-pesquisa-emendas')" class="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow">
-              <i data-lucide="search" class="w-4 h-4"></i> Prosseguir para Consulta de Emendas &amp; LOA
-            </button>
+                <!-- Pílula Semafórica de Consequência Real -->
+                <div id="box-consequencia-pendente" class="p-2.5 rounded-xl bg-amber-100 border border-amber-300 text-amber-950 text-xs font-bold flex items-center gap-2">
+                  <span>⚠️</span>
+                  <span>Consequência Real: Proposta com pendência sofre diligência ou bloqueio no Transferegov.br.</span>
+                </div>
+
+                <!-- Lista Dinâmica de Pendências -->
+                <div id="box-pendencias-eleg" class="space-y-1.5 pt-2 border-t border-amber-200 text-xs">
+                  <span class="font-bold text-amber-950 block">Itens que precisam ser regularizados:</span>
+                  <ul id="lista-pendencias-eleg" class="list-disc pl-5 space-y-1 text-slate-700 text-[11px]">
+                    <li>Selecione as opções no checklist acima para identificar eventuais pendências.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Orientação Prática -->
+              <div class="pt-3 border-t border-amber-200">
+                <button type="button" onclick="showToast('Revise os itens assinalados com NÃO ou EM ANÁLISE acima e providencie a regularização cadastral.', 'info')" class="w-full py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5">
+                  <i data-lucide="help-circle" class="w-4 h-4"></i> Como Sanar as Pendências Detectadas?
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -3658,12 +3772,27 @@ ${p.justificativa}
       if (!box) return;
       box.classList.remove('hidden');
 
-      document.getElementById('res-nome-osc').innerText = d.razaoSocial || 'Razão Social';
-      document.getElementById('res-dados-osc').innerText = `CNPJ: ${d.cnpj} • Fundação: ${d.dataAbertura || d.anoAbertura} (${d.anos || 0} anos de existência) • ${d.municipio}/${d.uf}`;
-
       const minAnos = anosMinimosEsfera[esferaElegibilidade];
       const atendeTempo = (d.anos || 0) >= minAnos;
       const statusAtivo = (d.situacaoCadastral || '').toUpperCase().includes('ATIVA');
+
+      if (document.getElementById('res-nome-osc')) {
+        document.getElementById('res-nome-osc').innerText = d.razaoSocial || 'Razão Social';
+      }
+      if (document.getElementById('res-cnpj-osc')) {
+        document.getElementById('res-cnpj-osc').innerText = d.cnpj || '-';
+      }
+      if (document.getElementById('res-local-osc')) {
+        document.getElementById('res-local-osc').innerText = `${d.municipio || '-'}/${d.uf || '-'}`;
+      }
+      if (document.getElementById('res-tempo-osc')) {
+        document.getElementById('res-tempo-osc').innerHTML = `<strong>${d.anos || 0} anos</strong> (${d.dataAbertura || d.anoAbertura || '-'})`;
+      }
+      if (document.getElementById('res-status-osc')) {
+        document.getElementById('res-status-osc').innerHTML = statusAtivo
+          ? '<span class="text-emerald-700 font-bold flex items-center gap-1">✓ Ativa</span>'
+          : '<span class="text-rose-700 font-bold flex items-center gap-1">✕ Irregular</span>';
+      }
 
       const badgeTempo = document.getElementById('badge-tempo-osc');
       if (badgeTempo) {
@@ -3684,8 +3813,8 @@ ${p.justificativa}
       const parecer = document.getElementById('res-parecer-tempo');
       if (parecer) {
         parecer.innerHTML = atendeTempo
-          ? `✓ Entidade atende ao requisito temporal para a esfera <strong>${esferaElegibilidade.toUpperCase()}</strong> (mínimo de ${minAnos} anos pela Lei 13.019/2014).`
-          : `⚠️ A instituição tem ${d.anos || 0} anos de existência, abaixo do mínimo legal de <strong>${minAnos} anos</strong> exigidos para celebração na esfera ${esferaElegibilidade.toUpperCase()}.`;
+          ? `✓ <strong>Enquadramento Aprovado:</strong> A entidade atende ao requisito temporal para a esfera <strong>${esferaElegibilidade.toUpperCase()}</strong> (mínimo de ${minAnos} anos pela Lei 13.019/2014).`
+          : `⚠️ <strong>Enquadramento Pendente:</strong> A instituição possui ${d.anos || 0} anos de existência, abaixo do mínimo legal de <strong>${minAnos} anos</strong> exigidos para celebração na esfera ${esferaElegibilidade.toUpperCase()}.`;
       }
     }
 
@@ -3701,54 +3830,56 @@ ${p.justificativa}
       const temNao = respostas.includes('nao');
       const temAnaliseOuNulo = respostas.includes('analise') || respostas.some(v => v === null);
 
-      const painel = document.getElementById('painel-diagnostico-eleg');
-      const icone = document.getElementById('icone-diagnostico-eleg');
-      const titulo = document.getElementById('titulo-diagnostico-eleg');
-      const desc = document.getElementById('desc-diagnostico-eleg');
-      const boxPendencias = document.getElementById('box-pendencias-eleg');
+      const cardRegular = document.getElementById('card-decisao-regular');
+      const cardPendente = document.getElementById('card-decisao-pendente');
       const listaPendencias = document.getElementById('lista-pendencias-eleg');
-
-      if (!painel) return;
+      const tagPendencias = document.getElementById('tag-pendencias-count');
+      const boxConsequencia = document.getElementById('box-consequencia-pendente');
 
       const pendencias = [];
       criteriosElegibilidade.forEach(c => {
         const r = respostasElegibilidade[c.id];
         if (r === 'nao') {
-          pendencias.push(`<strong>IMPEDIMENTO:</strong> ${c.titulo} não atendido (${c.fundamento}).`);
+          pendencias.push(`<strong>IMPEDIMENTO CRÍTICO:</strong> ${c.titulo} não atendido (${c.fundamento}).`);
         } else if (r === 'analise' || r === null) {
-          pendencias.push(`<strong>PENDÊNCIA:</strong> ${c.titulo} requer confirmação documental.`);
+          pendencias.push(`<strong>EM ANÁLISE / PENDENTE:</strong> ${c.titulo} requer confirmação documental.`);
         }
       });
 
-      if (temNao) {
-        painel.className = 'p-5 rounded-2xl border transition space-y-3 bg-red-50 border-red-300 mt-4';
-        icone.innerText = '🔴';
-        titulo.className = 'font-bold text-sm text-red-950';
-        titulo.innerText = 'Diagnóstico: Inelegível para Celebração Imediata (Risco de Diligência / Bloqueio)';
-        desc.className = 'text-xs text-red-900';
-        desc.innerText = 'Foram detectados critérios legais obrigatórios não atendidos. A entidade não pode celebrar Termo de Fomento antes de sanar as irregularidades.';
-      } else if (temAnaliseOuNulo) {
-        painel.className = 'p-5 rounded-2xl border transition space-y-3 bg-amber-50 border-amber-300 mt-4';
-        icone.innerText = '🟡';
-        titulo.className = 'font-bold text-sm text-amber-950';
-        titulo.innerText = 'Diagnóstico: Elegível com Ressalvas / Itens em Verificação';
-        desc.className = 'text-xs text-amber-900';
-        desc.innerText = 'A entidade atende aos critérios já preenchidos, porém restam requisitos a confirmar antes de protocolar a proposta no Transferegov.br.';
-      } else {
-        painel.className = 'p-5 rounded-2xl border transition space-y-3 bg-emerald-50 border-emerald-400 mt-4';
-        icone.innerText = '🟢';
-        titulo.className = 'font-bold text-sm text-emerald-950';
-        titulo.innerText = 'Diagnóstico: 100% Elegível e Habilitada (Prontidão Jurídica Plena MROSC)';
-        desc.className = 'text-xs text-emerald-900';
-        desc.innerText = 'Parabéns! Sua OSC atende a todos os 8 requisitos obrigatórios da Lei nº 13.019/2014 para a esfera federativa selecionada. Prossiga com segurança técnica.';
+      if (tagPendencias) {
+        tagPendencias.innerText = pendencias.length > 0 ? `${pendencias.length} item(ns) pendente(s)` : 'Nenhuma pendência';
       }
 
-      if (boxPendencias && listaPendencias) {
+      if (listaPendencias) {
         if (pendencias.length > 0) {
-          boxPendencias.classList.remove('hidden');
           listaPendencias.innerHTML = pendencias.map(p => `<li>${p}</li>`).join('');
         } else {
-          boxPendencias.classList.add('hidden');
+          listaPendencias.innerHTML = '<li class="text-emerald-700 font-bold list-none">✓ Parabéns! Nenhum impedimento ou pendência foi detectado na sua OSC.</li>';
+        }
+      }
+
+      // Estilo Visual Law Bifurcado (PGFN)
+      if (cardRegular && cardPendente) {
+        if (!temNao && !temAnaliseOuNulo) {
+          // 100% Regular
+          cardRegular.className = 'rounded-2xl border-4 border-emerald-500 bg-emerald-50 p-5 flex flex-col justify-between space-y-4 transition duration-300 shadow-lg scale-[1.01]';
+          cardPendente.className = 'rounded-2xl border border-slate-200 bg-slate-50/50 p-5 flex flex-col justify-between space-y-4 transition duration-300 opacity-60';
+        } else if (temNao) {
+          // Com Impedimento Crítico
+          cardRegular.className = 'rounded-2xl border border-slate-200 bg-slate-50/40 p-5 flex flex-col justify-between space-y-4 transition duration-300 opacity-60';
+          cardPendente.className = 'rounded-2xl border-4 border-red-500 bg-red-50 p-5 flex flex-col justify-between space-y-4 transition duration-300 shadow-lg scale-[1.01]';
+          if (boxConsequencia) {
+            boxConsequencia.className = 'p-2.5 rounded-xl bg-red-100 border border-red-300 text-red-950 text-xs font-bold flex items-center gap-2';
+            boxConsequencia.innerHTML = '<span>🚫</span><span>Consequência Real: Impedimento legal. A proposta será sumariamente rejeitada pelo Ministério.</span>';
+          }
+        } else {
+          // Em Análise / Incompleto
+          cardRegular.className = 'rounded-2xl border border-emerald-200 bg-emerald-50/40 p-5 flex flex-col justify-between space-y-4 transition duration-300';
+          cardPendente.className = 'rounded-2xl border-2 border-amber-400 bg-amber-50 p-5 flex flex-col justify-between space-y-4 transition duration-300 shadow-md';
+          if (boxConsequencia) {
+            boxConsequencia.className = 'p-2.5 rounded-xl bg-amber-100 border border-amber-300 text-amber-950 text-xs font-bold flex items-center gap-2';
+            boxConsequencia.innerHTML = '<span>⚠️</span><span>Consequência Real: Se protocolar proposta com itens em análise, haverá diligência técnica no Transferegov.br.</span>';
+          }
         }
       }
     }
