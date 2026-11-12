@@ -29,6 +29,10 @@ Ao abrir o CaptaOSC, o usuário não é sobrecarregado com dezenas de abas. Ele 
 ## ⚡ Inovações de Usabilidade & Engenharia
 
 - **Arquitetura de Concierge:** Entrada por triagem de intenções, operando em *Modo Foco da Missão* com indicador de passos sequenciais (`Passo 1 > Passo 2 > Passo 3`).
+- **Padrão Oficial de Linguagem Simples (PLAIN, MGI & Câmara dos Deputados):**
+  - **O Tripé Operacional:** `ENCONTRAR` (Arquitetura de Concierge) &gt; `ENTENDER` (Revelação Progressiva e padronização do termo canônico **OSC** e de **"recursos"**) &gt; `USAR` (Calculadora de menor preço e gerador `.DOCX`).
+  - **As 4 Camadas Consecutivas (Câmara dos Deputados 2024):** `Design Visual` (layout) &gt; `Arquitetura da Informação` (fluxo) &gt; `Estrutura das Frases` (ordem direta) &gt; `Escolha das Palavras` (vocabulário cidadão e terminologia legal precisa).
+  - **Pilares de Redish & Kleimann:** Foco em seleção de conteúdo essencial, ordem orientada ao usuário, linguagem acolhedora e design escaneável.
 - **Revelação por Conquista (Just-in-Time):** Módulos densos (como a *Trilha de 6 Passos do Transferegov.br* ou o *Ciclo do TCE*) são sugeridos apenas quando o usuário conclui o diagnóstico ou gera o ofício com sucesso.
 - **Revelação Progressiva em 3 Níveis:**
   - 🟢 **Modo Simples (Iniciante):** Linguagem cidadã e dicas acolhedoras de preenchimento.
