@@ -36,6 +36,7 @@ Transformação completa do CaptaOSC de um "depósito de 8 ferramentas" em um **
 5. **Radar Nacional de Editais Abertos:** Consumo em tempo real da API pública unificada da **Central de Editais Prosas** e do **Mapa das OSC (IPEA / Presidência da República)**, com cache em memória (TTL 1h), contagem regressiva de prazos e botão para carregar edital diretamente no Elaborador do Pleito.
 6. **Padrão Oficial de Linguagem Simples (PLAIN, MGI & Câmara dos Deputados 2024):** Incorporação do tripé `ENCONTRAR > ENTENDER > USAR`, das 4 camadas aninhadas da Câmara dos Deputados (*Design > Arquitetura > Estrutura de Frases > Escolha de Palavras*), dos 4 pilares de Ginny Redish & Susan Kleimann e do ciclo iterativo (*Planejar > Produzir > Revisar > Testar*).
 7. **Adequação Terminológica Canônica:** Adoção rigorosa do termo legal **OSC** (Lei 13.019/2014, art. 2º, I) em substituição à denominação informal "ONG" e do termo técnico **"recursos"** em substituição ao coloquial "dinheiro".
+8. **Visual Law e Legal Design no Módulo 1 (Padrão PGFN / REGULARIZE):** Reestruturação integral da aferição de elegibilidade com faixas orientadas a perguntas, tabela sintética de dados do CNPJ em alto contraste e árvore decisória paralela bifurcada com caixas semafóricas de consequência jurídica real.
 
 ---
 
