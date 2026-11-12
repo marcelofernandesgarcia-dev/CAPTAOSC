@@ -45,7 +45,7 @@ Transformação completa do CaptaOSC de um "depósito de 8 ferramentas" em um **
 2. **Backend Proxy & Cache (`server.js`):**
    - Rota `/api/editais/radar` que orquestra requisições paginadas à API do Prosas/IPEA, sanitiza links, calcula dias restantes e armazena em cache de 1 hora.
 3. **UX Writing e Micro-Cópia Atenciosa:**
-   - Remoção de terminologias frias; substituição de "dinheiro" por "recursos" e nomes de engenharia por frases de ação (*"Quero saber se minha ONG está regular"*, *"Preciso de recursos para um novo projeto"*, *"Já tenho emenda/edital e preciso documentar"*).
+   - Remoção de terminologias frias; substituição de "dinheiro" por "recursos", padronização estrita de "ONG" para "OSC" (Organização da Sociedade Civil - Lei 13.019/2014) e nomes de engenharia por frases de ação (*"Quero saber se minha OSC está regular"*, *"Preciso de recursos para um novo projeto"*, *"Já tenho emenda/edital e preciso documentar"*).
 
 ---
 
