@@ -110,19 +110,22 @@
   <!-- Topbar Oficial Gov -->
   <header class="bg-govblue text-white shadow-md border-b-4 border-govgold sticky top-0 z-40 no-print">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-2xl shadow-inner flex-shrink-0">
+      <div onclick="voltarAoPortalIntencoes()" class="flex items-center space-x-3 cursor-pointer group select-none" title="Voltar ao Portal de Intenções">
+        <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-2xl shadow-inner flex-shrink-0 group-hover:scale-105 transition">
           🏛️
         </div>
         <div>
           <div class="flex items-center gap-2">
             <span class="text-[10px] text-govgold font-black uppercase tracking-widest">LEI COMPLEMENTAR Nº 210/2024 &bull; MROSC</span>
           </div>
-          <h1 class="text-xl font-black tracking-tight">CaptaOSC</h1>
+          <h1 class="text-xl font-black tracking-tight group-hover:text-govgold transition">CaptaOSC</h1>
           <p class="text-xs text-blue-100 hidden sm:block">Plataforma Técnica e Estratégica para Captação de Emendas Parlamentares Federais</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
+        <button type="button" onclick="voltarAoPortalIntencoes()" id="btn-portal-home" class="text-xs bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-xl border border-white/20 hidden sm:flex items-center gap-1.5 font-bold transition">
+          <i data-lucide="home" class="w-4 h-4 text-govgold"></i> Início (Portal)
+        </button>
         <span class="text-xs bg-govdark text-emerald-300 px-3 py-1.5 rounded-full border border-blue-400/30 hidden sm:flex items-center gap-1.5 font-medium">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sistema Ativo (:3000)
         </span>
@@ -163,6 +166,9 @@
         <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-1">Módulos da Plataforma</div>
 
         <nav class="space-y-1 text-xs font-bold text-slate-700">
+          <button onclick="voltarAoPortalIntencoes(); fecharDrawerMobile();" class="w-full text-left p-3 rounded-xl bg-govgold/15 hover:bg-govgold/25 text-yellow-900 border border-govgold/30 flex items-center gap-2.5 transition font-extrabold mb-1">
+            <span class="text-base">✨</span> Portal de Intenções (Início)
+          </button>
           <button onclick="navegarMobile('aba-guia')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 flex items-center gap-2.5 transition">
             <span class="text-base">💡</span> Guia &amp; Usabilidade
           </button>
@@ -199,8 +205,8 @@
     </div>
   </div>
 
-  <!-- Navegação por Módulos Estratégicos (Desktop) -->
-  <nav class="bg-white border-b border-slate-200 shadow-sm sticky top-[68px] z-30 no-print hidden md:block">
+  <!-- Navegação por Módulos Estratégicos (Desktop) - Oculto por padrão na Sala de Triagem -->
+  <nav id="nav-desktop-modulos" class="bg-white border-b border-slate-200 shadow-sm sticky top-[68px] z-30 no-print hidden">
     <div class="max-w-6xl mx-auto px-4 flex space-x-1 sm:space-x-4 overflow-x-auto text-xs font-bold uppercase tracking-wider">
       <button onclick="trocarAba('aba-guia')" id="btn-aba-guia" class="tab-btn py-3 px-2 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-1.5 whitespace-nowrap">
         <i data-lucide="help-circle" class="w-4 h-4 text-govgold"></i> 💡 Guia
@@ -229,8 +235,37 @@
     </div>
   </nav>
 
+  <!-- BARRA DE MISSÃO EM MODO FOCO (ARQUITETURA DE CONCIERGE) -->
+  <div id="barra-missao-foco" class="hidden bg-slate-900 text-white border-b-2 border-govgold shadow-md no-print sticky top-[68px] z-30 transition-all py-2.5 px-4 animar-surgir">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-3">
+        <button onclick="voltarAoPortalIntencoes()" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg font-bold flex items-center gap-1.5 transition text-xs border border-white/20 shadow-sm">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i> Início (Portal)
+        </button>
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="tag-missao-nome" class="font-black text-govgold uppercase tracking-wider text-xs">Missão: Minha Regularidade</span>
+            <span class="bg-emerald-500/20 text-emerald-300 text-[10px] px-2 py-0.5 rounded-full font-bold border border-emerald-500/30">Modo Foco Ativo</span>
+          </div>
+          <span id="subtitulo-missao" class="text-slate-300 text-[11px] hidden sm:block">Passo a passo sem distrações.</span>
+        </div>
+      </div>
+
+      <!-- Etapas da Missão Ativa -->
+      <div id="passos-missao-container" class="flex items-center gap-1.5 text-[11px] font-semibold bg-black/40 p-1 rounded-xl border border-white/10">
+        <!-- Gerado via JS de acordo com a missão -->
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="alternarModoLivre()" class="text-slate-400 hover:text-white text-[11px] underline">
+          Modo Livre (8 Abas)
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- BARRA DE REVELAÇÃO PROGRESSIVA & CONTROLE DE EXPERIÊNCIA (3 NÍVEIS) -->
-  <div id="barra-nivel-experiencia" class="bg-gradient-to-r from-slate-900 via-govdark to-slate-900 text-white border-b border-slate-700/60 shadow-md no-print py-2 px-4 transition-all">
+  <div id="barra-nivel-experiencia" class="hidden bg-gradient-to-r from-slate-900 via-govdark to-slate-900 text-white border-b border-slate-700/60 shadow-md no-print py-2 px-4 transition-all">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs">
       <div class="flex items-center gap-2">
         <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-govgold/20 text-govgold font-black text-xs">
@@ -265,6 +300,129 @@
 
   <!-- Container Principal com espaçamento inferior para Barra Mobile -->
   <main class="max-w-6xl mx-auto px-4 py-6 flex-1 w-full space-y-6 pb-24 md:pb-8">
+
+    <!-- ================================================================= -->
+    <!-- PORTAL DE INTENÇÕES (SALA DE TRIAGEM & CONCIERGE DO CAPTAOSC) -->
+    <!-- ================================================================= -->
+    <div id="portal-intencoes" class="space-y-8 py-4 animar-surgir">
+      
+      <!-- Boas-Vindas & Triagem Inicial -->
+      <div class="text-center max-w-2xl mx-auto space-y-3">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-govgold/20 text-yellow-800 border border-govgold/40">
+          <span>✨</span> Mentor de Jornada MROSC &bull; Transferegov.br
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+          Olá! O que vamos resolver hoje?
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          Sem telas cheias de ferramentas confusas ou jargões jurídicos. Escolha o seu objetivo imediato e nós guiaremos você no que realmente importa, passo a passo.
+        </p>
+      </div>
+
+      <!-- As 3 Rotas Principais (Cards de Intenção) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Caminho A: Minha Regularidade (Foco em Segurança) -->
+        <div onclick="iniciarMissao('regularidade')" class="bg-white rounded-3xl p-6 sm:p-7 border-2 border-slate-200 hover:border-emerald-500 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 cursor-pointer group interativo-suave relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-bl-full -z-0 group-hover:scale-110 transition duration-300"></div>
+          <div class="space-y-4 relative z-10">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-3xl shadow-inner group-hover:bg-emerald-600 group-hover:text-white transition duration-300">
+              🛡️
+            </div>
+            <div>
+              <span class="text-[11px] font-black uppercase tracking-wider text-emerald-700 block mb-1">Caminho 1 • Foco em Segurança</span>
+              <h3 class="text-lg font-black text-slate-900 group-hover:text-emerald-700 transition">
+                Quero saber se minha ONG está regular
+              </h3>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Descubra se sua entidade cumpre o tempo mínimo por esfera (1, 2 ou 3 anos) e verifique pendências fiscais na Receita Federal antes de pleitear verba.
+            </p>
+          </div>
+
+          <div class="space-y-3 relative z-10 pt-4 border-t border-slate-100">
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">
+              <span>⏱️</span> Verificação em 2 minutos via CNPJ
+            </span>
+            <button type="button" class="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs uppercase tracking-wider transition shadow flex items-center justify-center gap-2 group-hover:gap-3">
+              <span>Checar Regularidade</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Caminho B: Buscador de Recursos & Editais (Foco em Oportunidade) -->
+        <div onclick="iniciarMissao('recursos')" class="bg-white rounded-3xl p-6 sm:p-7 border-2 border-slate-200 hover:border-purple-500 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 cursor-pointer group interativo-suave relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-purple-50 rounded-bl-full -z-0 group-hover:scale-110 transition duration-300"></div>
+          <div class="space-y-4 relative z-10">
+            <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center text-3xl shadow-inner group-hover:bg-purple-600 group-hover:text-white transition duration-300">
+              📢
+            </div>
+            <div>
+              <span class="text-[11px] font-black uppercase tracking-wider text-purple-700 block mb-1">Caminho 2 • Foco em Oportunidade</span>
+              <h3 class="text-lg font-black text-slate-900 group-hover:text-purple-700 transition">
+                Preciso de dinheiro para um novo projeto
+              </h3>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Explore mais de 100 editais e chamamentos abertos no Brasil (Mapa das OSCs e Prosas) ou localize ações de Ministérios e Emendas Parlamentares.
+            </p>
+          </div>
+
+          <div class="space-y-3 relative z-10 pt-4 border-t border-slate-100">
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-full">
+              <span>🎯</span> Radar ao vivo com contagem regressiva
+            </span>
+            <button type="button" class="w-full py-3 px-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-bold text-xs uppercase tracking-wider transition shadow flex items-center justify-center gap-2 group-hover:gap-3">
+              <span>Explorar Editais e OGU</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Caminho C: Criador de Projetos & Ofícios (Foco em Execução) -->
+        <div onclick="iniciarMissao('projeto')" class="bg-white rounded-3xl p-6 sm:p-7 border-2 border-slate-200 hover:border-govblue shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 cursor-pointer group interativo-suave relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -z-0 group-hover:scale-110 transition duration-300"></div>
+          <div class="space-y-4 relative z-10">
+            <div class="w-14 h-14 rounded-2xl bg-blue-100 text-govblue flex items-center justify-center text-3xl shadow-inner group-hover:bg-govblue group-hover:text-white transition duration-300">
+              📝
+            </div>
+            <div>
+              <span class="text-[11px] font-black uppercase tracking-wider text-govblue block mb-1">Caminho 3 • Foco em Execução</span>
+              <h3 class="text-lg font-black text-slate-900 group-hover:text-govblue transition">
+                Já tenho emenda/edital e preciso documentar
+              </h3>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Estruture o Plano de Trabalho oficial, calcule automaticamente cotações de menor preço (GND 3 vs 4) e emita o Ofício formal em Word (.DOCX).
+            </p>
+          </div>
+
+          <div class="space-y-3 relative z-10 pt-4 border-t border-slate-100">
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-govblue bg-blue-50 px-2.5 py-1 rounded-full">
+              <span>📥</span> Gera Ofício DOCX e Espelho Transferegov
+            </span>
+            <button type="button" class="w-full py-3 px-4 bg-govblue hover:bg-govdark text-white rounded-xl font-bold text-xs uppercase tracking-wider transition shadow flex items-center justify-center gap-2 group-hover:gap-3">
+              <span>Criar Minha Proposta</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Rodapé da Triagem: Acesso Avançado / Modo Livre -->
+      <div class="text-center pt-4 border-t border-slate-200/80">
+        <p class="text-xs text-slate-500">
+          Já conhece o sistema e quer todas as ferramentas abertas?
+          <button type="button" onclick="alternarModoLivre()" class="font-bold text-govblue hover:underline ml-1 inline-flex items-center gap-1">
+            <span>Acessar Modo Completo (8 Módulos)</span>
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </button>
+        </p>
+      </div>
+
+    </div>
 
     <!-- ================================================================= -->
     <!-- MÓDULO 0: GUIA DE EXPLICAÇÃO & USABILIDADE DO APLICATIVO -->
@@ -2042,8 +2200,125 @@
       setTimeout(() => { t.classList.add('opacity-0'); setTimeout(() => t.remove(), 300); }, 3500);
     }
 
+    // =========================================================================
+    // ARQUITETURA DE CONCIERGE & TRIAGEM DE MISSÕES (MENTOR DE JORNADA)
+    // =========================================================================
+    let missaoAtiva = null;
+
+    function iniciarMissao(tipo) {
+      missaoAtiva = tipo;
+      const portal = document.getElementById('portal-intencoes');
+      const barraFoco = document.getElementById('barra-missao-foco');
+      const navDesktop = document.getElementById('nav-desktop-modulos');
+      const barraExp = document.getElementById('barra-nivel-experiencia');
+      const tagNome = document.getElementById('tag-missao-nome');
+      const subtitulo = document.getElementById('subtitulo-missao');
+      const passosContainer = document.getElementById('passos-missao-container');
+
+      if (portal) portal.classList.add('hidden');
+      if (navDesktop) navDesktop.classList.add('hidden');
+      if (barraExp) barraExp.classList.add('hidden');
+      if (barraFoco) barraFoco.classList.remove('hidden');
+
+      if (tipo === 'regularidade') {
+        definirNivelExperiencia('iniciante');
+        if (tagNome) tagNome.innerText = 'Missão 1: Minha Regularidade (Segurança MROSC)';
+        if (subtitulo) subtitulo.innerText = 'Verificação de tempo mínimo por esfera e regularidade fiscal.';
+        if (passosContainer) {
+          passosContainer.innerHTML = `
+            <span class="px-2 py-0.5 rounded bg-emerald-600 text-white font-bold flex items-center gap-1">
+              <span>1</span> CNPJ &amp; Esfera
+            </span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span class="px-2 py-0.5 text-slate-400">2. Certidões</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span class="px-2 py-0.5 text-slate-400">3. Parecer</span>
+          `;
+        }
+        trocarAba('aba-elegibilidade');
+      } else if (tipo === 'recursos') {
+        definirNivelExperiencia('gestor');
+        if (tagNome) tagNome.innerText = 'Missão 2: Oportunidades & Editais Abertos';
+        if (subtitulo) subtitulo.innerText = 'Busca de chamamentos públicos no Prosas/Mapa OSC e ações OGU.';
+        if (passosContainer) {
+          passosContainer.innerHTML = `
+            <span class="px-2 py-0.5 rounded bg-purple-600 text-white font-bold flex items-center gap-1">
+              <span>1</span> Radar de Editais
+            </span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span class="px-2 py-0.5 text-slate-400">2. Emendas LOA</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span class="px-2 py-0.5 text-slate-400">3. Candidatura</span>
+          `;
+        }
+        trocarAba('aba-pesquisa-emendas');
+        trocarSubAbaPesquisa('sub-editais');
+      } else if (tipo === 'projeto') {
+        definirNivelExperiencia('gestor');
+        if (tagNome) tagNome.innerText = 'Missão 3: Criador de Projetos & Ofícios';
+        if (subtitulo) subtitulo.innerText = 'Plano de Trabalho, cotações de menor preço (GND 3/4) e ofício DOCX.';
+        if (passosContainer) {
+          passosContainer.innerHTML = `
+            <span class="px-2 py-0.5 rounded bg-govblue text-white font-bold flex items-center gap-1">
+              <span>1</span> Dados &amp; Objeto
+            </span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span class="px-2 py-0.5 text-slate-400">2. Cotações (GND 3 vs 4)</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span class="px-2 py-0.5 text-slate-400">3. Gerar Ofício DOCX</span>
+          `;
+        }
+        trocarAba('aba-elaborador');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function voltarAoPortalIntencoes() {
+      missaoAtiva = null;
+      document.querySelectorAll('.modulo-conteudo').forEach(el => el.classList.add('hidden'));
+      const portal = document.getElementById('portal-intencoes');
+      const barraFoco = document.getElementById('barra-missao-foco');
+      const navDesktop = document.getElementById('nav-desktop-modulos');
+      const barraExp = document.getElementById('barra-nivel-experiencia');
+
+      if (portal) portal.classList.remove('hidden');
+      if (barraFoco) barraFoco.classList.add('hidden');
+      if (navDesktop) navDesktop.classList.add('hidden');
+      if (barraExp) barraExp.classList.add('hidden');
+
+      // Limpa seletores ativos no menu
+      document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('border-govblue', 'text-govblue');
+        el.classList.add('border-transparent', 'text-slate-500');
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function alternarModoLivre() {
+      missaoAtiva = null;
+      const portal = document.getElementById('portal-intencoes');
+      const barraFoco = document.getElementById('barra-missao-foco');
+      const navDesktop = document.getElementById('nav-desktop-modulos');
+      const barraExp = document.getElementById('barra-nivel-experiencia');
+
+      if (portal) portal.classList.add('hidden');
+      if (barraFoco) barraFoco.classList.add('hidden');
+      if (navDesktop) navDesktop.classList.remove('hidden');
+      if (barraExp) barraExp.classList.remove('hidden');
+
+      trocarAba('aba-guia');
+      showToast('Modo Livre ativado: Todas as 8 ferramentas disponíveis no menu.', 'info');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
     // Navegação de Abas
     function trocarAba(abaId) {
+      document.getElementById('portal-intencoes')?.classList.add('hidden');
       document.querySelectorAll('.modulo-conteudo').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(el => {
         el.classList.remove('border-govblue', 'text-govblue');
@@ -3677,7 +3952,7 @@ ${p.justificativa}
     // =========================================================================
     let nivelExperienciaAtual = 'iniciante';
 
-    function definirNivelExperiencia(nivel, botaoClicado = null) {
+    function definirNivelExperiencia(nivel, silencioso = false) {
       if (!['iniciante', 'gestor', 'tecnico'].includes(nivel)) nivel = 'iniciante';
       nivelExperienciaAtual = nivel;
       localStorage.setItem('captaosc_nivel_experiencia', nivel);
@@ -3728,14 +4003,17 @@ ${p.justificativa}
         }
       }
 
-      showToast(`Modo ativo: ${nivel === 'iniciante' ? '🟢 Iniciante' : (nivel === 'gestor' ? '🟡 Gestor' : '🔴 Jurídico/Técnico')}`, 'info');
+      if (!silencioso) {
+        showToast(`Modo ativo: ${nivel === 'iniciante' ? '🟢 Iniciante' : (nivel === 'gestor' ? '🟡 Gestor' : '🔴 Jurídico/Técnico')}`, 'info');
+      }
       lucide.createIcons();
     }
 
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      voltarAoPortalIntencoes();
       const nivelSalvo = localStorage.getItem('captaosc_nivel_experiencia') || 'iniciante';
-      definirNivelExperiencia(nivelSalvo);
+      definirNivelExperiencia(nivelSalvo, true);
       renderizarCriteriosElegibilidade();
       renderizarItensCotacao();
       renderizarDirigentesArt39();
@@ -3749,21 +4027,21 @@ ${p.justificativa}
 
   <!-- Barra de Navegação Inferior Fixa (Mobile Bottom Navigation) -->
   <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-2 py-1.5 flex justify-around items-center shadow-[0_-4px_20px_rgba(0,0,0,0.08)] no-print">
-    <button onclick="trocarAba('aba-elegibilidade')" class="flex flex-col items-center gap-0.5 py-1 px-1.5 text-slate-500 hover:text-govblue active:scale-95 transition">
+    <button onclick="voltarAoPortalIntencoes()" class="flex flex-col items-center gap-0.5 py-1 px-1.5 text-slate-700 hover:text-govblue active:scale-95 transition">
+      <i data-lucide="compass" class="w-5 h-5 text-govgold"></i>
+      <span class="text-[9px] font-bold">Início</span>
+    </button>
+    <button onclick="iniciarMissao('regularidade')" class="flex flex-col items-center gap-0.5 py-1 px-1.5 text-slate-500 hover:text-govblue active:scale-95 transition">
       <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i>
-      <span class="text-[9px] font-bold">Diagnóstico</span>
+      <span class="text-[9px] font-bold">Regularidade</span>
     </button>
-    <button onclick="trocarAba('aba-pesquisa-emendas')" class="flex flex-col items-center gap-0.5 py-1 px-1.5 text-slate-500 hover:text-govblue active:scale-95 transition">
-      <i data-lucide="search-check" class="w-5 h-5 text-blue-600"></i>
-      <span class="text-[9px] font-bold">Consulta</span>
+    <button onclick="iniciarMissao('recursos')" class="flex flex-col items-center gap-0.5 py-1 px-1.5 text-slate-500 hover:text-govblue active:scale-95 transition">
+      <i data-lucide="search-check" class="w-5 h-5 text-purple-600"></i>
+      <span class="text-[9px] font-bold">Editais</span>
     </button>
-    <button onclick="trocarAba('aba-elaborador')" class="flex flex-col items-center gap-0.5 py-1 px-1.5 text-slate-500 hover:text-govblue active:scale-95 transition">
+    <button onclick="iniciarMissao('projeto')" class="flex flex-col items-center gap-0.5 py-1 px-1.5 text-slate-500 hover:text-govblue active:scale-95 transition">
       <i data-lucide="file-edit" class="w-5 h-5 text-govblue"></i>
       <span class="text-[9px] font-bold">Pleito</span>
-    </button>
-    <button onclick="trocarAba('aba-oficio')" class="flex flex-col items-center gap-0.5 py-1 px-1.5 text-slate-500 hover:text-govblue active:scale-95 transition">
-      <i data-lucide="mail" class="w-5 h-5 text-purple-600"></i>
-      <span class="text-[9px] font-bold">Ofício</span>
     </button>
     <button onclick="abrirDrawerMobile()" class="flex flex-col items-center gap-0.5 py-1 px-1.5 text-slate-500 hover:text-govblue active:scale-95 transition">
       <i data-lucide="menu" class="w-5 h-5"></i>
