@@ -1505,12 +1505,15 @@
         </div>
 
         <!-- Sub-Navegação Interna do Módulo 1 -->
-        <div class="flex border-b border-slate-200 gap-2 text-xs font-bold">
+        <div class="flex flex-wrap border-b border-slate-200 gap-2 text-xs font-bold">
           <button type="button" onclick="trocarSubAbaPesquisa('sub-politicas')" id="btn-sub-politicas" class="py-2.5 px-4 border-b-2 border-govblue text-govblue flex items-center gap-1.5 transition">
             <i data-lucide="landmark" class="w-4 h-4 text-govgold"></i> 🏛️ Políticas Públicas dos Ministérios (OGU / LOA)
           </button>
           <button type="button" onclick="trocarSubAbaPesquisa('sub-emendas')" id="btn-sub-emendas" class="py-2.5 px-4 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-1.5 transition">
             <i data-lucide="users" class="w-4 h-4 text-emerald-600"></i> 🔎 Emendas Parlamentares da Bancada
+          </button>
+          <button type="button" onclick="trocarSubAbaPesquisa('sub-editais')" id="btn-sub-editais" class="py-2.5 px-4 border-b-2 border-transparent text-slate-500 hover:text-govblue flex items-center gap-1.5 transition">
+            <i data-lucide="compass" class="w-4 h-4 text-purple-600"></i> 📢 Radar de Editais Abertos (Mapa OSC &amp; Prosas)
           </button>
         </div>
 
@@ -1706,6 +1709,85 @@
           <div class="p-4 bg-amber-50 border-l-4 border-amber-600 rounded-r-xl">
             <h4 class="font-bold text-amber-900 text-sm">Portaria Conjunta MGI/MF/CGU nº 32/2024 &amp; Decreto 8.726/2016</h4>
             <p class="text-slate-700 mt-1">Estabelece diretrizes operacionais para transferências de recursos da União, padronizando a análise de custos, celebração de Termos de Fomento e procedimentos supletivos.</p>
+          </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- SUB-ABA C: RADAR NACIONAL DE EDITAIS ABERTOS (MAPA OSC & PROSAS) -->
+        <!-- ============================================================= -->
+        <div id="sub-editais-container" class="hidden space-y-4">
+          <!-- Banner Informativo -->
+          <div class="p-4 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl border border-purple-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs">
+            <div class="space-y-1">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-100 text-purple-800">
+                <i data-lucide="satellite" class="w-3.5 h-3.5"></i> Integração Oficial em Tempo Real
+              </span>
+              <h3 class="font-bold text-slate-800 text-sm">Radar Nacional de Chamamentos Públicos &amp; Editais de Fomento</h3>
+              <p class="text-slate-600">
+                Oportunidades ativas sincronizadas diretamente com a <strong>Central de Editais Prosas</strong> e o <strong>Mapa das OSC (IPEA / Secretaria-Geral da Presidência)</strong> sob o regime da <strong>Lei 13.019/2014 (MROSC)</strong>.
+              </p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="carregarRadarEditais(true)" id="btn-atualizar-editais" class="px-3 py-2 bg-white border border-purple-200 hover:border-purple-400 text-purple-700 rounded-lg font-bold flex items-center gap-1.5 shadow-sm text-xs transition">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Atualizar Radar
+              </button>
+            </div>
+          </div>
+
+          <!-- Filtros Rápidos de Editais -->
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+              <div class="sm:col-span-2">
+                <label class="block font-bold text-slate-700 mb-1">Buscar por Palavra-Chave ou Concedente</label>
+                <input type="text" id="filtro-editais-q" oninput="filtrarEditais()" placeholder="Ex: cultura, juventude, saúde, meio ambiente, Itaú, Vale, Petrobras, Prefeitura..." class="w-full text-xs p-2.5 border border-slate-300 rounded-lg bg-white outline-none focus:ring-2 focus:ring-purple-600">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Regime de Inscrição</label>
+                <select id="filtro-editais-prazo" onchange="filtrarEditais()" class="w-full text-xs p-2.5 border border-slate-300 rounded-lg bg-white">
+                  <option value="todos">Todos os Editais Ativos</option>
+                  <option value="definido">Inscrições com Prazo Definido</option>
+                  <option value="continuo">Inscrições de Fluxo Contínuo</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Área Temática Rápida</label>
+                <select id="filtro-editais-area" onchange="filtrarEditais()" class="w-full text-xs p-2.5 border border-slate-300 rounded-lg bg-white">
+                  <option value="">Todas as Áreas</option>
+                  <option value="cultura">Cultura &amp; Patrimônio</option>
+                  <option value="educacao">Educação &amp; Formação</option>
+                  <option value="social">Assistência &amp; Inclusão Social</option>
+                  <option value="saude">Saúde</option>
+                  <option value="meio ambiente">Meio Ambiente &amp; Clima</option>
+                  <option value="esporte">Esporte &amp; Lazer</option>
+                  <option value="direitos">Direitos Humanos &amp; Cidadania</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Badges de Status do Radar -->
+            <div class="flex flex-wrap items-center justify-between pt-2 border-t border-slate-200 text-slate-500 text-[11px]">
+              <div class="flex items-center gap-2">
+                <span id="badge-total-editais" class="font-bold text-slate-700 bg-white border border-slate-200 px-2 py-0.5 rounded">Carregando oportunidades...</span>
+                <span id="badge-tempo-editais" class="text-slate-400"></span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1 text-emerald-700 font-semibold"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Inscrições Abertas</span>
+                <span class="inline-flex items-center gap-1 text-amber-700 font-semibold ml-2"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Reta Final (&lt; 15 dias)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grid de Editais -->
+          <div id="grid-editais-radar" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Cards gerados via JS -->
+          </div>
+
+          <!-- Alerta MROSC -->
+          <div class="p-4 bg-purple-50 border-l-4 border-purple-700 rounded-r-xl text-xs">
+            <h4 class="font-bold text-purple-900 text-sm">💡 Como usar um Edital no Elaborador de Propostas</h4>
+            <p class="text-slate-700 mt-1">
+              Ao clicar no botão <strong>"Elaborar Proposta para este Edital"</strong>, o CaptaOSC preenche automaticamente o título da oportunidade, seleciona o regime <em>Chamamento Público Concorrencial (Edital MROSC)</em> e encaminha você para o Módulo de Estruturação Técnica, já alinhado às exigências do Art. 24 da Lei nº 13.019/2014.
+            </p>
           </div>
         </div>
       </div>
@@ -2423,27 +2505,205 @@ ${p.justificativa}
     // =========================================================================
     let politicasPesquisadasCache = [];
     let naturezaFiltroAtual = 'todos';
+    let editaisRadarCache = [];
 
     function trocarSubAbaPesquisa(subAbaId) {
       document.getElementById('sub-politicas-container').classList.add('hidden');
       document.getElementById('sub-emendas-container').classList.add('hidden');
+      document.getElementById('sub-editais-container').classList.add('hidden');
+
       document.getElementById('btn-sub-politicas').classList.remove('border-govblue', 'text-govblue');
       document.getElementById('btn-sub-politicas').classList.add('border-transparent', 'text-slate-500');
       document.getElementById('btn-sub-emendas').classList.remove('border-govblue', 'text-govblue');
       document.getElementById('btn-sub-emendas').classList.add('border-transparent', 'text-slate-500');
+      document.getElementById('btn-sub-editais').classList.remove('border-govblue', 'text-govblue');
+      document.getElementById('btn-sub-editais').classList.add('border-transparent', 'text-slate-500');
 
       if (subAbaId === 'sub-politicas') {
         document.getElementById('sub-politicas-container').classList.remove('hidden');
         document.getElementById('btn-sub-politicas').classList.add('border-govblue', 'text-govblue');
         document.getElementById('btn-sub-politicas').classList.remove('border-transparent', 'text-slate-500');
         if (politicasPesquisadasCache.length === 0) executarPesquisaPoliticas();
-      } else {
+      } else if (subAbaId === 'sub-emendas') {
         document.getElementById('sub-emendas-container').classList.remove('hidden');
         document.getElementById('btn-sub-emendas').classList.add('border-govblue', 'text-govblue');
         document.getElementById('btn-sub-emendas').classList.remove('border-transparent', 'text-slate-500');
         if (emendasPesquisadasCache.length === 0) executarPesquisaEmendas();
+      } else if (subAbaId === 'sub-editais') {
+        document.getElementById('sub-editais-container').classList.remove('hidden');
+        document.getElementById('btn-sub-editais').classList.add('border-govblue', 'text-govblue');
+        document.getElementById('btn-sub-editais').classList.remove('border-transparent', 'text-slate-500');
+        if (editaisRadarCache.length === 0) carregarRadarEditais();
       }
       lucide.createIcons();
+    }
+
+    // =========================================================================
+    // RADAR NACIONAL DE EDITAIS (MAPA DAS OSC / PROSAS)
+    // =========================================================================
+    async function carregarRadarEditais(forcar = false) {
+      const grid = document.getElementById('grid-editais-radar');
+      const badgeTotal = document.getElementById('badge-total-editais');
+      const badgeTempo = document.getElementById('badge-tempo-editais');
+      const btnAtualizar = document.getElementById('btn-atualizar-editais');
+
+      if (btnAtualizar) btnAtualizar.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i> Atualizando...`;
+      grid.innerHTML = `
+        <div class="col-span-full p-8 text-center bg-slate-50 rounded-xl border border-slate-200">
+          <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-purple-700 mb-2"></div>
+          <p class="text-xs text-slate-600 font-semibold">Sincronizando com a Central de Editais e Mapa das OSCs...</p>
+        </div>
+      `;
+
+      try {
+        const url = `/api/editais/radar${forcar ? '?nocache=' + Date.now() : ''}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (!data.success) throw new Error(data.error || 'Erro ao consultar editais');
+
+        editaisRadarCache = data.editais || [];
+        if (badgeTotal) badgeTotal.textContent = `${data.totalGeral || editaisRadarCache.length} Oportunidades no Radar`;
+        if (badgeTempo && data.atualizadoEm) badgeTempo.textContent = `• Atualizado às ${data.atualizadoEm}`;
+
+        filtrarEditais();
+      } catch (err) {
+        grid.innerHTML = `
+          <div class="col-span-full p-6 text-center bg-rose-50 rounded-xl border border-rose-200 text-rose-700 text-xs">
+            <p class="font-bold">Não foi possível carregar as oportunidades neste instante.</p>
+            <p class="mt-1">${err.message}</p>
+            <button onclick="carregarRadarEditais(true)" class="mt-3 px-3 py-1.5 bg-rose-600 text-white rounded-lg font-bold hover:bg-rose-700">Tentar Novamente</button>
+          </div>
+        `;
+      } finally {
+        if (btnAtualizar) {
+          btnAtualizar.innerHTML = `<i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Atualizar Radar`;
+          lucide.createIcons();
+        }
+      }
+    }
+
+    function filtrarEditais() {
+      const q = (document.getElementById('filtro-editais-q')?.value || '').toLowerCase().trim();
+      const prazo = document.getElementById('filtro-editais-prazo')?.value || 'todos';
+      const area = (document.getElementById('filtro-editais-area')?.value || '').toLowerCase().trim();
+
+      let lista = editaisRadarCache;
+
+      if (q) {
+        lista = lista.filter(e => e.titulo.toLowerCase().includes(q) || e.concedente.toLowerCase().includes(q));
+      }
+      if (prazo === 'definido') {
+        lista = lista.filter(e => e.prazoTipo === 'definido');
+      } else if (prazo === 'continuo') {
+        lista = lista.filter(e => e.prazoTipo === 'continuo');
+      }
+      if (area) {
+        lista = lista.filter(e => e.titulo.toLowerCase().includes(area) || e.concedente.toLowerCase().includes(area));
+      }
+
+      renderizarCardsEditais(lista);
+    }
+
+    function renderizarCardsEditais(editais) {
+      const grid = document.getElementById('grid-editais-radar');
+      const badgeTotal = document.getElementById('badge-total-editais');
+      if (badgeTotal && editais.length !== editaisRadarCache.length) {
+        badgeTotal.textContent = `${editais.length} de ${editaisRadarCache.length} oportunidades filtradas`;
+      }
+
+      if (!editais || editais.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full p-8 text-center bg-slate-50 rounded-xl border border-slate-200 text-slate-500 text-xs">
+            <i data-lucide="search-x" class="w-8 h-8 text-slate-400 mx-auto mb-2"></i>
+            <p class="font-bold text-slate-700">Nenhum edital encontrado para estes critérios de busca.</p>
+            <p class="mt-1">Tente remover alguns termos ou mudar o filtro temático.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      grid.innerHTML = editais.map(item => {
+        let badgePrazo = '';
+        if (item.prazoTipo === 'continuo') {
+          badgePrazo = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-800">
+            <i data-lucide="infinity" class="w-3 h-3"></i> Fluxo Contínuo
+          </span>`;
+        } else if (item.diasRestantes !== null) {
+          if (item.diasRestantes <= 0) {
+            badgePrazo = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800">
+              <i data-lucide="alert-circle" class="w-3 h-3"></i> Encerra hoje
+            </span>`;
+          } else if (item.diasRestantes <= 15) {
+            badgePrazo = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">
+              <i data-lucide="clock" class="w-3 h-3"></i> ${item.diasRestantes} dias restantes (${item.dataFinal})
+            </span>`;
+          } else {
+            badgePrazo = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">
+              <i data-lucide="calendar" class="w-3 h-3"></i> ${item.diasRestantes} dias (${item.dataFinal})
+            </span>`;
+          }
+        }
+
+        const logoHtml = item.logo 
+          ? `<img src="${item.logo}" alt="Logo" class="w-10 h-10 object-contain rounded-lg border border-slate-100 bg-white p-1" onerror="this.style.display='none'">` 
+          : `<div class="w-10 h-10 rounded-lg bg-purple-50 text-purple-700 flex items-center justify-center font-bold text-xs"><i data-lucide="briefcase" class="w-5 h-5"></i></div>`;
+
+        // Limpeza de título para passagem segura de parâmetro
+        const tituloSeguro = (item.titulo || '').replace(/"/g, '&quot;');
+
+        return `
+          <div class="bg-white rounded-xl border border-slate-200 hover:border-purple-300 shadow-sm hover:shadow-md transition flex flex-col justify-between p-4 text-xs space-y-3">
+            <div>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                ${logoHtml}
+                <div class="text-right flex-1">
+                  ${badgePrazo}
+                </div>
+              </div>
+              <p class="text-[11px] font-semibold text-purple-700 uppercase tracking-wider truncate mb-1" title="${item.concedente}">
+                ${item.concedente}
+              </p>
+              <h4 class="font-bold text-slate-800 text-xs leading-snug line-clamp-2 hover:line-clamp-none transition" title="${tituloSeguro}">
+                ${item.titulo}
+              </h4>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 flex flex-col sm:flex-row gap-2">
+              <a href="${item.linkOficial}" target="_blank" rel="noopener noreferrer" class="flex-1 py-1.5 px-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-bold text-center flex items-center justify-center gap-1 transition">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Ver no Prosas / IPEA
+              </a>
+              <button type="button" onclick="usarEditalNoElaborador('${item.id}')" class="flex-1 py-1.5 px-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold text-center flex items-center justify-center gap-1 transition shadow-sm">
+                <i data-lucide="file-plus" class="w-3.5 h-3.5"></i> Elaborar Proposta
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function usarEditalNoElaborador(id) {
+      const edital = editaisRadarCache.find(e => String(e.id) === String(id));
+      if (!edital) {
+        showToast('Edital não localizado.', 'warning');
+        return;
+      }
+
+      // Preenchimento dos campos no elaborador
+      const fProjeto = document.getElementById('projeto');
+      const fObjeto = document.getElementById('objeto');
+      const fTipoEmenda = document.getElementById('tipoEmenda');
+
+      if (fProjeto) fProjeto.value = `Edital: ${edital.titulo}`;
+      if (fObjeto) fObjeto.value = `Proposta técnica em conformidade com o Chamamento Público / Edital promovido por ${edital.concedente}. Link de referência: ${edital.linkOficial}`;
+      if (fTipoEmenda) fTipoEmenda.value = 'Chamamento Público Concorrencial (Edital MROSC)';
+
+      trocarAba('aba-elaborador');
+      showToast(`Edital carregado no Elaborador!`, 'success');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function filtrarNaturezaPolitica(natureza) {

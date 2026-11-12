@@ -769,6 +769,131 @@ app.get('/api/politicas-publicas/pesquisa', (req, res) => {
 });
 
 // =============================================================================
+// DOMÍNIO 1.3: RADAR NACIONAL DE EDITAIS ABERTOS (MAPA DAS OSC / PROSAS)
+// =============================================================================
+let cacheEditais = {
+  timestamp: 0,
+  dados: []
+};
+const CACHE_TTL_EDITAIS = 60 * 60 * 1000; // 1 hora de cache em memória
+
+function extrairNomeIncentivador(item, included) {
+  const relId = item.relationships?.incentivador?.data?.id;
+  const found = relId && Array.isArray(included) ? included.find(inc => inc.type === 'incentivador' && String(inc.id) === String(relId)) : null;
+  return found?.attributes?.nome_fantasia || item.attributes?.nome_empresa || 'Órgão / Financiador Público ou Privado';
+}
+
+app.get('/api/editais/radar', async (req, res) => {
+  try {
+    const agora = Date.now();
+    const query = (req.query.q || '').toLowerCase().trim();
+    const area = (req.query.area || '').toLowerCase().trim();
+    const tipoPrazo = (req.query.prazo || '').toLowerCase().trim();
+
+    // Se o cache expirou ou está vazio, busca da API pública unificada
+    if (!cacheEditais.dados.length || (agora - cacheEditais.timestamp) > CACHE_TTL_EDITAIS) {
+      const PAGE_SIZE = 100;
+      const MAX_PAGES = 3;
+      let page = 1;
+      let totalPages = 1;
+      const rawItems = [];
+      const included = [];
+
+      do {
+        const url = `https://prosas.com.br/selecao/api/v2/publics/oportunidades?page[page]=${page}&page[size]=${PAGE_SIZE}&include=area_interesses,incentivador`;
+        const apiRes = await fetch(url, {
+          headers: { 'User-Agent': 'CaptaOSC/2.0 (gov.br/mrosc)' }
+        });
+        if (!apiRes.ok) throw new Error(`Falha ao acessar API Prosas/Mapa OSC: HTTP ${apiRes.status}`);
+        const json = await apiRes.json();
+        rawItems.push(...(json.data || []));
+        if (Array.isArray(json.included)) included.push(...json.included);
+        totalPages = json.links?.last || 1;
+        page++;
+      } while (page <= totalPages && page <= MAX_PAGES);
+
+      const hoje = new Date();
+      hoje.setHours(0, 0, 0, 0);
+
+      const processados = rawItems.map(item => {
+        const attrs = item.attributes || {};
+        const prazoContinuo = attrs.prazo === 'continuo' || !attrs.data_final_inscricoes;
+        const deadlineIso = prazoContinuo ? null : attrs.data_final_inscricoes;
+        
+        let diasRestantes = null;
+        let dataFormatada = 'Inscrições Contínuas';
+        if (deadlineIso) {
+          const dtFinal = new Date(deadlineIso);
+          dataFormatada = dtFinal.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+          const diffMs = dtFinal.getTime() - hoje.getTime();
+          diasRestantes = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+        }
+
+        const org = extrairNomeIncentivador(item, included);
+        let logo = attrs.logo || '';
+        if (logo.startsWith('//')) logo = 'https:' + logo;
+
+        return {
+          id: String(item.id),
+          titulo: attrs.nome || 'Edital sem título',
+          concedente: org,
+          linkOficial: `https://prosas.com.br/editais/${item.id}`,
+          prazoTipo: prazoContinuo ? 'continuo' : 'definido',
+          dataFinal: dataFormatada,
+          deadlineIso: deadlineIso,
+          diasRestantes: diasRestantes,
+          logo: logo
+        };
+      })
+      .filter(e => e.titulo && e.linkOficial)
+      .sort((a, b) => {
+        if (!a.deadlineIso && !b.deadlineIso) return 0;
+        if (!a.deadlineIso) return 1;
+        if (!b.deadlineIso) return -1;
+        return a.deadlineIso.localeCompare(b.deadlineIso);
+      });
+
+      cacheEditais = {
+        timestamp: agora,
+        dados: processados
+      };
+    }
+
+    // Filtros
+    let filtrados = cacheEditais.dados;
+    if (query) {
+      filtrados = filtrados.filter(e => 
+        e.titulo.toLowerCase().includes(query) || 
+        e.concedente.toLowerCase().includes(query)
+      );
+    }
+    if (area) {
+      filtrados = filtrados.filter(e => 
+        e.titulo.toLowerCase().includes(area) || 
+        e.concedente.toLowerCase().includes(area)
+      );
+    }
+    if (tipoPrazo === 'definido') {
+      filtrados = filtrados.filter(e => e.prazoTipo === 'definido');
+    } else if (tipoPrazo === 'continuo') {
+      filtrados = filtrados.filter(e => e.prazoTipo === 'continuo');
+    }
+
+    res.json({
+      success: true,
+      total: filtrados.length,
+      totalGeral: cacheEditais.dados.length,
+      atualizadoEm: new Date(cacheEditais.timestamp).toLocaleTimeString('pt-BR'),
+      origem: "Rede Nacional de Oportunidades: Mapa das OSC (IPEA) & Central de Editais Prosas",
+      editais: filtrados
+    });
+  } catch (err) {
+    console.error('Erro no radar de editais:', err.message);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// =============================================================================
 // DOMÍNIO 2: GESTÃO DE PROPOSTAS, OFÍCIO DE PLEITO & MINUTA TRANSFEREGOV
 // =============================================================================
 app.get('/api/propostas', (req, res) => res.json(lerProjetos()));
