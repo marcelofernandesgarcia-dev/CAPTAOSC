@@ -1,59 +1,51 @@
-# CaptaOSC &bull; Inteligência & Gestão de Emendas Parlamentares Federais
+# CaptaOSC &bull; Mentor de Jornada para Captação de Recursos (MROSC & OGU)
 
 > **Plataforma Estratégica e Técnica para Organizações da Sociedade Civil (OSCs)**  
-> Conformidade com o **Marco Regulatório das OSCs (Lei Federal nº 13.019/2014)**, **Lei Complementar nº 210/2024** e a Plataforma **Transferegov.br**.
+> Conformidade com o **Marco Regulatório das OSCs (Lei Federal nº 13.019/2014)**, **Decreto Federal nº 11.948/2024**, **Lei Complementar nº 210/2024** e a Plataforma **Transferegov.br**.
 
 ---
 
 ## 🏛️ Sobre o Projeto
 
-O **CaptaOSC** é uma aplicação completa e autônoma desenvolvida para capacitar, assessorar e orientar dirigentes e equipes técnicas de entidades sem fins lucrativos na captação, estruturação e execução de **Emendas Parlamentares Federais** e recursos do **Orçamento Geral da União (OGU)**.
+O **CaptaOSC** evoluiu de um repositório convencional de ferramentas para um **Mentor de Jornada de Captação**. Utilizando a **Arquitetura de Concierge (Triagem Inteligente)** e **Revelação Progressiva (Progressive Disclosure)**, a plataforma elimina a barreira do jargão técnico e blinda juridicamente os pleitos das entidades, prevenindo as reprovações históricas de propostas perante Ministérios e órgãos públicos.
 
-A aplicação elimina o empirismo e as perdas de recursos causadas por diligências e impedimentos técnicos, blindando juridicamente os pleitos das entidades.
+A regra de ouro da interface é: **"O usuário nunca deve ver uma ferramenta antes de precisar dela."**
 
 ---
 
-## ⚡ Principais Módulos & Funcionalidades
+## 🎯 As 3 Rotas do Portal de Intenções (Sala de Espera Inteligente)
 
-### 💡 Guia & Usabilidade Orçamentária
-- Diferenciação didática entre **Orçamento Impositivo (RP 6 / RP 7)** e **Orçamento Discricionário (RP 2 / RP 8)**.
-- Explicação jurídica do **Art. 29 da Lei 13.019/2014** (dispensa de chamamento público para emendas) frente ao Art. 16 (chamamento público concorrencial para editais).
-- Orientações sobre a cota constitucional obrigatória de **50% para Ações e Serviços Públicos de Saúde (ASPS)**.
+Ao abrir o CaptaOSC, o usuário não é sobrecarregado com dezenas de abas. Ele encontra 3 caminhos guiados:
 
-### 🔎 1. Consulta de Emendas & Inteligência do Congresso
-- **Políticas Públicas dos Ministérios (OGU / LOA):** Catálogo de Ações Orçamentárias (`21C0`, `8535`, `20V0`, `20RG`, `20ZX`, `21B9`, `21A7`), dotação LOA e diretrizes de custeio (GND 3) vs. capital (GND 4).
-- **Emendas Parlamentares da Bancada:** Integração em tempo real com as APIs oficiais de Dados Abertos da **Câmara dos Deputados** e do **Senado Federal**, mapeando parlamentares por UF com normalização Unicode.
-- **Vínculo em 1 Clique (`✨ Vincular ao meu Pleito`):** Carrega automaticamente a ação, órgão e minuta no formulário do pleito.
+1. 🛡️ **Minha Regularidade (Foco em Segurança):**  
+   Verificação preventiva de aptidão do CNPJ na Receita Federal, eficácia temporal por esfera (1 ano para Municípios, 2 anos para Estados/DF e 3 anos para a União - Art. 33, V, "a") e checklist de certidões obrigatórias.
+2. 📢 **Buscador de Recursos & Editais (Foco em Oportunidade):**  
+   Integração em tempo real com o **Radar Nacional de Editais Abertos** (consumindo a API unificada do **Mapa das OSC / IPEA** e **Central de Editais Prosas** com mais de 110 chamamentos ativos e contagem regressiva de prazos), além do catálogo de Políticas Públicas e Emendas Parlamentares à LOA.
+3. 📝 **Criador de Projetos & Ofícios (Foco em Execução):**  
+   Estruturação do Plano de Trabalho, calculadora automática de menor preço com 3 orçamentos (segregação GND 3 vs GND 4), emissão do Ofício formal em Word (`.DOCX`), visualização de impressão e espelho Transferegov.br.
 
-### 📝 2. Elaborador do Pleito & Assistente Anti-Impedimento
-- Validação automática de CNPJ perante o **Art. 33, III (3 anos de existência para a União)** e **Art. 39 (situação cadastral ATIVA)** via ReceitaWS/BrasilAPI.
-- **Assistente Anti-Impedimento Técnico (GND 3 vs. GND 4):** Validador inteligente que previne erros de enquadramento (ex.: excesso de capital em ações estritamente de custeio ambulatorial).
+---
 
-### ✉️ 3. Gerador Oficial de Ofício (Word .DOCX & PDF)
-- **Exportação em `.DOCX` (Microsoft Word):** Gera documentos formatados no padrão do *Manual de Redação da Presidência da República* e ABNT, com margens oficiais, identificação de bancada e tabela orçamentária.
-- **Visualização & Impressão em PDF Oficial:** Layout timbrado para assinatura física ou digital via **Gov.br / ICP-Brasil**.
-- **Minuta do Plano de Trabalho Transferegov.br:** Espelho descritivo em texto puro formatado para preenchimento ágil na plataforma federal.
+## ⚡ Inovações de Usabilidade & Engenharia
 
-### 📅 4. Ciclo Anual & Calendário Orçamentário
-- Cronograma estratégico em 4 etapas (Fev-Jul: Diagnóstico; Ago-Out: Protocolo; Nov-Dez: Votação LOA; Jan-Jun: Transferegov).
-
-### 🚀 5. Trilha Transferegov.br & Checklist MROSC
-- **Checklist Interativo de Pré-Habilitação MROSC:** 8 critérios fundamentais (CND Federal, FGTS, CNDT, CADIN, Estatuto, Transferegov, etc.) com links diretos aos portais oficiais e **Termômetro de Prontidão da OSC**.
-- Passo a passo das 6 fases operacionais (do credenciamento ao OBTV e prestação de contas digital).
-
-### ⚖️ 6. Matriz Normativa
-- Consolidação dos dispositivos da CF/88 (arts. 165 e 166), Lei Complementar nº 210/2024, Lei 13.019/2014, Decreto Federal 8.726/2016 e Portaria Conjunta MGI/MF/CGU nº 32/2024.
+- **Arquitetura de Concierge:** Entrada por triagem de intenções, operando em *Modo Foco da Missão* com indicador de passos sequenciais (`Passo 1 > Passo 2 > Passo 3`).
+- **Revelação por Conquista (Just-in-Time):** Módulos densos (como a *Trilha de 6 Passos do Transferegov.br* ou o *Ciclo do TCE*) são sugeridos apenas quando o usuário conclui o diagnóstico ou gera o ofício com sucesso.
+- **Revelação Progressiva em 3 Níveis:**
+  - 🟢 **Modo Simples (Iniciante):** Linguagem cidadã e dicas acolhedoras de preenchimento.
+  - 🟡 **Modo Gestor (Padrão):** Foco em prazos, orçamentos, cotações e cronogramas de desembolso.
+  - 🔴 **Modo Jurídico & Técnico:** Citações estritas dos artigos da Lei 13.019/14, Decreto 11.948/24 e conformidade com o Art. 45.
+- **PWA & Mobile-First:** Navegação tátil com barra inferior (*Bottom Navigation*), gaveta retrátil (*Drawer*) e suporte offline local.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Backend:** Node.js, Express, `docx` (Word processing nativo)
-- **Frontend:** Single-Page Application (SPA) responsiva com Tailwind CSS e Lucide Icons
-- **Integrações de Dados Abertos:**
-  - API da Câmara dos Deputados (`dadosabertos.camara.leg.br`)
-  - API do Senado Federal (`legis.senado.leg.br`)
-  - API ReceitaWS / BrasilAPI (Validação cadastral de CNPJ)
+- **Backend:** Node.js, Express, `docx` (geração de documentos OpenXML oficiais) e cache em memória (TTL 1 hora) para as APIs públicas.
+- **Frontend:** HTML5 Semântico, Tailwind CSS, Lucide Icons e JavaScript Puro (Vanilla) de alta performance e reatividade direta ao DOM.
+- **APIs Conectadas:**
+  - API do Prosas & Mapa das OSC (IPEA / Secretaria-Geral da Presidência)
+  - API de Dados Cadastrais da Receita Federal (CNPJ / QSA)
+  - Base de Ações Orçamentárias do Orçamento Geral da União (OGU / LOA)
 
 ---
 
@@ -77,4 +69,4 @@ Acesse a aplicação no navegador em: **`http://localhost:3000`**
 
 ## 📜 Licença
 
-Desenvolvido para apoio e fortalecimento institucional das Organizações da Sociedade Civil (OSCs) brasileiras.
+Desenvolvido para apoio e fortalecimento institucional das Organizações da Sociedade Civil (OSCs) brasileiras sob o regime do Marco Regulatório (MROSC).
